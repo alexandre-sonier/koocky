@@ -1,0 +1,45 @@
+#include "/home/barry_g/cnorm_2.10/src/cnorm.cwp"
+
+#ignore["KOOC"] ::=
+[
+        ['#' ->[['\r']? '\n']]
+        | ["//" ->[['\r']? '\n']]
+        | ["/*" ->"*/"]
+        | ' '
+        | '\t'
+        | '\n'
+        | '\r'
+]+
+;
+
+#overload
+translation_unit ::= #ignore("KOOC")
+  => cnormNodeBlock(this);
+  => cnormNodeBlock_PushCtx(this);
+  => insert this.import;
+[
+         mes_declarations(this.import)
+         | declaration(this.block)
+]+
+#continue
+#empty
+;
+
+mes_declarations(n : node) ::=
+import(n)
+;
+
+import(st : node) ::= 
+  "@!"
+  #readUptoIgnore:name
+  => insert st[name];
+  => cnormNodeBlock(st[name]);
+  => cnormNodeBlock_PushCtx(st[name]);
+  [
+    #check(existFile(name))
+    #parsedFile(name)
+    declaration(st[name].block)
+    | #continue
+  ]
+
+;
