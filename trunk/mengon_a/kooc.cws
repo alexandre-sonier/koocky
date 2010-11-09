@@ -1,5 +1,5 @@
 #include "koocDecor.inc.cws"
-#include "koocTrad.cws"
+#include "koocTrad.inc.cws"
 
 local myAst;
 
@@ -7,6 +7,8 @@ foreach file in _ARGS
 {
   parseAsBNF("kooc.cwp", myAst, file);
 }
+
+koocTradRecScan(myAst.block, myAst.block);
 
 saveProject("./test.xml", myAst);
 

@@ -27,34 +27,123 @@
 			<name __VALUE="_4bobo_variable_signed_char_1a" />
 		</__ARRAY_ENTRY>
 		<__ARRAY_ENTRY __KEY="2">
-			<__LINE__ __VALUE="8" />
+			<__LINE__ __VALUE="7" />
 			<ctype>
 				<pctx __REFERENCE="myAst.block" />
 				<type __VALUE="__PRIMARY__" />
 				<identifier __VALUE="int" />
 				<sign __VALUE="signed" />
 			</ctype>
-			<type __VALUE="__VARIABLE__" />
+			<type __VALUE="__FUNCTION__" />
 			<etype __VALUE="declaration" />
-			<name __VALUE="c" />
-			<init>
-				<type __VALUE="primary_expression" />
-				<value __VALUE="42" />
-				<ctype>
-					<identifier __VALUE="int" />
-				</ctype>
-				<operator __VALUE="literal" />
-				<otype __VALUE="terminal" />
-				<etype __VALUE="expression" />
-			</init>
+			<name __VALUE="main" />
+			<list />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<__LINE__ __VALUE="9" />
+					<ctype>
+						<pctx __REFERENCE="myAst.block[&quot;2&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="c" />
+					<init>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="84" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+						<etype __VALUE="expression" />
+					</init>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<__LINE__ __VALUE="10" />
+						<type __VALUE="primary_expression" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+						<value __VALUE="_4bobo_variable_signed_char_1a" />
+					</left>
+					<operator __VALUE="=" />
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="'c'" />
+						<ctype>
+							<identifier __VALUE="char" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<left>
+						<__LINE__ __VALUE="11" />
+						<type __VALUE="primary_expression" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+						<value __VALUE="_4bobo_variable_signed_int_1a" />
+					</left>
+					<operator __VALUE="=" />
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="42" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="3">
+					<left>
+						<__LINE__ __VALUE="12" />
+						<type __VALUE="primary_expression" />
+						<value __VALUE="d" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<operator __VALUE="=" />
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="21" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="myAst.block" />
+				<type __VALUE="block" />
+				<variables>
+					<__ARRAY_ENTRY __KEY="c" __REFERENCE="myAst.block[&quot;2&quot;].block[&quot;0&quot;]" />
+				</variables>
+			</block>
 		</__ARRAY_ENTRY>
 		<pctx />
 		<type __VALUE="block" />
 		<variables>
 			<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst.block[&quot;0&quot;]" />
 			<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_char_1a" __REFERENCE="myAst.block[&quot;1&quot;]" />
-			<__ARRAY_ENTRY __KEY="c" __REFERENCE="myAst.block[&quot;2&quot;]" />
 		</variables>
+		<functions>
+			<__ARRAY_ENTRY __KEY="main" __REFERENCE="myAst.block[&quot;2&quot;]" />
+		</functions>
 	</block>
 	<gl_pctx __REFERENCE="myAst.block" />
 </myAst>
