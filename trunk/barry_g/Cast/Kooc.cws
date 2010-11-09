@@ -1,0 +1,11 @@
+B0;256;0c#include "/home/barry_g/cnorm_2.10/src/cnorm2c/cnorm2c.inc.cws"
+
+local out = replaceString(".kc", ".c", _ARGS[0]);
+local myAST;
+translate("Cast.cwp", myAST, _ARGS[0], out);
+saveProject("save.xml", myAST);
+foreach item in myAST.import
+{
+	appendFile(out, key(item));
+}
+appendFile(out, cnorm2c(myAST.block));

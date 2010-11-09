@@ -1,0 +1,72 @@
+<myAST>
+	<block>
+		<__ARRAY_ENTRY __KEY="0">
+			<__LINE__ __VALUE="4" />
+			<ctype>
+				<pctx __REFERENCE="myAST.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="main" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="myAST.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="void" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="return" />
+					<otype __VALUE="pseudoexpression" />
+					<etype __VALUE="expression" />
+					<block>
+						<expr>
+							<pctx __REFERENCE="myAST.block[&quot;0&quot;].block" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="0" />
+							<ctype>
+								<identifier __VALUE="int" />
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</expr>
+						<type __VALUE="priority_expression" />
+						<otype __VALUE="priority" />
+						<operator __VALUE="()" />
+					</block>
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="myAST.block" />
+				<type __VALUE="block" />
+			</block>
+		</__ARRAY_ENTRY>
+		<pctx />
+		<type __VALUE="block" />
+		<functions>
+			<__ARRAY_ENTRY __KEY="main" __REFERENCE="myAST.block[&quot;0&quot;]" />
+		</functions>
+	</block>
+	<import>
+		<__ARRAY_ENTRY __KEY="unistd.h">
+			<block>
+				<pctx />
+				<type __VALUE="block" />
+			</block>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="lecochon.h">
+			<block>
+				<pctx />
+				<type __VALUE="block" />
+			</block>
+		</__ARRAY_ENTRY>
+	</import>
+	<gl_pctx __REFERENCE="myAST.block" />
+</myAST>
