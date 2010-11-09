@@ -1,0 +1,28 @@
+#include "patchLib/cnormPatchLib.inc.cws"
+
+function	koocTradgetVars(theAst : node, theModule : value, theVar : value, decored_vars : reference)
+{
+  local curstart;
+  local curname;
+  curstart = "_" + lengthString(theModule) + theModule + "_variable_";
+  curname = "_" + lengthString(theVar) + theVar;
+  foreach var in theAst.variables
+  {
+    if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
+      insert decored_vars[var.name] = var.name;
+  }
+}
+
+function	koocTradVar(theAst : node, theModule : value, theVar : value, theSuite : value)
+{
+  local newCode;
+  cnormPatchInit(newCode);
+  local decored_vars;
+  koocTradgetVars(theAst, theModule, theVar, decored_vars);
+  foreach var in decored_vars
+  {
+    cnormPatchDeclaration(newCode, "int " + var + theSuite);
+    traceLine(var);
+  }
+  cnormPatchCopyBlockAt(theAst, newCode, 0);
+}
