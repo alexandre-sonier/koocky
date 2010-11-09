@@ -10,18 +10,17 @@ translation_unit ::=
 [
  module(this.block)
  | implementation(this.block)
- | trad(this.block)
  | declaration(this.block)
 ]+
 #continue
 #empty
 ;
 
-/* #overload */
-/* primary_expression(expr : node) ::= */
-/*   [primary_expression(expr)] */
-/*   | [trad(expr)] */
-/*   ; */
+#overload
+primary_expression(expr : node) ::=
+  [#super::primary_expression(expr)]
+  | [trad(expr)]
+  ;
 
 module(theBlock : node) ::=
   "@module" #readIdentifier:mod
@@ -46,6 +45,10 @@ implementation(theBlock : node) ::=
 ;
 
 trad(theBlock : node) ::=
-  "[" #readIdentifier:mod "." #readIdentifier:var "]" #readCString:suite
-  => koocTradVar(theBlock, mod, var, suite);
+  "[" #readIdentifier:mod "." #readIdentifier:var "]"
+  => insert theBlock.operator = "id";
+=> insert theBlock.otype = "terminal";
+=> insert theBlock.conflict = "module";
+=> insert theBlock.module = mod;
+=> insert theBlock.value = var;
   ;

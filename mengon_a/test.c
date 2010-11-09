@@ -4,5 +4,10 @@
   char a;
 }
 
-[bobo.a]" = 42;"
-int c = 42;
+int main()
+{
+  int c = 84;
+  [bobo.a] = 'c';
+  [bobo.a] = 42;
+  d = 21;
+}
