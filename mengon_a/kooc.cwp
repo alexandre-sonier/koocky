@@ -1,0 +1,51 @@
+#include "cnorm.cwp"
+
+#overload
+translation_unit ::=
+  #ignore
+
+  => cnormNodeBlock(this);
+=> cnormNodeBlock_PushCtx(this);
+
+[
+ module(this.block)
+ | implementation(this.block)
+ | trad(this.block)
+ | declaration(this.block)
+]+
+#continue
+#empty
+;
+
+/* #overload */
+/* primary_expression(expr : node) ::= */
+/*   [primary_expression(expr)] */
+/*   | [trad(expr)] */
+/*   ; */
+
+module(theBlock : node) ::=
+  "@module" #readIdentifier:mod
+  "{"
+  [declaration(theBlock)
+   => koocDecorName(theBlock#back, mod, theBlock);
+   ]+
+  "}"
+  ;
+
+implementation(theBlock : node) ::=
+  "@implementation" #readIdentifier:impl
+  "{"
+  [declaration(theBlock)
+   => koocDecorImpl(theBlock, theBlock#back, impl);
+   ]+
+  "}"
+  ;
+
+#ignore["decl"] ::=
+['\n']+
+;
+
+trad(theBlock : node) ::=
+  "[" #readIdentifier:mod "." #readIdentifier:var "]" #readCString:suite
+  => koocTradVar(theBlock, mod, var, suite);
+  ;
