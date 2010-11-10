@@ -1,0 +1,23 @@
+#include "cnorm2c/cnorm2c.inc.cws"
+#include "koocDecor.inc.cws"
+#include "koocTrad.inc.cws"
+
+local myAst;
+local out;
+
+//foreach file in _ARGS
+//{
+out = replaceString(".kc", ".c", _ARGS[0]);
+translate("kooc.cwp", myAst, _ARGS[0], out);
+//}
+
+foreach item in myAst.import
+{
+  appendFile(out, "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+}
+
+koocTradRecScan(myAst.block, myAst.block);
+
+saveProject("./test.xml", myAst);
+
+appendFile(out, cnorm2c(myAst.block));
