@@ -1,0 +1,8 @@
+trad(theBlock : node) ::=
+  "[" #readIdentifier:mod "." #readIdentifier:var "]"
+  => insert theBlock.operator = "id";
+=> insert theBlock.otype = "terminal";
+=> insert theBlock.conflict = "module";
+=> insert theBlock.module = mod;
+=> insert theBlock.value = var;
+;

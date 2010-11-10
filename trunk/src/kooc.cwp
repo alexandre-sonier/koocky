@@ -1,0 +1,28 @@
+B#include "cnorm.cwp"
+#include "import.inc.cwp"
+#include "module.inc.cwp"
+#include "trad.inc.cwp"
+
+#overload
+translation_unit ::=
+  #ignore
+
+  => cnormNodeBlock(this);
+=> cnormNodeBlock_PushCtx(this);
+=> insert this.import;
+
+[
+ import(this.import)
+ | module(this.block)
+ | implementation(this.block)
+ | declaration(this.block)
+]+
+#continue
+#empty
+;
+
+#overload
+primary_expression(expr : node) ::=
+  [#super::primary_expression(expr)]
+  | [trad(expr)]
+  ;

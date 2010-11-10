@@ -1,0 +1,84 @@
+#include "patchLib/cnormPatchLib.inc.cws"
+
+function	koocTradgetVars(theBlock : node, theModule : value, theVar : value, decored_vars : reference)
+{
+  local curstart;
+  local curname;
+  curstart = "_" + lengthString(theModule) + theModule + "_variable_";
+  curname = "_" + lengthString(theVar) + theVar;
+  foreach var in theBlock.variables
+  {
+    if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
+      insert decored_vars[var.name] = var.name;
+  }
+}
+
+function	koocTradTestVarType(theName : value, theModule : value)
+{
+  local strList;
+  theName = rightString(theName, 2 + lengthString(theModule));
+  cutString(theName, "_", strList);
+  return (strList[3]);
+}
+
+function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType : node)
+{
+  local decored_vars;
+  if (existVariable(theType.pointer))
+    error(theVar + " of type *" + theType.identifier + " has never been declared in " + theModule);    
+  koocTradgetVars(theBlock, theModule, theVar, decored_vars);
+  foreach var in decored_vars
+  {
+    if (koocTradTestVarType(var, theModule) == theType.identifier)
+      return var;
+  }
+  error(theVar + " of type " + theType.identifier + " has never been declared in " + theModule);
+}
+
+function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : node, theAst : node)
+{
+  if (existVariable(theVar.ctype))
+    {
+      init.value = koocTradVar(theAst, init.module, init.value, theVar.ctype);
+      insert theNode.ctype = theVar.ctype;
+      ref theNode.ctype = theVar.ctype;
+      return ;
+    }
+    
+  foreach var in theBlock.variables
+  {
+    if (key(var) == theVar.value)
+      {
+	init.value = koocTradVar(theAst, init.module, init.value, var.ctype);
+	insert theNode.ctype = var.ctype;
+	ref theNode.ctype = var.ctype;
+	return ;
+      }
+  }
+}
+
+function	koocTradRecScan(theBlock : node, theAst : node)
+{
+  foreach var in theBlock
+  {
+    if (existVariable(var.block))
+      koocTradRecScan(var.block, theAst);
+    if (existVariable(var.right))
+      {
+	traceLine(var.right.value);
+	koocTradRecScan(var.right, theAst);
+      }
+    if (existVariable(var.right.conflict))
+      {
+	koocTradgetType(theBlock, var.right, var.left, var, theAst);
+    	removeVariable(var.right.module);
+    	removeVariable(var.right.conflict);
+      }
+    if (existVariable(var.left.conflict))
+      {
+    	koocTradgetType(theBlock, var.left, var.right, var, theAst);
+    	removeVariable(var.left.module);
+    	removeVariable(var.left.conflict);
+      }
+  }
+}
