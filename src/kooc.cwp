@@ -1,4 +1,4 @@
-B#include "cnorm.cwp"
+#include "cnorm.cwp"
 #include "import.inc.cwp"
 #include "module.inc.cwp"
 #include "trad.inc.cwp"
