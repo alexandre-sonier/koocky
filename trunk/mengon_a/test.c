@@ -7,7 +7,8 @@
 int main()
 {
   int c = 84;
+
   [bobo.a] = 'c';
-  [bobo.a] = 42;
+  [bobo.a] = [bobo.a] + 2;
   d = 21;
 }
