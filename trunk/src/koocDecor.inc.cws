@@ -11,7 +11,11 @@ function	koocDecorTool_getsymtype(theType : value)
 function	koocDecorTool_gettype(theCType : node)
 {
   if (existVariable(theCType.specifier))
-    return replaceString(" ", "", theCType.specifier) + "_" + theCType.identifier;
+    {
+      if (theCType.specifier == "struct" || theCType.specifier == "union" || theCType.specifier == "enum")
+	return theCType.specifier;
+      return replaceString(" ", "", theCType.specifier) + "_" + theCType.identifier;
+    }
   else
     return theCType.identifier;
 }
@@ -80,11 +84,11 @@ function	koocDecorPrim(theDeclaration : node, name : value)
 
 function	koocDecorName(theDeclaration : node, theModule : value, theBlock : node)
 {
-  if (equalsIgnoreCase(koocDecorTool_gettype(theDeclaration.ctype), "struct") 
-      || equalsIgnoreCase(koocDecorTool_gettype(theDeclaration.ctype), "union")
-      || equalsIgnoreCase(koocDecorTool_getinfoType(theDeclaration.ctype.infoType), "typedef")
-      || equalsIgnoreCase(koocDecorTool_getinfoType(theDeclaration.ctype.infoType), "static")
-      || equalsIgnoreCase(koocDecorTool_gettype(theDeclaration.ctype), "enum"));
+  if (koocDecorTool_gettype(theDeclaration.ctype) == "struct"
+      || koocDecorTool_gettype(theDeclaration.ctype) == "union"
+      || koocDecorTool_getinfoType(theDeclaration.ctype.infoType) == "typedef"
+      || koocDecorTool_getinfoType(theDeclaration.ctype.infoType) == "static"
+      || koocDecorTool_gettype(theDeclaration.ctype) == "enum");
   else
     {
       local		name = theDeclaration.name;

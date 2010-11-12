@@ -5,19 +5,19 @@
 local myAst;
 local out;
 
-//foreach file in _ARGS
-//{
-out = replaceString(".kc", ".c", _ARGS[0]);
-translate("kooc.cwp", myAst, _ARGS[0], out);
-//}
-
-foreach item in myAst.import
+foreach file in _ARGS
 {
-  appendFile(out, "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+  out = replaceString(".kc", ".c", file);
+  out = replaceString(".kh", ".h", out);
+  translate("kooc.cwp", myAst, file, out);
+
+  foreach item in myAst.import
+  {
+    appendFile(out, "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+  }
+  koocTradRecScan(myAst.block, myAst.block);
+
+  saveProject("./tree.xml", myAst);
+
+  appendFile(out, cnorm2c(myAst.block));
 }
-
-koocTradRecScan(myAst.block, myAst.block);
-
-saveProject("./test.xml", myAst);
-
-appendFile(out, cnorm2c(myAst.block));

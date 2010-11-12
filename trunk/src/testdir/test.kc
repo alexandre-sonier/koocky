@@ -1,10 +1,13 @@
-@import "bla.kh"
+@import "bla.h"
 
 @module bobo
 {
   int a;
   char a;
+  //union a{};
+  //enum {};
 }
+struct a{int a;};
 
 int main()
 {
@@ -14,3 +17,4 @@ int main()
   c = [bobo.a];
   [bobo.a] = [bobo.a] + 1;
 }
+
