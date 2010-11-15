@@ -1,0 +1,33 @@
+#include "cnorm2c/cnorm2c.inc.cws"
+#include "koocDecor.inc.cws"
+#include "koocTrad.inc.cws"
+
+local myAst;
+local out;
+local filelist;
+insert myAst.file;
+
+foreach filename in _ARGS
+{
+  cutString(filename, "/", filelist);
+  pushItem myAst.file[filelist[1]] = filelist[1];
+
+  out = replaceString(".kc", ".c", filename);
+  out = replaceString(".kh", ".h", out);
+  translate("kooc.cwp", myAst.file[filelist[1]], filename, out);
+
+  foreach item in myAst.file[filelist[1]].import
+  {
+    appendFile(out, "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+  }
+}
+
+foreach file in myAst.file
+{
+  koocTradCopyRef(file, myAst);
+  koocTradRecScan(file.block, myAst);
+
+  appendFile(out, cnorm2c(file.block));
+}
+
+saveProject("tree.xml", myAst);
