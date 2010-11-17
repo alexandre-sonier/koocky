@@ -39,46 +39,113 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 {
   if (existVariable(theVar.ctype))
     {
-      init.value = koocTradVar(theAst, init.module, init.value, theVar.ctype);
-      insert theNode.ctype = theVar.ctype;
-      ref theNode.ctype = theVar.ctype;
+      if (existVariable(init.conflict))
+	init.value = koocTradVar(theAst, init.module, init.value, theVar.ctype);
+      //if (existVariable(theVar.ctype))
+      	//{
+	  insert theNode.ctype = theVar.ctype;
+	  ref theNode.ctype = theVar.ctype;
+	  //}
       return ;
     }
-    
   foreach var in theBlock.variables
   {
     if (key(var) == theVar.value)
       {
-	init.value = koocTradVar(theAst, init.module, init.value, var.ctype);
-	insert theNode.ctype = var.ctype;
-	ref theNode.ctype = var.ctype;
+	if (existVariable(init.conflict))
+	  init.value = koocTradVar(theAst, init.module, init.value, var.ctype);
+	//if (existVariable(theVar.ctype))
+	  //{
+	    insert theNode.ctype = theVar.ctype;
+	    ref theNode.ctype = theVar.ctype;
+	    //	  }
 	return ;
       }
   }
 }
 
-function	koocTradRecScan(theBlock : node, theAst : node)
+function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
 {
-  foreach var in theBlock
+  if (existVariable(Curr.right))
+    {      
+      koocTradRecScan(Curr.right, theBlock, theAst);
+      if (existVariable(Curr.right.ctype))
+	{
+	  insert Curr.ctype = Curr.right.ctype;
+	  ref Curr.ctype = Curr.right.ctype;
+	}
+    }
+  if (existVariable(Curr.left))
+    {
+      koocTradRecScan(Curr.left, theBlock, theAst);
+      if (existVariable(Curr.left.ctype))
+	{
+	  insert Curr.ctype = Curr.left.ctype;
+	  ref Curr.ctype = Curr.left.ctype;
+	}
+    }
+  if (existVariable(Curr.right.conflict))
+    {
+      koocTradgetType(theBlock, Curr.right, Curr.left, Curr, theAst);
+      removeVariable(Curr.right.module);
+      removeVariable(Curr.right.conflict);
+    }
+  if (existVariable(Curr.left.conflict))
+    {
+      koocTradgetType(theBlock, Curr.left, Curr.right, Curr, theAst);
+      removeVariable(Curr.left.module);
+      removeVariable(Curr.left.conflict);
+    }
+  foreach var in Curr
   {
     if (existVariable(var.block))
-      koocTradRecScan(var.block, theAst);
+      koocTradRecScan(var.block, var.block, theAst);
+    /* if (existVariable(var.condition)) */
+    /*   koocTradRecScan(var.condition, var.condition, theAst); */
+    /* if (existVariable(var.init)) */
+    /*   koocTradRecScan(var.init, var.init, theAst); */
+    /* if (existVariable(var.increment)) */
+    /*   koocTradRecScan(var.increment, var.increment, theAst); */
+    /* if (existVariable(var.stmt)) */
+    /*   koocTradRecScan(var.stmt, var.stmt, theAst); */
+    /* if (existVariable(var.else)) */
+    /*   koocTradRecScan(var.else, var.else, theAst); */
+    /* if (existVariable(var.then)) */
+    /*   koocTradRecScan(var.then, var.then, theAst); */
     if (existVariable(var.right))
-      {
-	traceLine(var.right.value);
-	koocTradRecScan(var.right, theAst);
-      }
+      koocTradRecScan(var.right, theBlock, theAst);
+    if (existVariable(var.left))
+      koocTradRecScan(var.left, theBlock, theAst);
     if (existVariable(var.right.conflict))
       {
 	koocTradgetType(theBlock, var.right, var.left, var, theAst);
-    	removeVariable(var.right.module);
-    	removeVariable(var.right.conflict);
+	removeVariable(var.right.module);
+	removeVariable(var.right.conflict);
       }
     if (existVariable(var.left.conflict))
       {
-    	koocTradgetType(theBlock, var.left, var.right, var, theAst);
-    	removeVariable(var.left.module);
-    	removeVariable(var.left.conflict);
+	koocTradgetType(theBlock, var.left, var.right, var, theAst);
+	removeVariable(var.left.module);
+	removeVariable(var.left.conflict);
       }
+  }
+}
+
+function	koocTradCopyRef(theFile : node, theAst : node)
+{
+  foreach import in theFile.import
+  {
+    foreach file in theAst
+    {
+      insert theFile.block.variables;
+      if (key(import) == file)
+	{
+	  foreach var in file.block.variables
+	  {
+	    insert theFile.block.variables[key(var)] = var;
+	    ref theFile.block.variables[key(var)] = var;
+	  }
+	}
+    }
   }
 }
