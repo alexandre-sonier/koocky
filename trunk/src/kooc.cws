@@ -1,5 +1,5 @@
 #include "cnorm2c/cnorm2c.inc.cws"
-#include "koocDecor.inc.cws"
+#include "koocImpl.inc.cws"
 #include "koocTrad.inc.cws"
 
 local myAst;
@@ -24,6 +24,7 @@ foreach filename in _ARGS
 foreach file in myAst
 {
   koocTradCopyRef(file, myAst);
+  koocImplRecScan(file);
   koocTradRecScan(file.block, file.block, file.block);
 
   appendFile(out[file], cnorm2c(file.block));

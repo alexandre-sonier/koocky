@@ -2,6 +2,7 @@
 #include "import.inc.cwp"
 #include "module.inc.cwp"
 #include "trad.inc.cwp"
+#include "implementation.inc.cwp"
 
 #overload
 translation_unit ::=
@@ -12,9 +13,9 @@ translation_unit ::=
 => insert this.import;
 
 [
- import(this.import)
+ implementation(this.block)
  | module(this.block)
- | implementation(this.block)
+ | import(this.import) 
  | declaration(this.block)
 ]+
 #continue

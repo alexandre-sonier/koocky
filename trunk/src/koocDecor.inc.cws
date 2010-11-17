@@ -94,18 +94,17 @@ function	koocDecorName(theDeclaration : node, theModule : value, theBlock : node
       local		name = theDeclaration.name;
       theDeclaration.name = "_" + lengthString(theModule) + theModule + "_" + koocDecorTool_getsymtype(theDeclaration.type);
       theDeclaration.name = koocDecorPrim(theDeclaration, name);
-      insert theBlock.variables[theDeclaration.name] = theBlock.variables[name];
-      ref theBlock.variables[theDeclaration.name] = theBlock.variables[name];
-      removeElement(theBlock.variables, name);
+      if (koocDecorTool_getsymtype(theDeclaration.type) == "variable")
+      	{
+      	  insert theBlock.variables[theDeclaration.name] = theBlock.variables[name];
+      	  ref theBlock.variables[theDeclaration.name] = theBlock.variables[name];
+      	  removeElement(theBlock.variables, name);
+      	}
+      else if (theDeclaration.type == "__PROTOTYPE__")
+      	{
+      	  insert theBlock.prototypes[theDeclaration.name] = theBlock.prototypes[name];
+      	  ref theBlock.prototypes[theDeclaration.name] = theBlock.prototypes[name];
+      	  removeElement(theBlock.prototypes, name);
+      	}
     }
-}
-
-function	koocDecorImpl(theBlock : node, theDeclaration : node, theImpl : value)
-{
-  local		name = theDeclaration.name;
-  koocDecorName(theDeclaration, theImpl, theBlock);
-  foreach declaration in theBlock
-    if (!equalTrees(declaration, theDeclaration) && equalsIgnoreCase(declaration.name, theDeclaration.name))
-      return;
-  error("function '" + name + "' implemented in '" + theImpl + "' was not declared in the corresponding module");
 }
