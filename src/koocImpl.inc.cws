@@ -1,0 +1,39 @@
+#include "koocDecor.inc.cws"
+
+function	koocImplDecor(theBlock : node, theDeclaration : node, theImpl : value)
+{
+  local		name = theDeclaration.name;
+  insert theDeclaration.impl = theImpl;
+  koocDecorName(theDeclaration, theImpl, theBlock);
+  if (theDeclaration.type == "__FUNCTION__")
+    {
+      insert theBlock.functions[theDeclaration.name] = theBlock.functions[name];
+      ref theBlock.functions[theDeclaration.name] = theBlock.functions[name];
+      removeElement(theBlock.functions, name);
+    }
+  else if (theDeclaration.type == "__PROTOTYPE__")
+    error("@implementation " + theImpl + ": shouldn't contain a prototype.");
+}
+
+function	koocImplRecScan(theFile : node)
+{
+  local check;
+  foreach var in theFile.block
+  {
+    if (existVariable(var.impl))
+      {
+	check = 0;
+	if (var.type == "__FUNCTION__")
+	  foreach func in theFile.prototypes
+	    if (key(func) == var.name)
+	      check = 1;
+	if (var.type == "__VARIABLE__")
+	  foreach var in theFile.variables
+	    if (key(func) == var.name)
+	      check = 1;
+	if (check == 0)
+	  error("function '" + var.name + "' implemented in '" + var.impl + "' was not declared in the corresponding module");
+	removeElement(var, "impl");
+      }
+  }
+}

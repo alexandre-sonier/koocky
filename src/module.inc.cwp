@@ -1,17 +1,8 @@
-implementation(theBlock : node) ::=
-  "@implementation" #readIdentifier:impl
-  "{"
-  [declaration(theBlock)
-   => koocDecorImpl(theBlock, theBlock#back, impl);
-   ]+
-  "}"
-  ;
-
 module(theBlock : node) ::=
   "@module" #readIdentifier:mod
   "{"
   [declaration(theBlock)
    => koocDecorName(theBlock#back, mod, theBlock);
-   ]+
+   ]*
   "}"
   ;

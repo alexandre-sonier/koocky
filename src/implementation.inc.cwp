@@ -1,0 +1,8 @@
+implementation(theBlock : node) ::=
+  "@implementation" #readIdentifier:impl
+  "{"
+  [declaration(theBlock)
+   => koocImplDecor(theBlock, theBlock#back, impl);
+   ]*
+  "}"
+  ;
