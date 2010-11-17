@@ -1,5 +1,4 @@
 import(st : node) ::= 
-  "@import"
-  #readCString:name
+  "@import" #readCString:name
   => insert st[name];
 ;

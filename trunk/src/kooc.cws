@@ -4,20 +4,29 @@
 
 local myAst;
 local out;
+local filelist;
 
-foreach file in _ARGS
+foreach filename in _ARGS
 {
-  out = replaceString(".kc", ".c", file);
-  out = replaceString(".kh", ".h", out);
-  translate("kooc.cwp", myAst, file, out);
+  cutString(filename, "/", filelist);
+  insert myAst[filelist[1]] = filelist[1];
 
-  foreach item in myAst.import
+  insert out[filelist[1]] = replaceString(".kc", ".c", filename);
+  out[filelist[1]] = replaceString(".kh", ".h", out[filelist[1]]);
+  translate("kooc.cwp", myAst[filelist[1]], filename, out[filelist[1]]);
+
+  foreach item in myAst[filelist[1]].import
   {
-    appendFile(out, "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+    appendFile(out[filelist[1]], "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
   }
-  koocTradRecScan(myAst.block, myAst.block);
-
-  saveProject("./tree.xml", myAst);
-
-  appendFile(out, cnorm2c(myAst.block));
 }
+
+foreach file in myAst
+{
+  koocTradCopyRef(file, myAst);
+  koocTradRecScan(file.block, file.block, file.block);
+
+  appendFile(out[file], cnorm2c(file.block));
+}
+
+saveProject("tree.xml", myAst);
