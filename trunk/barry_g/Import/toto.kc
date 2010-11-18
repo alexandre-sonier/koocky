@@ -1,8 +1,0 @@
-@import "unistd.h"
-@import "lecochon.h"
-
-int main (void)
-{
-	return (0);
-}
-

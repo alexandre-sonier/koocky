@@ -24,11 +24,7 @@ function	koocImplRecScan(theFile : node)
       {
 	check = 0;
 	if (var.type == "__FUNCTION__")
-	  foreach func in theFile.prototypes
-	    if (key(func) == var.name)
-	      check = 1;
-	if (var.type == "__VARIABLE__")
-	  foreach var in theFile.variables
+	  foreach func in theFile.block.prototypes
 	    if (key(func) == var.name)
 	      check = 1;
 	if (check == 0)
