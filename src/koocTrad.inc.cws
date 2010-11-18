@@ -145,6 +145,11 @@ function	koocTradCopyRef(theFile : node, theAst : node)
 	    insert theFile.block.variables[key(var)] = var;
 	    ref theFile.block.variables[key(var)] = var;
 	  }
+	  foreach func in file.block.prototypes
+	  {
+	    insert theFile.block.prototypes[key(func)] = func;
+	    ref theFile.block.prototypes[key(func)] = func;
+	  }
 	}
     }
   }
