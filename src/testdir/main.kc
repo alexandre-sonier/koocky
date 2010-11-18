@@ -1,0 +1,14 @@
+@import "a.kh"
+
+int main(void)
+{
+  int a;
+  char c;
+  [bobo.a] = 42;
+  a = [bobo.a];
+  [bobo.f] = a;
+  a = [bobo.a] + [bobo.f] + [bobo.a] + 42 + 42 + 42 + a + a + a - [bobo.a] * [bobo.f];
+  [bobo.a] = 'c';
+  c = 'b';
+  [bobo.a] = c;
+}
