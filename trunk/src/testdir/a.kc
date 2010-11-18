@@ -1,0 +1,9 @@
+@import "a.kh"
+
+@implementation bobo
+{
+  int f(int q)
+  {
+    return q;
+  }
+}

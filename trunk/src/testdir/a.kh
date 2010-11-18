@@ -1,0 +1,7 @@
+@module bobo
+{
+  int f;
+  int a;
+  char a;
+  int f(int);
+}
