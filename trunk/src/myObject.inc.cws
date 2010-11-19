@@ -1,0 +1,24 @@
+function	createMyObject(myAst : node)
+{
+  insert myAst["object"] = "object";
+  cnormNodeBlock(myAst["object"]);
+  cnormNodeBlock_PushCtx(myAst["object"]);
+
+  local		newBlock;
+  cnormPatchInit(newBlock);
+  cnormPatchDeclaration(newBlock, "typedef struct _Object_ { void* vtable; } _glObject_;");
+  cnormPatchDeclaration(newBlock, "struct _vtObject_ {};");
+  
+  
+  
+  pushItem newBlock.block[0].ctype.list;
+  cnormPatchDeclaration(newBlock.block[0].ctype.list#back, "int a;");
+  
+
+
+
+  pushItem myAst["object"].block;
+  setall myAst["object"].block#back = newBlock.block[0];
+  pushItem myAst["object"].block;
+  setall myAst["object"].block#back = newBlock.block[1];
+}

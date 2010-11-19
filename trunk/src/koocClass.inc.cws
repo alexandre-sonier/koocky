@@ -45,7 +45,7 @@ function	koocClassNameVar(theClass : value, theBlock : node, theExpression : val
     }
 }
 
-function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : value)
+function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : value, theVirtual : value)
 {
   local newCode;
   cnormPatchInit(newCode);
@@ -59,7 +59,11 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
   else
     {
       local		name = newCode.block[0].name;
-      newCode.block[0].name = "P_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      
+      if (theVirtual == "" || theVirtual == "@member")
+	newCode.block[0].name = "P_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      else
+	newCode.block[0].name = "V_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
       newCode.block[0].name = koocDecorPrim(newCode.block[0], name);
 
       local expr;
@@ -69,9 +73,18 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
       {
       	if (vtable.ctype.identifier == "_vtable_" + theClass + "_")
       	  {
+
 	    local funcPointer;
 	    cnormPatchInit(funcPointer);
-	    cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + " (*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*, " + expr[1]);
+	    theExpression = " (*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*";
+
+	    foreach point in newCode.block[0].ctype.pointer
+	      theExpression = "*" + theExpression;
+
+	    if (expr[1] == "void);" || expr[1] == ");")
+	      cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + theExpression + ");");
+	    else
+	      cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + theExpression + ", " + expr[1]);
 	    
       	    pushItem vtable.ctype.list;
       	    setall vtable.ctype.list#back = funcPointer.block[0];
