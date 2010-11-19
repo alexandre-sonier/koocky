@@ -13,30 +13,65 @@ function	koocTradgetVars(theBlock : node, theModule : value, theVar : value, dec
   }
 }
 
-function	koocTradTestVarType(theName : value, theModule : value)
+function	koocTradTestVarType(theName : value, theModule : value, theCType : reference)
 {
   local strList;
-  theName = rightString(theName, 2 + lengthString(theModule));
   cutString(theName, "_", strList);
-  return (strList[3]);
+  local i = 3;
+  local j = 0;
+  if (strList[i] != "signed" && strList[i] != "unsigned")
+    insert theCType.identifier = strList[i];
+  else
+    {
+      i = add(i, 1);
+      insert theCType.identifier = strList[i];
+    }
+  i = add(i, 1);
+  while (i < getArraySize(strList))
+    {
+      if (strList[i] == "point")
+	{
+	  insert theCType.pointer[j].level = "*";
+	  j = add(j, 1);
+	}
+      i = add(i, 1);
+    }
+  return (theCType);
 }
 
 function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType : node)
 {
   local decored_vars;
-  if (existVariable(theType.pointer))
-    error(theVar + " of type *" + theType.identifier + " has never been declared in " + theModule);    
+  local theCType;
   koocTradgetVars(theBlock, theModule, theVar, decored_vars);
   foreach var in decored_vars
   {
-    if (koocTradTestVarType(var, theModule) == theType.identifier)
-      return var;
+    koocTradTestVarType(var, theModule, theCType);
+    if (theCType.identifier == theType.identifier)
+      {
+	if (existVariable(theType.pointer) && existVariable(theCType.pointer))
+	  {
+	    if (equalTrees(theCType.pointer, theType.pointer))
+	      return var;
+	  }
+	else if (!existVariable(theType.pointer))
+	  return var;
+      }
+    clearVariable(theCType);
   }
-  error(theVar + " of type " + theType.identifier + " has never been declared in " + theModule);
+  error(theVar + " of type " + theCType.identifier + " has never been declared in " + theModule);
 }
 
 function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : node, theAst : node)
 {
+  if (existVariable(init.ctype))
+    {
+      if (existVariable(init.conflict))
+  	init.value = koocTradVar(theAst, init.module, init.value, init.ctype);
+      insert theNode.ctype = init.ctype;
+      ref theNode.ctype = init.ctype;
+      return ;
+    }
   if (existVariable(theVar.ctype))
     {
       if (existVariable(init.conflict))
@@ -96,22 +131,34 @@ function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
       removeVariable(Curr.left.module);
       removeVariable(Curr.left.conflict);
     }
+  if (existVariable(Curr.list))
+    koocTradRecScan(Curr.list, theBlock, theAst);
+  if (existVariable(Curr.conflict) && existVariable(Curr.ctype))
+    {
+      koocTradgetType(theBlock, Curr, Curr, Curr, theAst);
+      removeVariable(Curr.module);
+      removeVariable(Curr.conflict);
+    }
   foreach var in Curr
   {
     if (existVariable(var.block))
       koocTradRecScan(var.block, var.block, theAst);
+    if (existVariable(var.list))
+      koocTradRecScan(var.list, theBlock, theAst);
     if (existVariable(var.condition))
-      koocTradRecScan(var.condition, var.condition, theAst);
+      koocTradRecScan(var.condition, theBlock, theAst);
+    if (existVariable(var.case))
+      koocTradRecScan(var.case, theBlock, theAst);
     if (existVariable(var.init))
-      koocTradRecScan(var.init, var.init, theAst);
+      koocTradRecScan(var.init, theBlock, theAst);
     if (existVariable(var.increment))
-      koocTradRecScan(var.increment, var.increment, theAst);
+      koocTradRecScan(var.increment, theBlock, theAst);
     if (existVariable(var.stmt))
-      koocTradRecScan(var.stmt, var.stmt, theAst);
+      koocTradRecScan(var.stmt, theBlock, theAst);
     if (existVariable(var.else))
-      koocTradRecScan(var.else, var.else, theAst);
+      koocTradRecScan(var.else, theBlock, theAst);
     if (existVariable(var.then))
-      koocTradRecScan(var.then, var.then, theAst);
+      koocTradRecScan(var.then, theBlock, theAst);
     if (existVariable(var.right))
       koocTradRecScan(var.right, theBlock, theAst);
     if (existVariable(var.left))
@@ -128,7 +175,24 @@ function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
 	removeVariable(var.left.module);
 	removeVariable(var.left.conflict);
       }
+    if (existVariable(var.conflict) && existVariable(var.ctype))
+      {
+    	koocTradgetType(theBlock, var, var, var, theAst);
+    	removeVariable(var.module);
+    	removeVariable(var.conflict);
+      }
   }
+}
+
+function	koocTradFormType(theCType : node, thePoint : value)
+{
+  local i = 0;
+  while (i < lengthString(thePoint))
+    {
+      pushItem theCType.pointer;
+      insert theCType.pointer#back.level= "*";
+      i = add(i, 1);
+    }
 }
 
 function	koocTradCopyRef(theFile : node, theAst : node)
@@ -149,6 +213,11 @@ function	koocTradCopyRef(theFile : node, theAst : node)
 	  {
 	    insert theFile.block.prototypes[key(func)] = func;
 	    ref theFile.block.prototypes[key(func)] = func;
+	  }
+	  foreach class in file.block.classes
+	  {
+	    insert theFile.block.classes[key(class)] = class;
+	    ref theFile.block.classes[key(class)] = class;
 	  }
 	}
     }

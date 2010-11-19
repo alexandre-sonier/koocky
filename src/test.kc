@@ -1,0 +1,19 @@
+@module bobo
+{
+  int a;
+  int **a;
+  float a;
+  char a;
+  char a;
+  void f(void);
+}
+
+int bla(int, int, char, int **);
+
+int main()
+{
+  int i;
+
+  bla(@!(int)[bobo.a], @!(int**)[bobo.a], [bobo.a] + 4, [bobo.a] + i);
+  i = bla(@!(int)[bobo.a], @!(int**)[bobo.a], [bobo.a] + 4, [bobo.a] + i);
+}

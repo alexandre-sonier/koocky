@@ -36,8 +36,6 @@ function	koocDecorTool_getinfoType(theInfoType : node)
 function	koocDecorParam(theList : node)
 {
   local	myParam = "";
-  if (existVariable(theList.ctype.infoType))
-    myParam = myParam + koocDecorTool_getinfoType(theList.ctype.infoType);
   if (existVariable(theList.ctype.sign))
     myParam = myParam + "_" + theList.ctype.sign;
   myParam = myParam + "_" + koocDecorTool_gettype(theList.ctype);
@@ -55,8 +53,6 @@ function	koocDecorPrim(theDeclaration : node, name : value)
 {
   if (existVariable(theDeclaration.ctype.infoType) && equalsIgnoreCase(koocDecorTool_getinfoType(theDeclaration.ctype.infoType), "inline"))
     error("use of inline is forbidden");
-  else if (existVariable(theDeclaration.ctype.infoType) && !equalsIgnoreCase(koocDecorTool_gettype(theDeclaration.ctype), "variable"))
-    theDeclaration.name = theDeclaration.name + koocDecorTool_getinfoType(theDeclaration.ctype.infoType);
   if (existVariable(theDeclaration.ctype.sign))
     theDeclaration.name = theDeclaration.name + "_" + theDeclaration.ctype.sign;
   theDeclaration.name = theDeclaration.name + "_" + koocDecorTool_gettype(theDeclaration.ctype);

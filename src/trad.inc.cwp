@@ -1,5 +1,12 @@
-trad(theBlock : node) ::=
-  "[" #readIdentifier:mod "." #readIdentifier:var "]"
+vartrad(theBlock : node) ::=
+  [
+   "@!(" #readIdentifier:type [["*"]*]:point ")"
+   => insert theBlock.ctype.identifier = type;
+   => koocTradFormType(theBlock.ctype, point);
+   ]?
+  [
+   "[" #readIdentifier:mod "." #readIdentifier:var "]"
+   ]
   => insert theBlock.operator = "id";
 => insert theBlock.otype = "terminal";
 => insert theBlock.conflict = "module";

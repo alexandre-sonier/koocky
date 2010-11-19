@@ -11,4 +11,5 @@ int main(void)
   [bobo.a] = 'c';
   c = 'b';
   [bobo.a] = c;
+  [bobo.f] = @!(int)[bobo.a];
 }
