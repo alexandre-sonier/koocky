@@ -1,7 +1,10 @@
-@module bobo
+@class test
 {
-  int f;
-  int a;
-  char a;
-  int f(int);
+  @member 
+    {
+      char* func(void);
+      @virtual char *func(int);
+      char** func(double);
+    }
+  @virtual char **func(int);
 }
