@@ -1,8 +1,9 @@
 #include "cnorm.cwp"
 #include "import.inc.cwp"
 #include "module.inc.cwp"
-#include "trad.inc.cwp"
 #include "implementation.inc.cwp"
+#include "class.inc.cwp"
+#include "trad.inc.cwp"
 
 #overload
 translation_unit ::=
@@ -13,9 +14,10 @@ translation_unit ::=
 => insert this.import;
 
 [
- implementation(this.block)
+ import(this.import)
  | module(this.block)
- | import(this.import) 
+ | class(this.block)
+ | implementation(this.block)
  | declaration(this.block)
 ]+
 #continue
@@ -25,5 +27,5 @@ translation_unit ::=
 #overload
 primary_expression(expr : node) ::=
   [#super::primary_expression(expr)]
-  | [trad(expr)]
+  | [vartrad(expr)]
   ;

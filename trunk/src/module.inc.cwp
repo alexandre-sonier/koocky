@@ -1,7 +1,8 @@
 module(theBlock : node) ::=
   "@module" #readIdentifier:mod
   "{"
-  [declaration(theBlock)
+  [
+   declaration(theBlock)
    => koocDecorName(theBlock#back, mod, theBlock);
    ]*
   "}"
