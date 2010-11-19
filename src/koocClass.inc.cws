@@ -1,0 +1,81 @@
+function	addClass(theBlock : node, class : node)
+{
+  if (!existVariable(theBlock.classes[class]))
+    {
+      insert theBlock.classes[class] = class;
+      local  newBlock;
+
+      cnormPatchInit(newBlock);
+      cnormPatchDeclaration(newBlock, "typedef struct _class_" + class + "_ { void* vtable; }" + class + ";");
+      cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
+      pushItem theBlock;
+      setall theBlock#back = newBlock.block[0];
+      pushItem theBlock;
+      setall theBlock#back = newBlock.block[1];
+    }
+  else
+    error("/!\\ Redefinition of class '" + class + "' /!\\");
+}
+
+function	koocClassNameVar(theClass : value, theBlock : node, theExpression : value)
+{
+  local		newCode;
+      
+  cnormPatchInit(newCode);
+  cnormPatchDeclaration(newCode, theExpression);
+
+  if (koocDecorTool_gettype(newCode.block[0].ctype) == "struct"
+      || koocDecorTool_gettype(newCode.block[0].ctype) == "union"
+      || koocDecorTool_getinfoType(newCode.block[0].ctype.infoType) == "typedef"
+      || koocDecorTool_getinfoType(newCode.block[0].ctype.infoType) == "static"
+      || koocDecorTool_gettype(newCode.block[0].ctype) == "enum");
+  else
+    {
+      local		name = newCode.block[0].name;
+      newCode.block[0].name = "M_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      newCode.block[0].name = koocDecorPrim(newCode.block[0], name);
+      foreach class in theBlock
+      {
+	if (class.ctype.identifier == "_class_" + theClass + "_")
+	  {
+	    pushItem class.ctype.list;
+	    setall class.ctype.list#back = newCode.block[0];
+	  }
+      }
+    }
+}
+
+function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : value)
+{
+  local newCode;
+  cnormPatchInit(newCode);
+  cnormPatchDeclaration(newCode, theExpression);
+
+  if (koocDecorTool_gettype(newCode.block[0].ctype) == "struct"
+      || koocDecorTool_gettype(newCode.block[0].ctype) == "union"
+      || koocDecorTool_getinfoType(newCode.block[0].ctype.infoType) == "typedef"
+      || koocDecorTool_getinfoType(newCode.block[0].ctype.infoType) == "static"
+      || koocDecorTool_gettype(newCode.block[0].ctype) == "enum");
+  else
+    {
+      local		name = newCode.block[0].name;
+      newCode.block[0].name = "P_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      newCode.block[0].name = koocDecorPrim(newCode.block[0], name);
+
+      local expr;
+      cutString(theExpression, "(", expr);
+      
+      foreach vtable in theBlock
+      {
+      	if (vtable.ctype.identifier == "_vtable_" + theClass + "_")
+      	  {
+	    local funcPointer;
+	    cnormPatchInit(funcPointer);
+	    cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + " (*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*, " + expr[1]);
+	    
+      	    pushItem vtable.ctype.list;
+      	    setall vtable.ctype.list#back = funcPointer.block[0];
+      	  }
+      }
+    }
+}

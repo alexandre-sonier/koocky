@@ -1,0 +1,41 @@
+class(theBlock : node) ::=
+  "@class" #readIdentifier:class
+  "{"
+  => addClass(theBlock, class);
+  [
+    [
+     declaration(theBlock)
+     => koocDecorName(theBlock#back, class, theBlock);
+    ]
+    |
+    [
+     [
+      "@member" [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+[')']]:expr
+      => koocClassNameFunc(class, theBlock, expr + ";");
+     ]
+     |
+     [
+      "@member" ['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+:expr
+      => koocClassNameVar(class, theBlock, expr + ";");
+     ]
+    ]
+    |
+    [
+      "@member" 
+      "{"
+      [
+       [
+	[['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+";"]:expr
+	=> koocClassNameVar(class, theBlock, expr + ";");
+       ]
+       |
+       [
+	[['a'..'z'|'A'..'Z'|'0'..'9'|','|'('|')'|'_'|'*'|'['|']'|'&']+";"]:expr
+	=> koocClassNameFunc(class, theBlock, expr + ";");
+       ]
+      ]*
+      "}"
+    ]
+  ]*
+  "}"
+  ;
