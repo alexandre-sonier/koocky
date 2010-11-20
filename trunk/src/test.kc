@@ -14,6 +14,5 @@ int main()
 {
   int i;
 
-  bla(@!(int)[bobo.a], @!(int**)[bobo.a], [bobo.a] + 4, [bobo.a] + i);
-  i = bla(@!(int)[bobo.a], @!(int**)[bobo.a], [bobo.a] + 4, [bobo.a] + i);
+  return (i);
 }
