@@ -1,35 +1,32 @@
-#include "/home/barry_g/cnorm_2.10/src/cnorm2c/cnorm2c.inc.cws"
-
 function		MakeGen(out : node)
 {
-local myAST;
-local outs = "Makefile";
-parseAsBNF("Makegen.cwp", myAST, "Makefile.conf");
-translate("Makegen.cwp", myAST, "Makefile.conf", outs);
-foreach item in myAST.cc
-{
-	appendFile(outs, "CC\t=" + key(item) + "\n");
-}
-foreach item in myAST.cflags
-{
-	appendFile(outs, "CFLAGS\t=" + key(item) + "\n");
-}
-foreach item in myAST.NAME
-{
-	appendFile(outs, "NAME\t=" + key(item) + "\n");
-}
-appendFile(outs, "SRC\t=");
-foreach item in out
-{
-  if (rightString(item, 2) == ".c")
-    {
-      appendFile(outs, item + " ");
-    }
-}
-appendFile(outs, "\nOBJ\t=$(SRC:.c=.o)");
-appendFile(outs, "\nRM\t=rm -rf");
-appendFile(outs, "\n\nall:\n\t$(CC) -o $(NAME) $(SRC)\n\t\t@printf \"Executable generated \\n\" ");
-appendFile(outs, "\n\nclean:\n\t$(RM) *.o *~c *#");
-appendFile(outs, "\n\nfclean:\n\t$(RM) $(NAME)");
-appendFile(outs, "\n\nre:\tclean fclean all\n");
+  local myAST;
+  local outs = "Makefile";
+  translate("Makegen.cwp", myAST, "Makefile.conf", outs);
+  foreach item in myAST.cc
+  {
+    appendFile(outs, "CC\t=" + key(item) + "\n");
+  }
+  foreach item in myAST.cflags
+  {
+    appendFile(outs, "CFLAGS\t=" + key(item) + "\n");
+  }
+  foreach item in myAST.NAME
+  {
+    appendFile(outs, "NAME\t=" + key(item) + "\n");
+  }
+  appendFile(outs, "SRC\t=");
+  foreach item in out
+  {
+    if (rightString(item, 2) == ".c")
+      {
+	appendFile(outs, item + " ");
+      }
+  }
+  appendFile(outs, "\nOBJ\t=$(SRC:.c=.o)");
+  appendFile(outs, "\nRM\t=rm -rf");
+  appendFile(outs, "\n\nall:\n\t$(CC) -o $(NAME) $(SRC)\n\t\t@printf \"Executable generated \\n\" ");
+  appendFile(outs, "\n\nclean:\n\t$(RM) *.o *~c *#");
+  appendFile(outs, "\n\nfclean:\n\t$(RM) $(NAME)");
+  appendFile(outs, "\n\nre:\tclean fclean all\n");
 }

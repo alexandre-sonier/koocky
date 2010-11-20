@@ -1,2 +1,2 @@
 #!/bin/sh
-codeworker -I /home/barry_g/cnorm_2.10/src -nologo -script kooc.cws -args $*
+codeworker -I $CNORM_PATH/src -nologo -script kooc.cws -args $*

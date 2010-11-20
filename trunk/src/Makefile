@@ -1,7 +1,7 @@
 CC	=cc
 CFLAGS	=-W -Werror -Wstrict-prototypes -Wall -pedantics
 NAME	=test
-SRC	=test.c 
+SRC	=testdir/a.c testdir/main.c 
 OBJ	=$(SRC:.c=.o)
 RM	=rm -rf
 

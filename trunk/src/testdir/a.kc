@@ -2,8 +2,8 @@
 
 @implementation bobo
 {
-  int f(int q)
+  void f(int a, int b)
   {
-    return q;
+    printf("%d\n", a + b);
   }
 }

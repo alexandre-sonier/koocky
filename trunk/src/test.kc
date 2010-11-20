@@ -1,18 +1,24 @@
+@import	"/usr/include/stdio.h"
+
 @module bobo
 {
-  int a;
-  int **a;
-  float a;
-  char a;
-  char a;
-  void f(void);
+  int	f(int, int);
+  int	b = 2;
 }
 
-int bla(int, int, char, int **);
-
-int main()
+@implementation bobo
 {
-  int i;
+  int	f(int a, int b)
+  {
+    printf("%d\n", a + b);
+    return (0);
+  }
+}
 
-  return (i);
+int	main(void)
+{
+  int	a = 1;
+
+  @!(int)[bobo f :(int)a :(int)[bobo.b]];
+  return (0);
 }

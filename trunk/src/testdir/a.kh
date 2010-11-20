@@ -1,10 +1,18 @@
-@class test
+@module bobo
 {
-  @member 
-    {
-      char* func(void);
-      @virtual char *func(int);
-      char** func(double);
-    }
-  @virtual char **func(int);
+  void f(int, int);
+  int b = 2;
 }
+
+/* @class test */
+/* { */
+/*   @member int m; */
+/*   @member char* prout(int, char, int**); */
+/*   int f; */
+/*   @member */
+/*     { */
+/*       int a; */
+/*       int proutleretour(void); */
+/*     } */
+/*   void printamere(int); */
+/* } */
