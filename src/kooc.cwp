@@ -28,4 +28,5 @@ translation_unit ::=
 primary_expression(expr : node) ::=
   [#super::primary_expression(expr)]
   | [vartrad(expr)]
+  | [functrad(expr)]
   ;

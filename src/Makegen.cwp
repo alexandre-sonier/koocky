@@ -1,4 +1,4 @@
-#include "/home/barry_g/cnorm_2.10/src/cnorm.cwp"
+#include "cnorm.cwp"
 
 #overload
 translation_unit ::= 

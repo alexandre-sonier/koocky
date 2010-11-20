@@ -1,13 +1,16 @@
-signed int _4bobo_variable_signed_int_1a;
-signed int 	** _4bobo_variable_signed_int_point_point_1a;
-float _4bobo_variable_float_1a;
-signed char _4bobo_variable_signed_char_1a;
-signed char _4bobo_variable_signed_char_1a;
-void _4bobo_function_void_1f_param_void (void);
-signed int bla (signed int, signed int, signed char, signed int 	**);
-signed int main ()
+#include "/usr/include/stdio.h"
+signed int _4bobo_function_signed_int_1f_param_signed_int_signed_int (signed int, signed int);
+signed int _4bobo_variable_signed_int_1b  = 2;
+signed int _4bobo_function_signed_int_1f_param_signed_int_signed_int (signed int a, signed int b)
 {
-	signed int i;
-	return (i);
+	printf("%d\n", a + b);
+	return (0);
+}
+
+signed int main (void)
+{
+	signed int a  = 1;
+	_4bobo_function_signed_int_1f_param_signed_int_signed_int(a, _4bobo_variable_signed_int_1b);
+	return (0);
 }
 

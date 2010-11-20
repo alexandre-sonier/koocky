@@ -46,6 +46,7 @@ function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType
   koocTradgetVars(theBlock, theModule, theVar, decored_vars);
   foreach var in decored_vars
   {
+    clearVariable(theCType);
     koocTradTestVarType(var, theModule, theCType);
     if (theCType.identifier == theType.identifier)
       {
@@ -57,7 +58,6 @@ function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType
 	else if (!existVariable(theType.pointer))
 	  return var;
       }
-    clearVariable(theCType);
   }
   error(theVar + " of type " + theCType.identifier + " has never been declared in " + theModule);
 }
@@ -222,4 +222,55 @@ function	koocTradCopyRef(theFile : node, theAst : node)
 	}
     }
   }
+}
+
+function	koocTradnewFunc(theBlock : node, theDecl : value)
+{
+  local newCode;
+
+  cnormPatchInit(newCode);
+  cnormPatchStatement(newCode, theDecl);
+  setall theBlock = newCode.block[0];
+}
+
+function	koocTradAddParam(theBlock : node, type : value, param : value)
+{
+  local newCode;
+
+  cnormPatchInit(newCode);
+  cnormPatchStatement(newCode, "f(" + param + ");");
+
+  pushItem theBlock;
+  setall theBlock#back = newCode.block[0].list[0];
+}
+
+function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value , theName : value)
+{
+  local ParsedType;
+  local i;
+  local tmp;
+
+  theBlock.left.value = "_" + lengthString(theModule) + theModule + "_function_";
+  theBlock.left.value = theBlock.left.value;
+  foreach type in theTypes
+  {
+    i = 0;
+    pushItem ParsedType;
+    cutString(type, "_", tmp);
+    if (tmp[0] == "int" || tmp[0] == "char" || tmp[0] == "short" || tmp[0] == "long" || tmp[0] == "longlong")
+      ParsedType#back = ParsedType#back + "signed_";
+    ParsedType#back = ParsedType#back + tmp[0];
+    while (i < lengthString(tmp[1]))
+      {
+	ParsedType#back = ParsedType#back + "_point";
+	i = add(i, 1);
+      }
+  }
+  theBlock.left.value = theBlock.left.value + ParsedType[0] + "_" + lengthString(theName) + theName + "_param";
+  i = 1;  
+  while (i < getArraySize(ParsedType))
+    {
+      theBlock.left.value = theBlock.left.value + "_" + ParsedType[i];
+      i = add(i, 1);
+    }
 }
