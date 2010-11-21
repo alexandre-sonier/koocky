@@ -201,7 +201,6 @@ function	koocTradCopyRef(theFile : node, theAst : node)
   {
     foreach file in theAst
     {
-      insert theFile.block.variables;
       if (key(import) == file)
 	{
 	  foreach var in file.block.variables

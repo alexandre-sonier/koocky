@@ -16,7 +16,7 @@ function	koocImplDecor(theBlock : node, theDeclaration : node, theImpl : value)
     error("@implementation " + theImpl + ": shouldn't contain a prototype.");
 }
 
-function	koocImplRecScan(theFile : node)
+function	koocImplRecScan(theFile : node, theAst : node)
 {
   local check;
   foreach var in theFile.block
@@ -32,5 +32,33 @@ function	koocImplRecScan(theFile : node)
 	  error("function '" + var.name + "' implemented in '" + var.impl + "' was not declared in the corresponding module");
 	removeElement(var, "impl");
       }
+  }
+  foreach import in theFile.import
+  {
+    foreach file in theAst
+    {
+      if (key(import) == file)
+	{
+	  if (existVariable(theFile.block.implementation) && existVariable(file.block.module))
+	    foreach module in file.block.module
+	    {
+	      if (existVariable(theFile.block.implementation[module]))
+		{
+		  foreach var in file.block
+		  {
+		    if (existVariable(var.module) && module == var.module)
+		      {
+			pushItem theFile.block;
+			setall theFile.block#back = var;
+			var.ctype.infoType = add(var.infoType, 1);
+			insert var.ctype.infoType["extern"] = "storageClassSpecifier";
+			if (existVariable(var.init))
+			  removeVariable(var.init);
+		      }
+		  }
+		}
+	    }
+	}
+    }
   }
 }

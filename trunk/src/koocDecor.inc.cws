@@ -92,6 +92,7 @@ function	koocDecorName(theDeclaration : node, theModule : value, theBlock : node
       theDeclaration.name = koocDecorPrim(theDeclaration, name);
       if (koocDecorTool_getsymtype(theDeclaration.type) == "variable")
       	{
+	  insert theDeclaration.module = theModule;
       	  insert theBlock.variables[theDeclaration.name] = theBlock.variables[name];
       	  ref theBlock.variables[theDeclaration.name] = theBlock.variables[name];
       	  removeElement(theBlock.variables, name);
