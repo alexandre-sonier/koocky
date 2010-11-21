@@ -4,6 +4,6 @@
 {
   void f(int a, int b)
   {
-    printf("%d\n", a + b);
+    printf("%d + %d = %d\n", a, b, a + b);
   }
 }
