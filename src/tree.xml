@@ -54,7 +54,8 @@
 						<list>
 							<__ARRAY_ENTRY __KEY="0">
 								<type __VALUE="primary_expression" />
-								<value __VALUE="&quot;%d + %d = %d&quot;" />
+								<value __VALUE="&quot;%d + %d = %d
+&quot;" />
 								<ctype>
 									<infoType>
 										<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
