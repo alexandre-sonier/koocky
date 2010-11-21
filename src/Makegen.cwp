@@ -4,7 +4,7 @@ Makegen ::=
 [
 	cc(this.cc) 
 	| cflags(this.cflags) 
-	| name(this.st)
+	| name(this.name)
 ]*
 #empty
 ;

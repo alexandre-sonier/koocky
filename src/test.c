@@ -1,4 +1,3 @@
-#include "/usr/include/stdio.h"
 signed int _4bobo_function_signed_int_1f_param_signed_int_signed_int (signed int, signed int);
 signed int _4bobo_variable_signed_int_1b  = 2;
 signed int _4bobo_function_signed_int_1f_param_signed_int_signed_int (signed int a, signed int b)
