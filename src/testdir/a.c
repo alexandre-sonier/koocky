@@ -1,7 +1,13 @@
 #include "a.h"
-void _4bobo_function_void_1f_param_signed_int_signed_int (signed int a, signed int b)
+signed int _4test_function_signed_int_4test_param_signed_int (signed int a)
 {
-	printf("%d + %d = %d\n", a, b, a + b);
+	signed int a;
+	return a;
 }
 
-signed int _4bobo_variable_signed_int_1a  = 2;
+signed int M_4test_function_signed_int_1f_param_signed_int (struct _class_test_ 	* self, signed int a)
+{
+	signed int a;
+	return a;
+}
+

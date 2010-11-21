@@ -1,7 +1,16 @@
-@import "/usr/include/stdio.h"
-
-@module bobo
+@class test
 {
-  int a = 2;
-  void f(int, int);
+  int test(int);
+  @member int f(int);
+  @virtual int g(int);
+  @member
+    {
+      int h(int);
+      @virtual int g(int);
+    }
+  @virtual
+    {
+      int i(int);
+      @member int j(int);
+    }
 }

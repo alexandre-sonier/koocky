@@ -1,9 +1,34 @@
 implementation(theBlock : node) ::=
   "@implementation" #readIdentifier:impl
-  "{"
-  [declaration(theBlock)
-   => koocImplDecor(theBlock, theBlock#back, impl);
-   ]*
   => insert theBlock.implementation[impl] = impl;
+  "{"
+  [
+   [
+    [declaration(theBlock)
+     => koocImplDecor(theBlock, theBlock#back, impl);
+     ]
+    ]
+   |
+   [
+    ["@member"|"@virtual"]:virt 
+    [
+     declaration(theBlock)
+     ]*
+    => koocClassImpl(impl, theBlock, virt);
+    ]
+   |
+   [
+    ["@member"|"@virtual"]:virt 
+    "{"
+    [
+     [["@member"|"@virtual"]?]:virt 
+     [
+      declaration(theBlock)
+      ]+
+     => koocClassImpl(impl, theBlock, virt);
+     ]*
+    "}"
+    ]
+   ]*
   "}"
   ;

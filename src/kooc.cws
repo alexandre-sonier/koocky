@@ -9,7 +9,7 @@ local myAst;
 local out;
 local filelist;
 
-//createMyObject(myAst);
+createMyObject(myAst);
 
 foreach filename in _ARGS
 {
@@ -32,11 +32,14 @@ foreach filename in _ARGS
 
 foreach file in myAst
 {
-  koocTradCopyRef(file, myAst);
-  koocImplRecScan(file, myAst);
-  koocTradRecScan(file.block, file.block, file.block);
-  koocClassRecScan(file, myAst);
-  appendFile(out[file], cnorm2c(file.block));
+  if (file != "object")
+    {
+      koocTradCopyRef(file, myAst);
+      koocImplRecScan(file, myAst);
+      koocTradRecScan(file.block, file.block, file.block);
+      koocClassRecScan(file, myAst);
+      appendFile(out[file], cnorm2c(file.block));
+    }
 }
 
 MakeGen(out);

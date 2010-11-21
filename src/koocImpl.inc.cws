@@ -28,6 +28,9 @@ function	koocImplRecScan(theFile : node, theAst : node)
 	  foreach func in theFile.block.prototypes
 	    if (key(func) == var.name)
 	      check = 1;
+	foreach class in theFile.block.classes
+	  if (key(class) == var.impl)
+	    check = 1;
 	if (check == 0)
 	  error("function '" + var.name + "' implemented in '" + var.impl + "' was not declared in the corresponding module");
 	removeElement(var, "impl");
@@ -39,24 +42,45 @@ function	koocImplRecScan(theFile : node, theAst : node)
     {
       if (key(import) == file)
 	{
-	  if (existVariable(theFile.block.implementation) && existVariable(file.block.module))
-	    foreach module in file.block.module
+	  if (existVariable(theFile.block.implementation) && (existVariable(file.block.module) || existVariable(file.block.classes)))
 	    {
-	      if (existVariable(theFile.block.implementation[module]))
-		{
-		  foreach var in file.block
+	      foreach module in file.block.module
+	      {
+		if (existVariable(theFile.block.implementation[module]))
 		  {
-		    if (existVariable(var.module) && module == var.module)
-		      {
-			pushItem theFile.block;
-			setall theFile.block#back = var;
-			var.ctype.infoType = add(var.infoType, 1);
-			insert var.ctype.infoType["extern"] = "storageClassSpecifier";
-			if (existVariable(var.init))
-			  removeVariable(var.init);
-		      }
+		    foreach var in file.block
+		    {
+		      if (existVariable(var.module) && module == var.module)
+			{
+			  pushItem theFile.block;
+			  setall theFile.block#back = var;
+			  var.ctype.infoType = add(var.infoType, 1);
+			  insert var.ctype.infoType["extern"] = "storageClassSpecifier";
+			  if (existVariable(var.init))
+			    removeVariable(var.init);
+			}
+		    }
 		  }
-		}
+	      }
+
+	      foreach class in file.block.classes
+	      {
+		if (existVariable(theFile.block.implementation[key(class)]))
+		  {
+		    foreach var in file.block
+		    {
+		      if (existVariable(var.module) && key(class) == var.module)
+			{
+			  pushItem theFile.block;
+			  setall theFile.block#back = var;
+			  var.ctype.infoType = add(var.infoType, 1);
+			  insert var.ctype.infoType["extern"] = "storageClassSpecifier";
+			  if (existVariable(var.init))
+			    removeVariable(var.init);
+			}
+		    }
+		  }
+	      }
 	    }
 	}
     }

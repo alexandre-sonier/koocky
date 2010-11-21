@@ -1,4 +1,740 @@
 <myAst>
+	<__ARRAY_ENTRY __KEY="object" __VALUE="object">
+		<block __VALUE="declaration">
+			<__ARRAY_ENTRY __KEY="0">
+				<__LINE__ __VALUE="1" />
+				<ctype>
+					<pctx />
+					<type __VALUE="__COMPOSED__" />
+					<identifier __VALUE="_Object_" />
+					<infoType __VALUE="1">
+						<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+					</infoType>
+					<specifier __VALUE="struct" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="vtable" />
+						</__ARRAY_ENTRY>
+					</list>
+				</ctype>
+				<type __VALUE="__TYPE__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="_glObject_" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="1" />
+				<ctype>
+					<pctx />
+					<type __VALUE="__COMPOSED__" />
+					<identifier __VALUE="_vtObject_" />
+					<specifier __VALUE="struct" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="P_11_glObject__function_void_4init_param__glObject__point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="P_11_glObject__function_void_4init_param__glObject__point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="1">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="P_11_glObject__function_void_6delete_param__glObject__point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="P_11_glObject__function_void_6delete_param__glObject__point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="2">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="3">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_11_glObject__function_int_8isKindOf_param__glObject__point_char_point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="char" />
+										<infoType __VALUE="1">
+											<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+										</infoType>
+										<sign __VALUE="signed" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_11_glObject__function_int_8isKindOf_param__glObject__point_char_point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="4">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_11_glObject__function_int_8isKindOf_param__glObject__point__glObject__point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_11_glObject__function_int_8isKindOf_param__glObject__point__glObject__point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="5">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_11_glObject__function_int_12isInstanceOf_param__glObject__point_char_point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="char" />
+										<infoType __VALUE="1">
+											<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+										</infoType>
+										<sign __VALUE="signed" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_11_glObject__function_int_12isInstanceOf_param__glObject__point_char_point" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="6">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_11_glObject__function_int_12isInstanceOf_param__glObject__point__glObject__point" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_Object_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_11_glObject__function_int_12isInstanceOf_param__glObject__point__glObject__point" />
+						</__ARRAY_ENTRY>
+					</list>
+				</ctype>
+				<type __VALUE="__TYPE__" />
+				<etype __VALUE="declaration" />
+			</__ARRAY_ENTRY>
+			<pctx />
+			<type __VALUE="block" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<__LINE__ __VALUE="1" />
+					<ctype>
+						<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="void" />
+					</ctype>
+					<type __VALUE="__FUNCTION__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+								<type __VALUE="__COMPOSED__" />
+								<identifier __VALUE="_Object_" />
+								<specifier __VALUE="struct" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+						</__ARRAY_ENTRY>
+					</list>
+					<otype __VALUE="rootblock" />
+					<block>
+						<__ARRAY_ENTRY __KEY="0">
+							<left>
+								<__LINE__ __VALUE="2" />
+								<type __VALUE="primary_expression" />
+								<value __VALUE="free" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="call_expression" />
+							<otype __VALUE="call" />
+							<operator __VALUE="()" />
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtable" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</__ARRAY_ENTRY>
+							</list>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<pctx />
+						<type __VALUE="block" />
+					</block>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<__LINE__ __VALUE="1" />
+					<ctype>
+						<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="void" />
+					</ctype>
+					<type __VALUE="__FUNCTION__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="M_11_glObject__function_void_6delete_param__glObject__point" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+								<type __VALUE="__COMPOSED__" />
+								<identifier __VALUE="_Object_" />
+								<specifier __VALUE="struct" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="self" />
+						</__ARRAY_ENTRY>
+					</list>
+					<otype __VALUE="rootblock" />
+					<block>
+						<__ARRAY_ENTRY __KEY="0">
+							<left>
+								<__LINE__ __VALUE="2" />
+								<type __VALUE="primary_expression" />
+								<value __VALUE="self" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="deref_expression" />
+							<otype __VALUE="likebinary" />
+							<operator __VALUE="-&gt;" />
+							<right>
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="call_expression" />
+								<otype __VALUE="call" />
+								<operator __VALUE="()" />
+								<list>
+									<__ARRAY_ENTRY __KEY="0">
+										<type __VALUE="primary_expression" />
+										<value __VALUE="self" />
+										<operator __VALUE="id" />
+										<otype __VALUE="terminal" />
+									</__ARRAY_ENTRY>
+								</list>
+							</right>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="1">
+							<left>
+								<__LINE__ __VALUE="3" />
+								<type __VALUE="primary_expression" />
+								<value __VALUE="free" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="call_expression" />
+							<otype __VALUE="call" />
+							<operator __VALUE="()" />
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<type __VALUE="primary_expression" />
+									<value __VALUE="self" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</__ARRAY_ENTRY>
+							</list>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<pctx />
+						<type __VALUE="block" />
+					</block>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<__LINE__ __VALUE="1" />
+					<ctype>
+						<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="void" />
+					</ctype>
+					<type __VALUE="__FUNCTION__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="M_11_glObject__function_void_4init_param__glObject__point" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx __REFERENCE="myAst[&quot;object&quot;].block.block" />
+								<type __VALUE="__COMPOSED__" />
+								<identifier __VALUE="_Object_" />
+								<specifier __VALUE="struct" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="self" />
+						</__ARRAY_ENTRY>
+					</list>
+					<otype __VALUE="rootblock" />
+					<block>
+						<__ARRAY_ENTRY __KEY="0">
+							<__LINE__ __VALUE="2" />
+							<ctype>
+								<pctx __REFERENCE="myAst[&quot;object&quot;].block.block[&quot;2&quot;].block" />
+								<type __VALUE="__COMPOSED__" />
+								<identifier __VALUE="_vtObject_" />
+								<specifier __VALUE="struct" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="vtObj" />
+							<init>
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="malloc" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="call_expression" />
+								<otype __VALUE="call" />
+								<operator __VALUE="()" />
+								<list>
+									<__ARRAY_ENTRY __KEY="0">
+										<operator __VALUE="sizeof " />
+										<type __VALUE="sizeof_expression" />
+										<left>
+											<expr>
+												<type __VALUE="unary_expression" />
+												<operator __VALUE="*" />
+												<left>
+													<type __VALUE="primary_expression" />
+													<value __VALUE="vtObj" />
+													<operator __VALUE="id" />
+													<otype __VALUE="terminal" />
+												</left>
+												<otype __VALUE="unary" />
+											</expr>
+											<type __VALUE="priority_expression" />
+											<otype __VALUE="priority" />
+											<operator __VALUE="()" />
+										</left>
+										<otype __VALUE="unary" />
+									</__ARRAY_ENTRY>
+								</list>
+								<etype __VALUE="expression" />
+							</init>
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="1">
+							<left>
+								<left>
+									<__LINE__ __VALUE="3" />
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtObj" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="deref_expression" />
+								<otype __VALUE="likebinary" />
+								<operator __VALUE="-&gt;" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="P_11_glObject__function_void_4init_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</right>
+							</left>
+							<operator __VALUE="=" />
+							<type __VALUE="assignement_expression" />
+							<otype __VALUE="binary" />
+							<right>
+								<operator __VALUE="&amp;" />
+								<type __VALUE="unary_expression" />
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="M_11_glObject__function_void_4init_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<otype __VALUE="unary" />
+							</right>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="2">
+							<left>
+								<left>
+									<__LINE__ __VALUE="4" />
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtObj" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="deref_expression" />
+								<otype __VALUE="likebinary" />
+								<operator __VALUE="-&gt;" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</right>
+							</left>
+							<operator __VALUE="=" />
+							<type __VALUE="assignement_expression" />
+							<otype __VALUE="binary" />
+							<right>
+								<operator __VALUE="&amp;" />
+								<type __VALUE="unary_expression" />
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="V_11_glObject__function_void_5clean_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<otype __VALUE="unary" />
+							</right>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="3">
+							<left>
+								<left>
+									<__LINE__ __VALUE="5" />
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtObj" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="deref_expression" />
+								<otype __VALUE="likebinary" />
+								<operator __VALUE="-&gt;" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="P_11_glObject__function_void_6delete_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</right>
+							</left>
+							<operator __VALUE="=" />
+							<type __VALUE="assignement_expression" />
+							<otype __VALUE="binary" />
+							<right>
+								<operator __VALUE="&amp;" />
+								<type __VALUE="unary_expression" />
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="M_11_glObject__function_void_6delete_param__glObject__point" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<otype __VALUE="unary" />
+							</right>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="4">
+							<left>
+								<left>
+									<__LINE__ __VALUE="6" />
+									<type __VALUE="primary_expression" />
+									<value __VALUE="self" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<type __VALUE="deref_expression" />
+								<otype __VALUE="likebinary" />
+								<operator __VALUE="-&gt;" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtable" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</right>
+							</left>
+							<operator __VALUE="=" />
+							<type __VALUE="assignement_expression" />
+							<otype __VALUE="binary" />
+							<right>
+								<operator __VALUE="&amp;" />
+								<type __VALUE="unary_expression" />
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="vtObj" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<otype __VALUE="unary" />
+							</right>
+							<etype __VALUE="expression" />
+						</__ARRAY_ENTRY>
+						<pctx />
+						<type __VALUE="block" />
+						<variables>
+							<__ARRAY_ENTRY __KEY="vtObj" __REFERENCE="myAst[&quot;object&quot;].block.block[&quot;2&quot;].block[&quot;0&quot;]" />
+						</variables>
+					</block>
+				</__ARRAY_ENTRY>
+				<functions>
+					<__ARRAY_ENTRY __KEY="V_11_glObject__function_void_5clean_param__glObject__point" __REFERENCE="myAst[&quot;object&quot;].block.block[&quot;0&quot;]" />
+					<__ARRAY_ENTRY __KEY="M_11_glObject__function_void_6delete_param__glObject__point" __REFERENCE="myAst[&quot;object&quot;].block.block[&quot;1&quot;]" />
+					<__ARRAY_ENTRY __KEY="M_11_glObject__function_void_4init_param__glObject__point" __REFERENCE="myAst[&quot;object&quot;].block.block[&quot;2&quot;]" />
+				</functions>
+			</block>
+		</block>
+	</__ARRAY_ENTRY>
 	<__ARRAY_ENTRY __KEY="a.kc" __VALUE="a.kc">
 		<block>
 			<__ARRAY_ENTRY __KEY="0">
@@ -6,12 +742,13 @@
 				<ctype>
 					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
 					<type __VALUE="__PRIMARY__" />
-					<identifier __VALUE="void" />
+					<identifier __VALUE="int" />
+					<sign __VALUE="signed" />
 					<infoType />
 				</ctype>
 				<type __VALUE="__FUNCTION__" />
 				<etype __VALUE="declaration" />
-				<name __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
+				<name __VALUE="_4test_function_signed_int_4test_param_signed_int" />
 				<list>
 					<__ARRAY_ENTRY __KEY="0">
 						<ctype>
@@ -25,7 +762,76 @@
 						<etype __VALUE="declaration" />
 						<name __VALUE="a" />
 					</__ARRAY_ENTRY>
+				</list>
+				<otype __VALUE="rootblock" />
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<__LINE__ __VALUE="7" />
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="a" />
+					</__ARRAY_ENTRY>
 					<__ARRAY_ENTRY __KEY="1">
+						<type __VALUE="return" />
+						<otype __VALUE="pseudoexpression" />
+						<etype __VALUE="expression" />
+						<block>
+							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="a" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</block>
+					</__ARRAY_ENTRY>
+					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
+					<type __VALUE="block" />
+					<variables>
+						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;]" />
+					</variables>
+				</block>
+				<impl __VALUE="test" />
+				<comment_suffix />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="11" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="int" />
+					<sign __VALUE="signed" />
+					<infoType />
+				</ctype>
+				<type __VALUE="__FUNCTION__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="M_4test_function_signed_int_1f_param_signed_int" />
+				<list>
+					<__ARRAY_ENTRY __KEY="1">
+						<__LINE__ __VALUE="1" />
+						<ctype>
+							<pctx />
+							<type __VALUE="__COMPOSED__" />
+							<identifier __VALUE="_class_test_" />
+							<specifier __VALUE="struct" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+							<comment_struct />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="self" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="0">
 						<ctype>
 							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
 							<type __VALUE="__PRIMARY__" />
@@ -35,118 +841,59 @@
 						</ctype>
 						<type __VALUE="__VARIABLE__" />
 						<etype __VALUE="declaration" />
-						<name __VALUE="b" />
+						<name __VALUE="a" />
 					</__ARRAY_ENTRY>
 				</list>
 				<otype __VALUE="rootblock" />
 				<block>
 					<__ARRAY_ENTRY __KEY="0">
-						<left>
-							<__LINE__ __VALUE="7" />
+						<__LINE__ __VALUE="13" />
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="a" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="1">
+						<type __VALUE="return" />
+						<otype __VALUE="pseudoexpression" />
+						<etype __VALUE="expression" />
+						<block>
+							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block" />
 							<type __VALUE="primary_expression" />
-							<value __VALUE="printf" />
+							<value __VALUE="a" />
 							<operator __VALUE="id" />
 							<otype __VALUE="terminal" />
-						</left>
-						<type __VALUE="call_expression" />
-						<otype __VALUE="call" />
-						<operator __VALUE="()" />
-						<list>
-							<__ARRAY_ENTRY __KEY="0">
-								<type __VALUE="primary_expression" />
-								<value __VALUE="&quot;%d + %d = %d
-&quot;" />
-								<ctype>
-									<infoType>
-										<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
-									</infoType>
-									<identifier __VALUE="char" />
-									<pointer>
-										<__ARRAY_ENTRY __KEY="0">
-											<level __VALUE="*" />
-										</__ARRAY_ENTRY>
-									</pointer>
-								</ctype>
-								<operator __VALUE="literal" />
-								<otype __VALUE="terminal" />
-							</__ARRAY_ENTRY>
-							<__ARRAY_ENTRY __KEY="1">
-								<type __VALUE="primary_expression" />
-								<value __VALUE="a" />
-								<operator __VALUE="id" />
-								<otype __VALUE="terminal" />
-							</__ARRAY_ENTRY>
-							<__ARRAY_ENTRY __KEY="2">
-								<type __VALUE="primary_expression" />
-								<value __VALUE="b" />
-								<operator __VALUE="id" />
-								<otype __VALUE="terminal" />
-							</__ARRAY_ENTRY>
-							<__ARRAY_ENTRY __KEY="3">
-								<left>
-									<type __VALUE="primary_expression" />
-									<value __VALUE="a" />
-									<operator __VALUE="id" />
-									<otype __VALUE="terminal" />
-								</left>
-								<operator __VALUE="+" />
-								<type __VALUE="additive_expression" />
-								<otype __VALUE="binary" />
-								<right>
-									<type __VALUE="primary_expression" />
-									<value __VALUE="b" />
-									<operator __VALUE="id" />
-									<otype __VALUE="terminal" />
-								</right>
-							</__ARRAY_ENTRY>
-						</list>
-						<etype __VALUE="expression" />
+						</block>
 					</__ARRAY_ENTRY>
 					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
 					<type __VALUE="block" />
+					<variables>
+						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block[&quot;0&quot;]" />
+					</variables>
 				</block>
-				<impl __VALUE="bobo" />
 				<comment_suffix />
-			</__ARRAY_ENTRY>
-			<__ARRAY_ENTRY __KEY="1">
-				<__LINE__ __VALUE="5" />
-				<ctype>
-					<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
-					<type __VALUE="__PRIMARY__" />
-					<identifier __VALUE="int" />
-					<sign __VALUE="signed" />
-					<infoType />
-					<comment_suffix />
-				</ctype>
-				<type __VALUE="__VARIABLE__" />
-				<etype __VALUE="declaration" />
-				<name __VALUE="_4bobo_variable_signed_int_1a" />
-				<init>
-					<type __VALUE="primary_expression" />
-					<value __VALUE="2" />
-					<ctype>
-						<identifier __VALUE="int" />
-					</ctype>
-					<operator __VALUE="literal" />
-					<otype __VALUE="terminal" />
-					<etype __VALUE="expression" />
-				</init>
-				<module __VALUE="bobo" />
 			</__ARRAY_ENTRY>
 			<pctx />
 			<type __VALUE="block" />
-			<functions>
-				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;]" />
-			</functions>
 			<implementation>
-				<__ARRAY_ENTRY __KEY="bobo" __VALUE="bobo" />
+				<__ARRAY_ENTRY __KEY="test" __VALUE="test" />
 			</implementation>
-			<variables>
-				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
-			</variables>
+			<functions>
+				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_4test_param_signed_int" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;]" />
+				<__ARRAY_ENTRY __KEY="f" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;]" />
+			</functions>
 			<prototypes>
-				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;1&quot;]" />
+				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
 			</prototypes>
+			<classes>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block.classes[&quot;test&quot;]" />
+			</classes>
 		</block>
 		<import>
 			<__ARRAY_ENTRY __KEY="a.kh" />
@@ -156,46 +903,319 @@
 	<__ARRAY_ENTRY __KEY="a.kh" __VALUE="a.kh">
 		<block>
 			<__ARRAY_ENTRY __KEY="0">
-				<__LINE__ __VALUE="5" />
+				<__LINE__ __VALUE="1" />
+				<ctype>
+					<pctx />
+					<type __VALUE="__COMPOSED__" />
+					<identifier __VALUE="_class_test_" />
+					<infoType __VALUE="1">
+						<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+					</infoType>
+					<specifier __VALUE="struct" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<ctype>
+								<pctx />
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="vtable" />
+						</__ARRAY_ENTRY>
+					</list>
+					<comment_struct />
+					<comment_suffix />
+				</ctype>
+				<type __VALUE="__TYPE__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="test" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="1" />
+				<ctype>
+					<pctx />
+					<type __VALUE="__COMPOSED__" />
+					<identifier __VALUE="_vtable_test_" />
+					<specifier __VALUE="struct" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="P_4test_function_signed_int_1f_param_signed_int" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_class_test_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+										<comment_struct />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="int" />
+										<sign __VALUE="signed" />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="P_4test_function_signed_int_1f_param_signed_int" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="1">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_class_test_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+										<comment_struct />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="int" />
+										<sign __VALUE="signed" />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="2">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="P_4test_function_signed_int_1h_param_signed_int" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_class_test_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+										<comment_struct />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="int" />
+										<sign __VALUE="signed" />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="P_4test_function_signed_int_1h_param_signed_int" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="3">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_class_test_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+										<comment_struct />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="int" />
+										<sign __VALUE="signed" />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="4">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PFUNCTION__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<pfname>
+								<__ARRAY_ENTRY __KEY="0">
+									<function>
+										<name __VALUE="P_4test_function_signed_int_1i_param_signed_int" />
+									</function>
+								</__ARRAY_ENTRY>
+							</pfname>
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<ctype>
+										<pctx />
+										<type __VALUE="__COMPOSED__" />
+										<identifier __VALUE="_class_test_" />
+										<specifier __VALUE="struct" />
+										<pointer>
+											<__ARRAY_ENTRY __KEY="0">
+												<level __VALUE="*" />
+											</__ARRAY_ENTRY>
+										</pointer>
+										<comment_struct />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<ctype>
+										<pctx />
+										<type __VALUE="__PRIMARY__" />
+										<identifier __VALUE="int" />
+										<sign __VALUE="signed" />
+										<comment_suffix />
+									</ctype>
+									<type __VALUE="__VARIABLE__" />
+									<etype __VALUE="declaration" />
+								</__ARRAY_ENTRY>
+							</list>
+							<name __VALUE="P_4test_function_signed_int_1i_param_signed_int" />
+						</__ARRAY_ENTRY>
+					</list>
+					<comment_struct />
+					<comment_suffix />
+				</ctype>
+				<type __VALUE="__TYPE__" />
+				<etype __VALUE="declaration" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="2">
+				<__LINE__ __VALUE="3" />
 				<ctype>
 					<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
 					<type __VALUE="__PRIMARY__" />
 					<identifier __VALUE="int" />
 					<sign __VALUE="signed" />
-					<infoType __VALUE="1">
-						<__ARRAY_ENTRY __KEY="extern" __VALUE="storageClassSpecifier" />
-					</infoType>
-					<comment_suffix />
-				</ctype>
-				<type __VALUE="__VARIABLE__" />
-				<etype __VALUE="declaration" />
-				<name __VALUE="_4bobo_variable_signed_int_1a" />
-				<module __VALUE="bobo" />
-			</__ARRAY_ENTRY>
-			<__ARRAY_ENTRY __KEY="1">
-				<__LINE__ __VALUE="6" />
-				<ctype>
-					<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
-					<type __VALUE="__PRIMARY__" />
-					<identifier __VALUE="void" />
 					<infoType />
 				</ctype>
 				<type __VALUE="__PROTOTYPE__" />
 				<etype __VALUE="declaration" />
-				<name __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
+				<name __VALUE="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" />
 				<list>
 					<__ARRAY_ENTRY __KEY="0">
-						<ctype>
-							<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
-							<type __VALUE="__PRIMARY__" />
-							<identifier __VALUE="int" />
-							<sign __VALUE="signed" />
-							<comment_suffix />
-						</ctype>
-						<type __VALUE="__VARIABLE__" />
-						<etype __VALUE="declaration" />
-					</__ARRAY_ENTRY>
-					<__ARRAY_ENTRY __KEY="1">
 						<ctype>
 							<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
 							<type __VALUE="__PRIMARY__" />
@@ -211,133 +1231,14 @@
 			</__ARRAY_ENTRY>
 			<pctx />
 			<type __VALUE="block" />
-			<variables>
-				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
-			</variables>
+			<classes>
+				<__ARRAY_ENTRY __KEY="test" __VALUE="test" />
+			</classes>
 			<prototypes>
-				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;1&quot;]" />
+				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
 			</prototypes>
-			<module>
-				<__ARRAY_ENTRY __KEY="bobo" __VALUE="bobo" />
-			</module>
 		</block>
-		<import>
-			<__ARRAY_ENTRY __KEY="/usr/include/stdio.h" />
-		</import>
+		<import />
 		<gl_pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
-	</__ARRAY_ENTRY>
-	<__ARRAY_ENTRY __KEY="main.kc" __VALUE="main.kc">
-		<block>
-			<__ARRAY_ENTRY __KEY="0">
-				<__LINE__ __VALUE="3" />
-				<ctype>
-					<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
-					<type __VALUE="__PRIMARY__" />
-					<identifier __VALUE="int" />
-					<sign __VALUE="signed" />
-				</ctype>
-				<type __VALUE="__FUNCTION__" />
-				<etype __VALUE="declaration" />
-				<name __VALUE="main" />
-				<list />
-				<otype __VALUE="rootblock" />
-				<block>
-					<__ARRAY_ENTRY __KEY="0">
-						<__LINE__ __VALUE="5" />
-						<ctype>
-							<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
-							<type __VALUE="__PRIMARY__" />
-							<identifier __VALUE="int" />
-							<sign __VALUE="signed" />
-							<comment_suffix />
-						</ctype>
-						<type __VALUE="__VARIABLE__" />
-						<etype __VALUE="declaration" />
-						<name __VALUE="a" />
-						<init>
-							<type __VALUE="primary_expression" />
-							<value __VALUE="1" />
-							<ctype>
-								<identifier __VALUE="int" />
-							</ctype>
-							<operator __VALUE="literal" />
-							<otype __VALUE="terminal" />
-							<etype __VALUE="expression" />
-						</init>
-					</__ARRAY_ENTRY>
-					<__ARRAY_ENTRY __KEY="1">
-						<left>
-							<__LINE__ __VALUE="1" />
-							<type __VALUE="primary_expression" />
-							<value __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
-							<operator __VALUE="id" />
-							<otype __VALUE="terminal" />
-						</left>
-						<type __VALUE="call_expression" />
-						<otype __VALUE="call" />
-						<operator __VALUE="()" />
-						<list>
-							<__ARRAY_ENTRY __KEY="0">
-								<ctype>
-									<identifier __VALUE="int" />
-								</ctype>
-								<operator __VALUE="id" />
-								<otype __VALUE="terminal" />
-								<value __VALUE="_4bobo_variable_signed_int_1a" />
-							</__ARRAY_ENTRY>
-							<__ARRAY_ENTRY __KEY="1">
-								<type __VALUE="primary_expression" />
-								<value __VALUE="a" />
-								<operator __VALUE="id" />
-								<otype __VALUE="terminal" />
-							</__ARRAY_ENTRY>
-						</list>
-						<etype __VALUE="expression" />
-						<module __VALUE="bobo" />
-					</__ARRAY_ENTRY>
-					<__ARRAY_ENTRY __KEY="2">
-						<type __VALUE="return" />
-						<otype __VALUE="pseudoexpression" />
-						<etype __VALUE="expression" />
-						<block>
-							<expr>
-								<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
-								<type __VALUE="primary_expression" />
-								<value __VALUE="0" />
-								<ctype>
-									<identifier __VALUE="int" />
-								</ctype>
-								<operator __VALUE="literal" />
-								<otype __VALUE="terminal" />
-							</expr>
-							<type __VALUE="priority_expression" />
-							<otype __VALUE="priority" />
-							<operator __VALUE="()" />
-						</block>
-					</__ARRAY_ENTRY>
-					<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
-					<type __VALUE="block" />
-					<variables>
-						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;]" />
-					</variables>
-				</block>
-				<comment_suffix />
-			</__ARRAY_ENTRY>
-			<pctx />
-			<type __VALUE="block" />
-			<functions>
-				<__ARRAY_ENTRY __KEY="main" __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;]" />
-			</functions>
-			<variables>
-				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
-			</variables>
-			<prototypes>
-				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;1&quot;]" />
-			</prototypes>
-		</block>
-		<import>
-			<__ARRAY_ENTRY __KEY="a.kh" />
-		</import>
-		<gl_pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
 	</__ARRAY_ENTRY>
 </myAst>
