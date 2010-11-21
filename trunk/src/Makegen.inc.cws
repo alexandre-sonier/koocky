@@ -15,10 +15,11 @@ function		MakeGen(out : node)
     appendFile(outs, "CFLAGS\t=" + key(item) + "\n");
   }
 
-  foreach item in myAST.NAME
+  foreach item in myAST.name
   {
     appendFile(outs, "NAME\t=" + key(item) + "\n");
   }
+
   appendFile(outs, "SRC\t=");
 
   foreach item in out
