@@ -131,3 +131,30 @@ function	koocClassRecScan(theFile : node, theAst : node)
 	}
   }
 }
+
+function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value)
+{
+  if (koocDecorTool_gettype(theBlock#back.ctype) == "struct"
+      || koocDecorTool_gettype(theBlock#back.ctype) == "union"
+      || koocDecorTool_getinfoType(theBlock#back.ctype.infoType) == "typedef"
+      || koocDecorTool_getinfoType(theBlock#back.ctype.infoType) == "static"
+      || koocDecorTool_gettype(theBlock#back.ctype) == "enum");
+  else
+    {
+      local		name = theBlock#back.name;
+
+      if (theVirtual == "" || theVirtual == "@member")
+	theBlock#back.name = "M_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(theBlock#back.type);
+      else
+	theBlock#back.name = "V_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(theBlock#back.type);
+      theBlock#back.name = koocDecorPrim(theBlock#back, name);
+
+      invertArray(theBlock#back.list);
+      pushItem theBlock#back.list;
+      local newCode;
+      cnormPatchInit(newCode);
+      cnormPatchDeclaration(newCode, "struct _class_" + theClass + "_* self");
+      setall theBlock#back.list#back = newCode.block[0];
+      invertArray(theBlock#back.list);
+    }
+}

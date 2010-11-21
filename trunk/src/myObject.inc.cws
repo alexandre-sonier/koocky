@@ -1,3 +1,18 @@
+function	implMyObject(myObject : node)
+{
+  cnormPatchDeclaration(myObject, "void V_11_glObject__function_void_5clean_param__glObject__point(struct _Object_*){\
+free(vtable);}");
+  cnormPatchDeclaration(myObject, "void M_11_glObject__function_void_6delete_param__glObject__point(struct _Object_* self){\
+self->V_11_glObject__function_void_5clean_param__glObject__point(self);\
+free(self);}");
+  cnormPatchDeclaration(myObject, "void M_11_glObject__function_void_4init_param__glObject__point(struct _Object_* self){\
+struct _vtObject_ *vtObj = malloc(sizeof(*vtObj));\
+vtObj->P_11_glObject__function_void_4init_param__glObject__point = &M_11_glObject__function_void_4init_param__glObject__point;\
+vtObj->V_11_glObject__function_void_5clean_param__glObject__point = &V_11_glObject__function_void_5clean_param__glObject__point;\
+vtObj->P_11_glObject__function_void_6delete_param__glObject__point = &M_11_glObject__function_void_6delete_param__glObject__point;\
+self->vtable = &vtObj;}");
+}
+
 function	createMyObject(myAst : node)
 {
   insert myAst["object"] = "object";
@@ -7,18 +22,19 @@ function	createMyObject(myAst : node)
   local		newBlock;
   cnormPatchInit(newBlock);
   cnormPatchDeclaration(newBlock, "typedef struct _Object_ { void* vtable; } _glObject_;");
-  cnormPatchDeclaration(newBlock, "struct _vtObject_ {};");
-  
-  
-  
-  pushItem newBlock.block[0].ctype.list;
-  cnormPatchDeclaration(newBlock.block[0].ctype.list#back, "int a;");
-  
-
-
+  cnormPatchDeclaration(newBlock, "struct _vtObject_ {\
+void (*P_11_glObject__function_void_4init_param__glObject__point)(struct _Object_*);\
+void (*P_11_glObject__function_void_6delete_param__glObject__point)(struct _Object_*);\
+void (*V_11_glObject__function_void_5clean_param__glObject__point)(struct _Object_*);\
+int (*V_11_glObject__function_int_8isKindOf_param__glObject__point_char_point)(struct _Object_*, const char*);\
+int (*V_11_glObject__function_int_8isKindOf_param__glObject__point__glObject__point)(struct _Object_*, struct _Object_*);\
+int (*V_11_glObject__function_int_12isInstanceOf_param__glObject__point_char_point)(struct _Object_*, const char*);\
+int (*V_11_glObject__function_int_12isInstanceOf_param__glObject__point__glObject__point)(struct _Object_*, struct _Object_*);};");
 
   pushItem myAst["object"].block;
   setall myAst["object"].block#back = newBlock.block[0];
   pushItem myAst["object"].block;
   setall myAst["object"].block#back = newBlock.block[1];
+
+  implMyObject(myAst["object"].block);
 }

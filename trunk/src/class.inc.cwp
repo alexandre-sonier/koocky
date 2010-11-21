@@ -22,7 +22,7 @@ class(theBlock : node) ::=
      ]
     |
     [
-     "@member" 
+     ["@member"|"@virtual"]:virt 
      "{"
      [
       [
