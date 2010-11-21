@@ -1,4 +1,4 @@
-function	addClass(theBlock : node, class : node)
+function	addClass(theBlock : node, class : node, theLegacy : value)
 {
   if (!existVariable(theBlock.classes[class]))
     {
@@ -7,7 +7,13 @@ function	addClass(theBlock : node, class : node)
 
       cnormPatchInit(newBlock);
       cnormPatchDeclaration(newBlock, "typedef struct _class_" + class + "_ { void* vtable; }" + class + ";");
-      cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
+      if (theLegacy != "")
+	{
+	  cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ { struct _vtable_" + theLegacy + "_* vtableLegacy; };");
+	  insert newBlock.block[0].legacy = theLegacy;
+	}
+      else
+	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
       pushItem theBlock;
       setall theBlock#back = newBlock.block[0];
       pushItem theBlock;
@@ -20,7 +26,7 @@ function	addClass(theBlock : node, class : node)
 function	koocClassNameVar(theClass : value, theBlock : node, theExpression : value)
 {
   local		newCode;
-      
+    
   cnormPatchInit(newCode);
   cnormPatchDeclaration(newCode, theExpression);
 
@@ -34,6 +40,7 @@ function	koocClassNameVar(theClass : value, theBlock : node, theExpression : val
       local		name = newCode.block[0].name;
       newCode.block[0].name = "M_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
       newCode.block[0].name = koocDecorPrim(newCode.block[0], name);
+
       foreach class in theBlock
       {
 	if (class.ctype.identifier == "_class_" + theClass + "_")
@@ -45,7 +52,7 @@ function	koocClassNameVar(theClass : value, theBlock : node, theExpression : val
     }
 }
 
-function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : value)
+function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : value, theVirtual : value)
 {
   local newCode;
   cnormPatchInit(newCode);
@@ -59,7 +66,11 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
   else
     {
       local		name = newCode.block[0].name;
-      newCode.block[0].name = "P_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      
+      if (theVirtual == "" || theVirtual == "@member")
+	newCode.block[0].name = "P_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
+      else
+	newCode.block[0].name = "V_" + lengthString(theClass) + theClass + "_" + koocDecorTool_getsymtype(newCode.block[0].type);
       newCode.block[0].name = koocDecorPrim(newCode.block[0], name);
 
       local expr;
@@ -69,13 +80,54 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
       {
       	if (vtable.ctype.identifier == "_vtable_" + theClass + "_")
       	  {
+
 	    local funcPointer;
 	    cnormPatchInit(funcPointer);
-	    cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + " (*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*, " + expr[1]);
+	    theExpression = " (*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*";
+
+	    foreach point in newCode.block[0].ctype.pointer
+	      theExpression = "*" + theExpression;
+
+	    if (expr[1] == "void);" || expr[1] == ");")
+	      cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + theExpression + ");");
+	    else
+	      cnormPatchDeclaration(funcPointer, newCode.block[0].ctype.identifier + theExpression + ", " + expr[1]);
 	    
       	    pushItem vtable.ctype.list;
       	    setall vtable.ctype.list#back = funcPointer.block[0];
       	  }
       }
     }
+}
+
+function	setNodeLegacy(theAst : node, theLegacyName : value, theChildBlock : reference)
+{
+  foreach file in theAst
+  {
+    foreach declaration in file.block
+    {
+      if (equalsIgnoreCase(declaration.ctype.identifier, theLegacyName))
+	foreach block in declaration.ctype.list
+	{
+	  if (block.name != "vtable")
+	    {
+	      pushItem theChildBlock;
+	      setall theChildBlock#back = block;
+	    }
+	}
+    }
+  }
+}
+
+function	koocClassRecScan(theFile : node, theAst : node)
+{
+  foreach declaration in theFile.block
+  {
+    if (existVariable(declaration.ctype.identifier) && startString(declaration.ctype.identifier, "_class_"))
+      if (existVariable(declaration.legacy))
+	{
+	  insert declaration.ctype.list;
+	  setNodeLegacy(theAst, "_class_" + declaration.legacy + "_", declaration.ctype.list);
+	}
+  }
 }
