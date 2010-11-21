@@ -18,6 +18,10 @@ foreach filename in _ARGS
 
   insert out[filelist#back] = replaceString(".kc", ".c", filename);
   out[filelist#back] = replaceString(".kh", ".h", out[filelist#back]);
+
+  if (existFile(out[filelist#back]))
+    deleteFile(out[filelist#back]);
+
   translate("kooc.cwp", myAst[filelist#back], filename, out[filelist#back]);
 
   foreach item in myAst[filelist#back].import
@@ -29,8 +33,8 @@ foreach filename in _ARGS
 foreach file in myAst
 {
   koocTradCopyRef(file, myAst);
-  koocImplRecScan(file);
-  koocTradRecScan(file.block, file.block, file.block);     
+  koocImplRecScan(file, myAst);
+  koocTradRecScan(file.block, file.block, file.block);
   appendFile(out[file], cnorm2c(file.block));
 }
 

@@ -4,5 +4,6 @@ implementation(theBlock : node) ::=
   [declaration(theBlock)
    => koocImplDecor(theBlock, theBlock#back, impl);
    ]*
+  => insert theBlock.implementation[impl] = impl;
   "}"
   ;
