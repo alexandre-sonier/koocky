@@ -1,9 +1,8 @@
 @import "a.kh"
 
-int main(void)
+int main()
 {
-  int	a = 1;
-
-  printf("%d + %d = %d\n", a, @!(int)[bobo.b], a + [bobo.b]);
-  @!(void)[bobo f :(int)a :(int)[bobo.b]];
+  int a = 1;
+  @!(void)[bobo f :(int)[bobo.a] :(int)a];
+  return (0);
 }
