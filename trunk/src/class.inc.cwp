@@ -1,41 +1,43 @@
 class(theBlock : node) ::=
-  "@class" #readIdentifier:class
-  "{"
-  => addClass(theBlock, class);
   [
+   "@class" #readIdentifier:class [":" #readIdentifier:legacy]?
+   "{"
+   => addClass(theBlock, class, legacy);
+   [
     [
      declaration(theBlock)
      => koocDecorName(theBlock#back, class, theBlock);
-    ]
+     ]
     |
     [
      [
-      "@member" [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+[')']]:expr
-      => koocClassNameFunc(class, theBlock, expr + ";");
-     ]
+      ["@member"|"@virtual"]:virt [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[')']]:expr
+      => koocClassNameFunc(class, theBlock, expr + ";", virt);
+      ]
      |
      [
       "@member" ['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+:expr
       => koocClassNameVar(class, theBlock, expr + ";");
+      ]
      ]
-    ]
     |
     [
-      "@member" 
-      "{"
+     "@member" 
+     "{"
+     [
       [
-       [
-	[['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+";"]:expr
-	=> koocClassNameVar(class, theBlock, expr + ";");
+       [["@virtual"]?]:virt [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[");"]]:expr
+       => koocClassNameFunc(class, theBlock, expr, virt);
        ]
-       |
-       [
-	[['a'..'z'|'A'..'Z'|'0'..'9'|','|'('|')'|'_'|'*'|'['|']'|'&']+";"]:expr
-	=> koocClassNameFunc(class, theBlock, expr + ";");
+      |
+      [
+       [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+[";"]]:expr
+       => koocClassNameVar(class, theBlock, expr);
        ]
       ]*
-      "}"
-    ]
-  ]*
-  "}"
+     "}"
+     ]
+    ]*
+   "}"
+   ]
   ;
