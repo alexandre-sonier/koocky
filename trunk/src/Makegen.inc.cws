@@ -3,19 +3,24 @@ function		MakeGen(out : node)
   local myAST;
   local outs = "Makefile";
   translate("Makegen.cwp", myAST, "Makefile.conf", outs);
+
   foreach item in myAST.cc
   {
     appendFile(outs, "CC\t=" + key(item) + "\n");
+
   }
+
   foreach item in myAST.cflags
   {
     appendFile(outs, "CFLAGS\t=" + key(item) + "\n");
   }
+
   foreach item in myAST.NAME
   {
     appendFile(outs, "NAME\t=" + key(item) + "\n");
   }
   appendFile(outs, "SRC\t=");
+
   foreach item in out
   {
     if (rightString(item, 2) == ".c")
