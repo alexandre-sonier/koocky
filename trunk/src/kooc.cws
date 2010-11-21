@@ -35,6 +35,7 @@ foreach file in myAst
   koocTradCopyRef(file, myAst);
   koocImplRecScan(file, myAst);
   koocTradRecScan(file.block, file.block, file.block);
+  koocClassRecScan(file, myAst);
   appendFile(out[file], cnorm2c(file.block));
 }
 
