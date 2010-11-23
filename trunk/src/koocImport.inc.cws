@@ -24,15 +24,25 @@ function	koocImportRef(theFile : node, file : node)
 
 function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
 {
-  local filename = theAst.relPath + theFile;
-  local outname = replaceString(".kh", ".h", filename);
-  outname = replaceString(".kc", ".c", outname);
-  local outfile = replaceString(".kh", ".h", theFile);
-  outfile = replaceString(".kc", ".c", outfile);
-  local Currfilename = replaceString(".kc", ".c", CurrFile);
-  Currfilename = theAst.relPath + replaceString(".kh", ".h", Currfilename);
-  if (!startString(theFile, "/"))
+  if (!endString(theFile, ".h"))
     {
+      if (theFile != "Object.ko")
+	{
+	  local filename = theAst.relPath + theFile;
+	  local outname = replaceString(".kh", ".h", filename);
+	  outname = replaceString(".kc", ".c", outname);
+	  local outfile = replaceString(".kh", ".h", theFile);
+	  outfile = replaceString(".kc", ".c", outfile);
+	  local Currfilename = replaceString(".kc", ".c", CurrFile);
+	  Currfilename = theAst.relPath + replaceString(".kh", ".h", Currfilename);
+	}
+      else
+	{
+	  local filename = "./src/Object.ko";
+	  local outname = "./lib/Object.ko"
+	  local outfile = "Object.ko";
+	  
+	}
       if (!existVariable(theAst[theFile]))
 	{
 	  if (existFile(outname))
@@ -42,5 +52,7 @@ function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
 	}
       koocImportRef(CurrFile, theAst[theFile]);
     }
+  else
+    local outfile = theFile;
   appendFile(Currfilename, "#include \"" + outfile + "\"\n");
 }

@@ -3,7 +3,6 @@
 #include "koocImpl.inc.cws"
 #include "koocTrad.inc.cws"
 #include "koocImport.inc.cws"
-#include "myObject.inc.cws"
 #include "Makegen.inc.cws"
 
 local myAst;
@@ -30,24 +29,27 @@ foreach filename in _ARGS
       if (existFile(out[filelist#back]))
 	  deleteFile(out[filelist#back]);
       insert myAst[filelist#back] = filelist#back;
+      //      insert myAst[filelist#back].import["Object.ko"] = "Object.ko";
       parseAsBNF("kooc.cwp", myAst[filelist#back], filename);
     }
   foreach item in myAst[filelist#back].import
   {
-    insert out[key(item)] = replaceString(".kh", ".h", myAst.relPath + key(item));
-    out[key(item)] = replaceString(".kh", ".h", out[key(item)]);
+    if (item != "Object.ko")
+      {
+	insert out[key(item)] = replaceString(".kh", ".h", myAst.relPath + key(item));
+	out[key(item)] = replaceString(".kh", ".h", out[key(item)]);
+      }
+    else
+      insert out[item] = "./libObject.ko";
   }
 }
 
 foreach file in myAst
 {
-  if (file != "object")
-    {
-      koocImplRecScan(file, myAst);
-      koocTradRecScan(file.block, file.block, file.block);
-      koocClassRecScan(file, myAst);
-      appendFile(out[file], cnorm2c(file.block));
-    }
+  koocImplRecScan(file, myAst);
+  koocTradRecScan(file.block, file.block, file.block);
+  koocClassRecScan(file, myAst);
+  appendFile(out[file], cnorm2c(file.block));
 }
 
 MakeGen(out);

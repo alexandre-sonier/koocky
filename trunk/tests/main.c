@@ -1,5 +1,6 @@
 #include "a.h"
 #include "b.h"
+
 signed int main ()
 {
 	signed int a  = 1;
@@ -11,6 +12,7 @@ signed int main ()
 		while (_4test_variable_signed_int_1b > a + 80)
 		if (_4test_variable_signed_int_1b < 100)
 		_4test_variable_signed_int_1b += 1;
+	printf("%d\n", _4bobo_function_signed_int_1a_param_signed_int(10));
 	return 0;
 }
 
