@@ -1,4 +1,4 @@
-function	addClass(theBlock : node, class : node, theLegacy : value)
+function	addClass(theBlock : node, class : value, theLegacy : value)
 {
   if (!existVariable(theBlock.classes[class]))
     {
@@ -6,20 +6,18 @@ function	addClass(theBlock : node, class : node, theLegacy : value)
       local  newBlock;
 
       cnormPatchInit(newBlock);
+      cnormPatchDeclaration(newBlock, "typedef struct _class_" + class + "_ { void* vtable; }" + class + ";");
       if (theLegacy != "")
 	{
-	  cnormPatchDeclaration(newBlock, "typedef struct _class_" + class + "_ {\
-struct _class_" + theLegacy + "_* motherClass; }" + class + ";");
 	  cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ { struct _vtable_" + theLegacy + "_* vtableLegacy; };");
 	  insert newBlock.block[0].legacy = theLegacy;
 	}
       else
-	{
-	  cnormPatchDeclaration(newBlock, "typedef struct _class_" + class + "_ { }" + class + ";");
-	  cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
-	}
+	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
       pushItem theBlock;
       setall theBlock#back = newBlock.block[0];
+      insert theBlock.types[class];
+      ref theBlock.types[class] = theBlock#back;
       pushItem theBlock;
       setall theBlock#back = newBlock.block[1];
     }

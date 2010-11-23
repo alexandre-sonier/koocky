@@ -12,5 +12,6 @@ int main()
     while ([test.b] > a + 80)
       if ([test.b] < 100)
 	[test.b] += 1;
+  printf("%d\n", @!(int)[bobo a :(int)10]);
   return 0;
 }

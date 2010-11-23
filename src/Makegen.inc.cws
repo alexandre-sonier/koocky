@@ -31,7 +31,7 @@ function		MakeGen(out : node)
   }
   appendFile(outs, "\nOBJ\t=$(SRC:.c=.o)");
   appendFile(outs, "\nRM\t=rm -rf");
-  appendFile(outs, "\n\nall:\n\t$(CC) -o $(NAME) $(SRC)\n\t\t@printf \"Executable generated \\n\" ");
+  appendFile(outs, "\n\nall:\n\t$(CC) -o $(NAME) -I./lib/ $(SRC)\n\t\t@printf \"Executable generated \\n\" ");
   appendFile(outs, "\n\nclean:\n\t$(RM) *.o *~c *#");
   appendFile(outs, "\n\nfclean:\n\t$(RM) $(NAME)");
   appendFile(outs, "\n\nre:\tclean fclean all\n");

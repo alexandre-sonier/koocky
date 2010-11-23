@@ -3,5 +3,6 @@
 @module bobo
 {
   int a = 42;
+  int a(int);
   void f(int, int);
 }

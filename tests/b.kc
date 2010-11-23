@@ -6,4 +6,8 @@
   {
     printf("%d + %d = %d\n", a, b, a + b);
   }
+  int a(int b)
+  {
+    return (b + 1);
+  }
 }
