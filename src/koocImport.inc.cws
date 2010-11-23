@@ -1,0 +1,46 @@
+function	koocImportRef(theFile : node, file : node)
+{
+  foreach var in file.block.variables
+  {
+    insert theFile.block.variables[key(var)] = var;
+    ref theFile.block.variables[key(var)] = var;
+  }
+  foreach func in file.block.prototypes
+  {
+    insert theFile.block.prototypes[key(func)] = func;
+    ref theFile.block.prototypes[key(func)] = func;
+  }
+  foreach class in file.block.classes
+  {
+    insert theFile.block.classes[key(class)] = class;
+    ref theFile.block.classes[key(class)] = class;
+  }
+  foreach type in file.block.types
+  {
+    insert theFile.block.types[key(type)] = type;
+    ref theFile.block.types[key(type)] = type;
+  }
+}
+
+function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
+{
+  local filename = theAst.relPath + theFile;
+  local outname = replaceString(".kh", ".h", filename);
+  outname = replaceString(".kc", ".c", outname);
+  local outfile = replaceString(".kh", ".h", theFile);
+  outfile = replaceString(".kc", ".c", outfile);
+  local Currfilename = replaceString(".kc", ".c", CurrFile);
+  Currfilename = theAst.relPath + replaceString(".kh", ".h", Currfilename);
+  if (!startString(theFile, "/"))
+    {
+      if (!existVariable(theAst[theFile]))
+	{
+	  if (existFile(outname))
+	    deleteFile(outname);
+	  insert theAst[theFile] = theFile;
+	  parseAsBNF("kooc.cwp", theAst[theFile], filename);
+	}
+      koocImportRef(CurrFile, theAst[theFile]);
+    }
+  appendFile(Currfilename, "#include \"" + outfile + "\"\n");
+}

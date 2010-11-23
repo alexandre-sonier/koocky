@@ -1,8 +1,0 @@
-@import "a.kh"
-
-int main()
-{
-  int a = 1;
-  @!(void)[bobo f :(int)[bobo.a] :(int)a];
-  return (0);
-}
