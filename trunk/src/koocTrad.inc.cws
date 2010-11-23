@@ -195,34 +195,6 @@ function	koocTradFormType(theCType : node, thePoint : value)
     }
 }
 
-function	koocTradCopyRef(theFile : node, theAst : node)
-{
-  foreach import in theFile.import
-  {
-    foreach file in theAst
-    {
-      if (key(import) == file)
-	{
-	  foreach var in file.block.variables
-	  {
-	    insert theFile.block.variables[key(var)] = var;
-	    ref theFile.block.variables[key(var)] = var;
-	  }
-	  foreach func in file.block.prototypes
-	  {
-	    insert theFile.block.prototypes[key(func)] = func;
-	    ref theFile.block.prototypes[key(func)] = func;
-	  }
-	  foreach class in file.block.classes
-	  {
-	    insert theFile.block.classes[key(class)] = class;
-	    ref theFile.block.classes[key(class)] = class;
-	  }
-	}
-    }
-  }
-}
-
 function	koocTradnewFunc(theBlock : node, theDecl : value)
 {
   local newCode;

@@ -1,0 +1,2 @@
+#!/bin/sh
+codeworker -I $CNORM_PATH/src -nologo -script src/kooc.cws -args $*

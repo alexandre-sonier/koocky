@@ -11,13 +11,13 @@ class(theBlock : node) ::=
     |
     [
      [
-      ["@member"|"@virtual"]:virt [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[')']]:expr
-      => koocClassNameFunc(class, theBlock, expr + ";", virt);
+      ["@member"|"@virtual"]:virt [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[");"]]:expr
+      => koocClassNameFunc(class, theBlock, expr, virt);
       ]
-     |
+      |
      [
-      "@member" ['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+:expr
-      => koocClassNameVar(class, theBlock, expr + ";");
+      "@member" [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+[';']]:expr
+      => koocClassNameVar(class, theBlock, expr);
       ]
      ]
     |

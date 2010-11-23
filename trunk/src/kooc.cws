@@ -2,6 +2,7 @@
 #include "patchLib/cnormPatchLib.inc.cws"
 #include "koocImpl.inc.cws"
 #include "koocTrad.inc.cws"
+#include "koocImport.inc.cws"
 #include "myObject.inc.cws"
 #include "Makegen.inc.cws"
 
@@ -14,19 +15,27 @@ createMyObject(myAst);
 foreach filename in _ARGS
 {
   cutString(filename, "/", filelist);
-  insert myAst[filelist#back] = filelist#back;
 
   insert out[filelist#back] = replaceString(".kc", ".c", filename);
   out[filelist#back] = replaceString(".kh", ".h", out[filelist#back]);
 
-  if (existFile(out[filelist#back]))
-    deleteFile(out[filelist#back]);
-
-  translate("kooc.cwp", myAst[filelist#back], filename, out[filelist#back]);
-
+  insert myAst.relPath = "";
+  foreach path in filelist
+  {
+    if (path != filelist#back)
+      myAst.relPath = myAst.relPath + path + '/';
+  }
+  if (!existVariable(myAst[filelist#back]))
+    {
+      if (existFile(out[filelist#back]))
+	  deleteFile(out[filelist#back]);
+      insert myAst[filelist#back] = filelist#back;
+      parseAsBNF("kooc.cwp", myAst[filelist#back], filename);
+    }
   foreach item in myAst[filelist#back].import
   {
-    appendFile(out[filelist#back], "#include \"" + replaceString(".kh", ".h", key(item)) + "\"\n");
+    insert out[key(item)] = replaceString(".kh", ".h", myAst.relPath + key(item));
+    out[key(item)] = replaceString(".kh", ".h", out[key(item)]);
   }
 }
 
@@ -34,7 +43,6 @@ foreach file in myAst
 {
   if (file != "object")
     {
-      koocTradCopyRef(file, myAst);
       koocImplRecScan(file, myAst);
       koocTradRecScan(file.block, file.block, file.block);
       koocClassRecScan(file, myAst);

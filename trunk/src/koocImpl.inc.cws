@@ -36,11 +36,11 @@ function	koocImplRecScan(theFile : node, theAst : node)
 	removeElement(var, "impl");
       }
   }
-  foreach import in theFile.import
+  foreach import in theAst[theFile].import
   {
     foreach file in theAst
     {
-      if (key(import) == file)
+      if (file == key(import))
 	{
 	  if (existVariable(theFile.block.implementation) && (existVariable(file.block.module) || existVariable(file.block.classes)))
 	    {
@@ -52,17 +52,18 @@ function	koocImplRecScan(theFile : node, theAst : node)
 		    {
 		      if (existVariable(var.module) && module == var.module)
 			{
+			  invertArray(theFile.block);
 			  pushItem theFile.block;
 			  setall theFile.block#back = var;
 			  var.ctype.infoType = add(var.infoType, 1);
 			  insert var.ctype.infoType["extern"] = "storageClassSpecifier";
 			  if (existVariable(var.init))
 			    removeVariable(var.init);
+			  invertArray(theFile.block);
 			}
 		    }
 		  }
 	      }
-
 	      foreach class in file.block.classes
 	      {
 		if (existVariable(theFile.block.implementation[key(class)]))
@@ -71,12 +72,14 @@ function	koocImplRecScan(theFile : node, theAst : node)
 		    {
 		      if (existVariable(var.module) && key(class) == var.module)
 			{
+			  invertArray(theFile.block);
 			  pushItem theFile.block;
 			  setall theFile.block#back = var;
 			  var.ctype.infoType = add(var.infoType, 1);
 			  insert var.ctype.infoType["extern"] = "storageClassSpecifier";
 			  if (existVariable(var.init))
 			    removeVariable(var.init);
+			  invertArray(theFile.block);
 			}
 		    }
 		  }

@@ -2,15 +2,8 @@
 
 @implementation test
 {
-  int test(int a)
-  {
-    int a;
-    return a;
-  }
-
   @member int	f(int a)
-  {
-    int a;
+    {
     return a;
-  }
+    }
 }

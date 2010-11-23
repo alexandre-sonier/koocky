@@ -737,70 +737,33 @@
 	</__ARRAY_ENTRY>
 	<__ARRAY_ENTRY __KEY="a.kc" __VALUE="a.kc">
 		<block>
-			<__ARRAY_ENTRY __KEY="0">
-				<__LINE__ __VALUE="5" />
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="3" />
 				<ctype>
-					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
+					<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
 					<type __VALUE="__PRIMARY__" />
 					<identifier __VALUE="int" />
 					<sign __VALUE="signed" />
 					<infoType />
+					<comment_suffix />
 				</ctype>
-				<type __VALUE="__FUNCTION__" />
+				<type __VALUE="__VARIABLE__" />
 				<etype __VALUE="declaration" />
-				<name __VALUE="_4test_function_signed_int_4test_param_signed_int" />
-				<list>
-					<__ARRAY_ENTRY __KEY="0">
-						<ctype>
-							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
-							<type __VALUE="__PRIMARY__" />
-							<identifier __VALUE="int" />
-							<sign __VALUE="signed" />
-							<comment_suffix />
-						</ctype>
-						<type __VALUE="__VARIABLE__" />
-						<etype __VALUE="declaration" />
-						<name __VALUE="a" />
-					</__ARRAY_ENTRY>
-				</list>
-				<otype __VALUE="rootblock" />
-				<block>
-					<__ARRAY_ENTRY __KEY="0">
-						<__LINE__ __VALUE="7" />
-						<ctype>
-							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block" />
-							<type __VALUE="__PRIMARY__" />
-							<identifier __VALUE="int" />
-							<sign __VALUE="signed" />
-							<comment_suffix />
-						</ctype>
-						<type __VALUE="__VARIABLE__" />
-						<etype __VALUE="declaration" />
-						<name __VALUE="a" />
-					</__ARRAY_ENTRY>
-					<__ARRAY_ENTRY __KEY="1">
-						<type __VALUE="return" />
-						<otype __VALUE="pseudoexpression" />
-						<etype __VALUE="expression" />
-						<block>
-							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block" />
-							<type __VALUE="primary_expression" />
-							<value __VALUE="a" />
-							<operator __VALUE="id" />
-							<otype __VALUE="terminal" />
-						</block>
-					</__ARRAY_ENTRY>
-					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
-					<type __VALUE="block" />
-					<variables>
-						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;]" />
-					</variables>
-				</block>
-				<impl __VALUE="test" />
-				<comment_suffix />
+				<name __VALUE="_4test_variable_signed_int_1b" />
+				<init>
+					<type __VALUE="primary_expression" />
+					<value __VALUE="20" />
+					<ctype>
+						<identifier __VALUE="int" />
+					</ctype>
+					<operator __VALUE="literal" />
+					<otype __VALUE="terminal" />
+					<etype __VALUE="expression" />
+				</init>
+				<module __VALUE="test" />
 			</__ARRAY_ENTRY>
-			<__ARRAY_ENTRY __KEY="1">
-				<__LINE__ __VALUE="11" />
+			<__ARRAY_ENTRY __KEY="0">
+				<__LINE__ __VALUE="5" />
 				<ctype>
 					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
 					<type __VALUE="__PRIMARY__" />
@@ -847,24 +810,11 @@
 				<otype __VALUE="rootblock" />
 				<block>
 					<__ARRAY_ENTRY __KEY="0">
-						<__LINE__ __VALUE="13" />
-						<ctype>
-							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block" />
-							<type __VALUE="__PRIMARY__" />
-							<identifier __VALUE="int" />
-							<sign __VALUE="signed" />
-							<comment_suffix />
-						</ctype>
-						<type __VALUE="__VARIABLE__" />
-						<etype __VALUE="declaration" />
-						<name __VALUE="a" />
-					</__ARRAY_ENTRY>
-					<__ARRAY_ENTRY __KEY="1">
 						<type __VALUE="return" />
 						<otype __VALUE="pseudoexpression" />
 						<etype __VALUE="expression" />
 						<block>
-							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block" />
+							<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;].block" />
 							<type __VALUE="primary_expression" />
 							<value __VALUE="a" />
 							<operator __VALUE="id" />
@@ -873,27 +823,26 @@
 					</__ARRAY_ENTRY>
 					<pctx __REFERENCE="myAst[&quot;a.kc&quot;].block" />
 					<type __VALUE="block" />
-					<variables>
-						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;].block[&quot;0&quot;]" />
-					</variables>
 				</block>
 				<comment_suffix />
 			</__ARRAY_ENTRY>
 			<pctx />
 			<type __VALUE="block" />
+			<variables>
+				<__ARRAY_ENTRY __KEY="_4test_variable_signed_int_1b" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
+			</variables>
+			<classes>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block.classes[&quot;test&quot;]" />
+			</classes>
+			<types>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
+			</types>
 			<implementation>
 				<__ARRAY_ENTRY __KEY="test" __VALUE="test" />
 			</implementation>
 			<functions>
-				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_4test_param_signed_int" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;]" />
-				<__ARRAY_ENTRY __KEY="f" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;1&quot;]" />
+				<__ARRAY_ENTRY __KEY="f" __REFERENCE="myAst[&quot;a.kc&quot;].block[&quot;0&quot;]" />
 			</functions>
-			<prototypes>
-				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
-			</prototypes>
-			<classes>
-				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block.classes[&quot;test&quot;]" />
-			</classes>
 		</block>
 		<import>
 			<__ARRAY_ENTRY __KEY="a.kh" />
@@ -928,6 +877,20 @@
 							<type __VALUE="__VARIABLE__" />
 							<etype __VALUE="declaration" />
 							<name __VALUE="vtable" />
+						</__ARRAY_ENTRY>
+						<__ARRAY_ENTRY __KEY="1">
+							<__LINE__ __VALUE="1" />
+							<ctype>
+								<pctx />
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<infoType />
+								<comment_suffix />
+							</ctype>
+							<type __VALUE="__VARIABLE__" />
+							<etype __VALUE="declaration" />
+							<name __VALUE="M_4test_variable_signed_int_1a" />
 						</__ARRAY_ENTRY>
 					</list>
 					<comment_struct />
@@ -1045,156 +1008,6 @@
 							</list>
 							<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
 						</__ARRAY_ENTRY>
-						<__ARRAY_ENTRY __KEY="2">
-							<__LINE__ __VALUE="1" />
-							<ctype>
-								<pctx />
-								<type __VALUE="__PFUNCTION__" />
-								<identifier __VALUE="int" />
-								<sign __VALUE="signed" />
-								<comment_suffix />
-							</ctype>
-							<type __VALUE="__VARIABLE__" />
-							<etype __VALUE="declaration" />
-							<pfname>
-								<__ARRAY_ENTRY __KEY="0">
-									<function>
-										<name __VALUE="P_4test_function_signed_int_1h_param_signed_int" />
-									</function>
-								</__ARRAY_ENTRY>
-							</pfname>
-							<list>
-								<__ARRAY_ENTRY __KEY="0">
-									<ctype>
-										<pctx />
-										<type __VALUE="__COMPOSED__" />
-										<identifier __VALUE="_class_test_" />
-										<specifier __VALUE="struct" />
-										<pointer>
-											<__ARRAY_ENTRY __KEY="0">
-												<level __VALUE="*" />
-											</__ARRAY_ENTRY>
-										</pointer>
-										<comment_struct />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-								<__ARRAY_ENTRY __KEY="1">
-									<ctype>
-										<pctx />
-										<type __VALUE="__PRIMARY__" />
-										<identifier __VALUE="int" />
-										<sign __VALUE="signed" />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-							</list>
-							<name __VALUE="P_4test_function_signed_int_1h_param_signed_int" />
-						</__ARRAY_ENTRY>
-						<__ARRAY_ENTRY __KEY="3">
-							<__LINE__ __VALUE="1" />
-							<ctype>
-								<pctx />
-								<type __VALUE="__PFUNCTION__" />
-								<identifier __VALUE="int" />
-								<sign __VALUE="signed" />
-								<comment_suffix />
-							</ctype>
-							<type __VALUE="__VARIABLE__" />
-							<etype __VALUE="declaration" />
-							<pfname>
-								<__ARRAY_ENTRY __KEY="0">
-									<function>
-										<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
-									</function>
-								</__ARRAY_ENTRY>
-							</pfname>
-							<list>
-								<__ARRAY_ENTRY __KEY="0">
-									<ctype>
-										<pctx />
-										<type __VALUE="__COMPOSED__" />
-										<identifier __VALUE="_class_test_" />
-										<specifier __VALUE="struct" />
-										<pointer>
-											<__ARRAY_ENTRY __KEY="0">
-												<level __VALUE="*" />
-											</__ARRAY_ENTRY>
-										</pointer>
-										<comment_struct />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-								<__ARRAY_ENTRY __KEY="1">
-									<ctype>
-										<pctx />
-										<type __VALUE="__PRIMARY__" />
-										<identifier __VALUE="int" />
-										<sign __VALUE="signed" />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-							</list>
-							<name __VALUE="V_4test_function_signed_int_1g_param_signed_int" />
-						</__ARRAY_ENTRY>
-						<__ARRAY_ENTRY __KEY="4">
-							<__LINE__ __VALUE="1" />
-							<ctype>
-								<pctx />
-								<type __VALUE="__PFUNCTION__" />
-								<identifier __VALUE="int" />
-								<sign __VALUE="signed" />
-								<comment_suffix />
-							</ctype>
-							<type __VALUE="__VARIABLE__" />
-							<etype __VALUE="declaration" />
-							<pfname>
-								<__ARRAY_ENTRY __KEY="0">
-									<function>
-										<name __VALUE="P_4test_function_signed_int_1i_param_signed_int" />
-									</function>
-								</__ARRAY_ENTRY>
-							</pfname>
-							<list>
-								<__ARRAY_ENTRY __KEY="0">
-									<ctype>
-										<pctx />
-										<type __VALUE="__COMPOSED__" />
-										<identifier __VALUE="_class_test_" />
-										<specifier __VALUE="struct" />
-										<pointer>
-											<__ARRAY_ENTRY __KEY="0">
-												<level __VALUE="*" />
-											</__ARRAY_ENTRY>
-										</pointer>
-										<comment_struct />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-								<__ARRAY_ENTRY __KEY="1">
-									<ctype>
-										<pctx />
-										<type __VALUE="__PRIMARY__" />
-										<identifier __VALUE="int" />
-										<sign __VALUE="signed" />
-										<comment_suffix />
-									</ctype>
-									<type __VALUE="__VARIABLE__" />
-									<etype __VALUE="declaration" />
-								</__ARRAY_ENTRY>
-							</list>
-							<name __VALUE="P_4test_function_signed_int_1i_param_signed_int" />
-						</__ARRAY_ENTRY>
 					</list>
 					<comment_struct />
 					<comment_suffix />
@@ -1209,15 +1022,230 @@
 					<type __VALUE="__PRIMARY__" />
 					<identifier __VALUE="int" />
 					<sign __VALUE="signed" />
+					<infoType __VALUE="1">
+						<__ARRAY_ENTRY __KEY="extern" __VALUE="storageClassSpecifier" />
+					</infoType>
+					<comment_suffix />
+				</ctype>
+				<type __VALUE="__VARIABLE__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="_4test_variable_signed_int_1b" />
+				<module __VALUE="test" />
+			</__ARRAY_ENTRY>
+			<pctx />
+			<type __VALUE="block" />
+			<classes>
+				<__ARRAY_ENTRY __KEY="test" __VALUE="test" />
+			</classes>
+			<types>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
+			</types>
+			<variables>
+				<__ARRAY_ENTRY __KEY="_4test_variable_signed_int_1b" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
+			</variables>
+		</block>
+		<import />
+		<gl_pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
+	</__ARRAY_ENTRY>
+	<__ARRAY_ENTRY __KEY="b.kc" __VALUE="b.kc">
+		<block>
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="5" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="int" />
+					<sign __VALUE="signed" />
+					<infoType />
+					<comment_suffix />
+				</ctype>
+				<type __VALUE="__VARIABLE__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="_4bobo_variable_signed_int_1a" />
+				<init>
+					<type __VALUE="primary_expression" />
+					<value __VALUE="42" />
+					<ctype>
+						<identifier __VALUE="int" />
+					</ctype>
+					<operator __VALUE="literal" />
+					<otype __VALUE="terminal" />
+					<etype __VALUE="expression" />
+				</init>
+				<module __VALUE="bobo" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="0">
+				<__LINE__ __VALUE="5" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;b.kc&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="void" />
+					<infoType />
+				</ctype>
+				<type __VALUE="__FUNCTION__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;b.kc&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="a" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="1">
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;b.kc&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="b" />
+					</__ARRAY_ENTRY>
+				</list>
+				<otype __VALUE="rootblock" />
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<left>
+							<__LINE__ __VALUE="7" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="printf" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<type __VALUE="call_expression" />
+						<otype __VALUE="call" />
+						<operator __VALUE="()" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="&quot;%d + %d = %d
+&quot;" />
+								<ctype>
+									<infoType>
+										<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+									</infoType>
+									<identifier __VALUE="char" />
+									<pointer>
+										<__ARRAY_ENTRY __KEY="0">
+											<level __VALUE="*" />
+										</__ARRAY_ENTRY>
+									</pointer>
+								</ctype>
+								<operator __VALUE="literal" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="1">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="a" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="2">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="b" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="3">
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="a" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<operator __VALUE="+" />
+								<type __VALUE="additive_expression" />
+								<otype __VALUE="binary" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="b" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</right>
+							</__ARRAY_ENTRY>
+						</list>
+						<etype __VALUE="expression" />
+					</__ARRAY_ENTRY>
+					<pctx __REFERENCE="myAst[&quot;b.kc&quot;].block" />
+					<type __VALUE="block" />
+				</block>
+				<impl __VALUE="bobo" />
+				<comment_suffix />
+			</__ARRAY_ENTRY>
+			<pctx />
+			<type __VALUE="block" />
+			<variables>
+				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;0&quot;]" />
+			</variables>
+			<prototypes>
+				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;1&quot;]" />
+			</prototypes>
+			<implementation>
+				<__ARRAY_ENTRY __KEY="bobo" __VALUE="bobo" />
+			</implementation>
+			<functions>
+				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;b.kc&quot;].block[&quot;0&quot;]" />
+			</functions>
+		</block>
+		<import>
+			<__ARRAY_ENTRY __KEY="b.kh" />
+		</import>
+		<gl_pctx __REFERENCE="myAst[&quot;b.kc&quot;].block" />
+	</__ARRAY_ENTRY>
+	<__ARRAY_ENTRY __KEY="b.kh" __VALUE="b.kh">
+		<block>
+			<__ARRAY_ENTRY __KEY="0">
+				<__LINE__ __VALUE="5" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="int" />
+					<sign __VALUE="signed" />
+					<infoType __VALUE="1">
+						<__ARRAY_ENTRY __KEY="extern" __VALUE="storageClassSpecifier" />
+					</infoType>
+					<comment_suffix />
+				</ctype>
+				<type __VALUE="__VARIABLE__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="_4bobo_variable_signed_int_1a" />
+				<module __VALUE="bobo" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="1">
+				<__LINE__ __VALUE="6" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="void" />
 					<infoType />
 				</ctype>
 				<type __VALUE="__PROTOTYPE__" />
 				<etype __VALUE="declaration" />
-				<name __VALUE="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" />
+				<name __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
 				<list>
 					<__ARRAY_ENTRY __KEY="0">
 						<ctype>
-							<pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
+							<pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="1">
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
 							<type __VALUE="__PRIMARY__" />
 							<identifier __VALUE="int" />
 							<sign __VALUE="signed" />
@@ -1231,14 +1259,393 @@
 			</__ARRAY_ENTRY>
 			<pctx />
 			<type __VALUE="block" />
-			<classes>
-				<__ARRAY_ENTRY __KEY="test" __VALUE="test" />
-			</classes>
+			<variables>
+				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;0&quot;]" />
+			</variables>
 			<prototypes>
-				<__ARRAY_ENTRY __KEY="_4test_function_signed_int_95_4test_function_signed_int_49_4test_function_signed_int_4test_param_signed_int_param_signed_int_param_signed_int" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
+				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;1&quot;]" />
 			</prototypes>
+			<module>
+				<__ARRAY_ENTRY __KEY="bobo" __VALUE="bobo" />
+			</module>
 		</block>
-		<import />
-		<gl_pctx __REFERENCE="myAst[&quot;a.kh&quot;].block" />
+		<import>
+			<__ARRAY_ENTRY __KEY="/usr/include/stdio.h" />
+		</import>
+		<gl_pctx __REFERENCE="myAst[&quot;b.kh&quot;].block" />
 	</__ARRAY_ENTRY>
+	<__ARRAY_ENTRY __KEY="main.kc" __VALUE="main.kc">
+		<block>
+			<__ARRAY_ENTRY __KEY="0">
+				<__LINE__ __VALUE="4" />
+				<ctype>
+					<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
+					<type __VALUE="__PRIMARY__" />
+					<identifier __VALUE="int" />
+					<sign __VALUE="signed" />
+				</ctype>
+				<type __VALUE="__FUNCTION__" />
+				<etype __VALUE="declaration" />
+				<name __VALUE="main" />
+				<list />
+				<otype __VALUE="rootblock" />
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<__LINE__ __VALUE="6" />
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="a" />
+						<init>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="1" />
+							<ctype>
+								<identifier __VALUE="int" />
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+							<etype __VALUE="expression" />
+						</init>
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="1">
+						<__LINE__ __VALUE="7" />
+						<ctype>
+							<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+							<type __VALUE="__COMPOSED__" />
+							<identifier __VALUE="test" />
+							<comment_struct />
+							<comment_suffix />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="tutu" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="2">
+						<left>
+							<left>
+								<__LINE__ __VALUE="8" />
+								<type __VALUE="primary_expression" />
+								<value __VALUE="tutu" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="field_expression" />
+							<otype __VALUE="likebinary" />
+							<operator __VALUE="." />
+							<right>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="M_4test_variable_signed_int_1a" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</right>
+						</left>
+						<operator __VALUE="=" />
+						<type __VALUE="assignement_expression" />
+						<otype __VALUE="binary" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="2" />
+							<ctype>
+								<identifier __VALUE="int" />
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</right>
+						<etype __VALUE="expression" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="3">
+						<left>
+							<__LINE__ __VALUE="1" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_4bobo_function_void_1f_param_signed_int_signed_int" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<type __VALUE="call_expression" />
+						<otype __VALUE="call" />
+						<operator __VALUE="()" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<ctype>
+									<identifier __VALUE="int" />
+								</ctype>
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+								<value __VALUE="_4bobo_variable_signed_int_1a" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="1">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="a" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+						</list>
+						<etype __VALUE="expression" />
+						<module __VALUE="bobo" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="4">
+						<left>
+							<__LINE__ __VALUE="10" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="printf" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<type __VALUE="call_expression" />
+						<otype __VALUE="call" />
+						<operator __VALUE="()" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="&quot;%d + %d = %d
+&quot;" />
+								<ctype>
+									<infoType>
+										<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+									</infoType>
+									<identifier __VALUE="char" />
+									<pointer>
+										<__ARRAY_ENTRY __KEY="0">
+											<level __VALUE="*" />
+										</__ARRAY_ENTRY>
+									</pointer>
+								</ctype>
+								<operator __VALUE="literal" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="1">
+								<type __VALUE="primary_expression" />
+								<ctype>
+									<identifier __VALUE="int" />
+								</ctype>
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+								<value __VALUE="_4bobo_variable_signed_int_1a" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="2">
+								<type __VALUE="primary_expression" />
+								<value __VALUE="a" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</__ARRAY_ENTRY>
+							<__ARRAY_ENTRY __KEY="3">
+								<left>
+									<type __VALUE="primary_expression" />
+									<value __VALUE="a" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</left>
+								<operator __VALUE="+" />
+								<type __VALUE="additive_expression" />
+								<otype __VALUE="binary" />
+								<right>
+									<type __VALUE="primary_expression" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+									<value __VALUE="_4bobo_variable_signed_int_1a" />
+								</right>
+								<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;].ctype" />
+							</__ARRAY_ENTRY>
+						</list>
+						<etype __VALUE="expression" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="5">
+						<type __VALUE="if" />
+						<otype __VALUE="if" />
+						<etype __VALUE="statement" />
+						<condition>
+							<left>
+								<block>
+									<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+									<type __VALUE="block" />
+								</block>
+								<type __VALUE="primary_expression" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+								<value __VALUE="_4test_variable_signed_int_1b" />
+							</left>
+							<operator __VALUE="&gt;" />
+							<type __VALUE="relational_expression" />
+							<otype __VALUE="binary" />
+							<right>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="a" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</right>
+							<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;].ctype" />
+						</condition>
+						<then>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="while" />
+								<otype __VALUE="while" />
+								<etype __VALUE="statement" />
+								<condition>
+									<left>
+										<block>
+											<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+											<type __VALUE="block" />
+										</block>
+										<type __VALUE="primary_expression" />
+										<operator __VALUE="id" />
+										<otype __VALUE="terminal" />
+										<value __VALUE="_4test_variable_signed_int_1b" />
+									</left>
+									<operator __VALUE="&gt;" />
+									<type __VALUE="relational_expression" />
+									<otype __VALUE="binary" />
+									<right>
+										<left>
+											<type __VALUE="primary_expression" />
+											<value __VALUE="a" />
+											<operator __VALUE="id" />
+											<otype __VALUE="terminal" />
+										</left>
+										<operator __VALUE="+" />
+										<type __VALUE="additive_expression" />
+										<otype __VALUE="binary" />
+										<right>
+											<type __VALUE="primary_expression" />
+											<value __VALUE="80" />
+											<ctype>
+												<identifier __VALUE="int" />
+											</ctype>
+											<operator __VALUE="literal" />
+											<otype __VALUE="terminal" />
+										</right>
+										<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;5&quot;].then[&quot;0&quot;].condition.right.right.ctype" />
+									</right>
+									<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;5&quot;].then[&quot;0&quot;].condition.right.right.ctype" />
+								</condition>
+								<stmt>
+									<__ARRAY_ENTRY __KEY="0">
+										<type __VALUE="if" />
+										<otype __VALUE="if" />
+										<etype __VALUE="statement" />
+										<condition>
+											<left>
+												<block>
+													<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+													<type __VALUE="block" />
+												</block>
+												<type __VALUE="primary_expression" />
+												<operator __VALUE="id" />
+												<otype __VALUE="terminal" />
+												<value __VALUE="_4test_variable_signed_int_1b" />
+											</left>
+											<operator __VALUE="&lt;" />
+											<type __VALUE="relational_expression" />
+											<otype __VALUE="binary" />
+											<right>
+												<type __VALUE="primary_expression" />
+												<value __VALUE="100" />
+												<ctype>
+													<identifier __VALUE="int" />
+												</ctype>
+												<operator __VALUE="literal" />
+												<otype __VALUE="terminal" />
+											</right>
+											<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;5&quot;].then[&quot;0&quot;].stmt[&quot;0&quot;].condition.right.ctype" />
+										</condition>
+										<then>
+											<__ARRAY_ENTRY __KEY="0">
+												<left>
+													<__LINE__ __VALUE="14" />
+													<type __VALUE="primary_expression" />
+													<operator __VALUE="id" />
+													<otype __VALUE="terminal" />
+													<value __VALUE="_4test_variable_signed_int_1b" />
+												</left>
+												<operator __VALUE="+=" />
+												<type __VALUE="assignement_expression" />
+												<otype __VALUE="binary" />
+												<right>
+													<type __VALUE="primary_expression" />
+													<value __VALUE="1" />
+													<ctype>
+														<identifier __VALUE="int" />
+													</ctype>
+													<operator __VALUE="literal" />
+													<otype __VALUE="terminal" />
+												</right>
+												<etype __VALUE="expression" />
+												<ctype __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;5&quot;].then[&quot;0&quot;].stmt[&quot;0&quot;].then[&quot;0&quot;].right.ctype" />
+											</__ARRAY_ENTRY>
+											<block>
+												<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+												<type __VALUE="block" />
+											</block>
+											<otype __VALUE="then" />
+										</then>
+									</__ARRAY_ENTRY>
+									<block>
+										<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+										<type __VALUE="block" />
+									</block>
+									<otype __VALUE="stmt" />
+								</stmt>
+							</__ARRAY_ENTRY>
+							<block>
+								<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+								<type __VALUE="block" />
+							</block>
+							<otype __VALUE="then" />
+						</then>
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="6">
+						<type __VALUE="return" />
+						<otype __VALUE="pseudoexpression" />
+						<etype __VALUE="expression" />
+						<block>
+							<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block" />
+							<type __VALUE="primary_expression" />
+							<value __VALUE="0" />
+							<ctype>
+								<identifier __VALUE="int" />
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</block>
+					</__ARRAY_ENTRY>
+					<pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
+					<type __VALUE="block" />
+					<variables>
+						<__ARRAY_ENTRY __KEY="a" __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;0&quot;]" />
+						<__ARRAY_ENTRY __KEY="tutu" __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;].block[&quot;1&quot;]" />
+					</variables>
+				</block>
+				<comment_suffix />
+			</__ARRAY_ENTRY>
+			<pctx />
+			<type __VALUE="block" />
+			<variables>
+				<__ARRAY_ENTRY __KEY="_4test_variable_signed_int_1b" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;2&quot;]" />
+				<__ARRAY_ENTRY __KEY="_4bobo_variable_signed_int_1a" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;0&quot;]" />
+			</variables>
+			<classes>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block.classes[&quot;test&quot;]" />
+			</classes>
+			<types>
+				<__ARRAY_ENTRY __KEY="test" __REFERENCE="myAst[&quot;a.kh&quot;].block[&quot;0&quot;]" />
+			</types>
+			<prototypes>
+				<__ARRAY_ENTRY __KEY="_4bobo_function_void_1f_param_signed_int_signed_int" __REFERENCE="myAst[&quot;b.kh&quot;].block[&quot;1&quot;]" />
+			</prototypes>
+			<functions>
+				<__ARRAY_ENTRY __KEY="main" __REFERENCE="myAst[&quot;main.kc&quot;].block[&quot;0&quot;]" />
+			</functions>
+		</block>
+		<import>
+			<__ARRAY_ENTRY __KEY="a.kh" />
+			<__ARRAY_ENTRY __KEY="b.kh" />
+		</import>
+		<gl_pctx __REFERENCE="myAst[&quot;main.kc&quot;].block" />
+	</__ARRAY_ENTRY>
+	<relPath __VALUE="testdir/" />
 </myAst>

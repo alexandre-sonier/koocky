@@ -1,0 +1,7 @@
+@import "/usr/include/stdio.h"
+
+@module bobo
+{
+  int a = 42;
+  void f(int, int);
+}
