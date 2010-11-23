@@ -1,5 +1,6 @@
 implementation(theBlock : node) ::=
   "@implementation" #readIdentifier:impl
+  => local table;
   => insert theBlock.implementation[impl] = impl;
   "{"
   [
@@ -14,7 +15,7 @@ implementation(theBlock : node) ::=
     [
      declaration(theBlock)
      ]*
-    => koocClassImpl(impl, theBlock, virt);
+    => koocClassImpl(impl, theBlock, virt, table);
     ]
    |
    [
@@ -25,10 +26,11 @@ implementation(theBlock : node) ::=
      [
       declaration(theBlock)
       ]+
-     => koocClassImpl(impl, theBlock, virt);
+     => koocClassImpl(impl, theBlock, virt, table);
      ]*
     "}"
     ]
    ]*
   "}"
+  => koocClassCreateVtable(impl, theBlock, table);
   ;

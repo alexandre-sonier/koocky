@@ -1,19 +1,42 @@
 #include "patchLib/cnormPatchLib.inc.cws"
 
-function	koocTradgetVars(theBlock : node, theModule : value, theVar : value, decored_vars : reference)
+function	koocTradgetVars(theBlock : node, theModule : node, theVar : value, decored_vars : reference)
 {
-  local curstart;
+  local curstart = "";
   local curname;
-  curstart = "_" + lengthString(theModule) + theModule + "_variable_";
+  local moduleName;
+  if (existVariable(theModule.ctype.identifier))
+    {
+      moduleName = theModule.ctype.identifier;
+      curstart = "M";
+    }
+  else
+    moduleName = theModule;
+  curstart = curstart + "_" + lengthString(moduleName) + moduleName + "_variable_";
   curname = "_" + lengthString(theVar) + theVar;
-  foreach var in theBlock.variables
-  {
-    if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
-      insert decored_vars[var.name] = var.name;
-  }
+  if (existVariable(theModule.ctype.identifier))
+    {
+      foreach type in theBlock.types
+      {
+	if (moduleName == key(type))
+	  foreach var in type.ctype.list
+	  {
+	    if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
+	      insert decored_vars[var.name] = var.name;
+	  }
+      }
+    }
+  else
+    {
+      foreach var in theBlock.variables
+      {
+	if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
+	  insert decored_vars[var.name] = var.name;
+      }
+    }
 }
 
-function	koocTradTestVarType(theName : value, theModule : value, theCType : reference)
+function	koocTradTestVarType(theName : value, theCType : reference)
 {
   local strList;
   cutString(theName, "_", strList);
@@ -39,15 +62,22 @@ function	koocTradTestVarType(theName : value, theModule : value, theCType : refe
   return (theCType);
 }
 
-function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType : node)
+function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node)
 {
   local decored_vars;
   local theCType;
-  koocTradgetVars(theBlock, theModule, theVar, decored_vars);
+  local module = init.module;
+  
+  foreach var in theBlock.variables
+  {
+    if (key(var) == init.module)
+      setall module = var;
+  }
+  koocTradgetVars(theAst, module, init.value, decored_vars);
   foreach var in decored_vars
   {
     clearVariable(theCType);
-    koocTradTestVarType(var, theModule, theCType);
+    koocTradTestVarType(var, theCType);
     if (theCType.identifier == theType.identifier)
       {
 	if (existVariable(theType.pointer) && existVariable(theCType.pointer))
@@ -59,7 +89,26 @@ function	koocTradVar(theBlock : node, theModule : value, theVar : value, theType
 	  return var;
       }
   }
-  error(theVar + " of type " + theCType.identifier + " has never been declared in " + theModule);
+  error(init.value + " of type " + theCType.identifier + " has never been declared in " + init.module);
+}
+
+function	koocTradClassCall(init : node)
+{
+  local tmp;
+
+  setall tmp = init;
+  insert init.right;
+  setall init.right = tmp;
+  insert init.left;
+  setall init.left = tmp;
+  removeVariable(init.right.__LINE__);
+  init.left.value = init.module;
+  init.right.value = init.value;
+  removeVariable(init.value);
+  removeVariable(init.__LINE__);
+  init.type = "deref_expression";
+  init.otype = "likebinary";
+  init.operator = "->";
 }
 
 function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : node, theAst : node)
@@ -67,7 +116,10 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
   if (existVariable(init.ctype))
     {
       if (existVariable(init.conflict))
-  	init.value = koocTradVar(theAst, init.module, init.value, init.ctype);
+	{
+	  init.value = koocTradVar(theAst, theBlock, init, init.ctype);
+	  koocTradClassCall(init);
+	}
       insert theNode.ctype = init.ctype;
       ref theNode.ctype = init.ctype;
       return ;
@@ -75,7 +127,10 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
   if (existVariable(theVar.ctype))
     {
       if (existVariable(init.conflict))
-	init.value = koocTradVar(theAst, init.module, init.value, theVar.ctype);
+	{
+	  init.value = koocTradVar(theAst, theBlock, init, theVar.ctype);
+	  koocTradClassCall(init);
+	}
       insert theNode.ctype = theVar.ctype;
       ref theNode.ctype = theVar.ctype;
       return ;
@@ -85,7 +140,10 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
     if (key(var) == theVar.value)
       {
 	if (existVariable(init.conflict))
-	  init.value = koocTradVar(theAst, init.module, init.value, var.ctype);
+	  {
+	    init.value = koocTradVar(theAst, theBlock, init, var.ctype);
+	    koocTradClassCall(init);
+	  }
 	insert theNode.ctype = var.ctype;
 	ref theNode.ctype = var.ctype;
 	return ;
@@ -94,7 +152,10 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
   if (existVariable(theNode.ctype))
     {
       if (existVariable(init.conflict))
-	init.value = koocTradVar(theAst, init.module, init.value, theNode.ctype);
+	{
+	  init.value = koocTradVar(theAst, theBlock, init, theNode.ctype);
+	  koocTradClassCall(init);
+	}
       return ;
     }
 }
@@ -102,7 +163,7 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
 {
   if (existVariable(Curr.right))
-    {      
+    {
       koocTradRecScan(Curr.right, theBlock, theAst);
       if (existVariable(Curr.right.ctype))
 	{

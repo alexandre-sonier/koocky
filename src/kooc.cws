@@ -9,8 +9,6 @@ local myAst;
 local out;
 local filelist;
 
-createMyObject(myAst);
-
 foreach filename in _ARGS
 {
   cutString(filename, "/", filelist);

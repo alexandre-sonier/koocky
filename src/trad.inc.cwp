@@ -34,7 +34,7 @@ functrad(theBlock : node) ::=
       ]
      |
      [
-      '['#readIdentifier:modu '.' #readIdentifier:param']'
+      '[' #readIdentifier:modu '.' #readIdentifier:param']'
       => pushItem theBlock.list;
       => insert theBlock.list#back.ctype.identifier = type;
       => koocTradFormType(theBlock.list#back.ctype, point);

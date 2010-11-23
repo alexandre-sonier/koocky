@@ -16,6 +16,7 @@ function	addClass(theBlock : node, class : value, theLegacy : value)
 	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {};");
       pushItem theBlock;
       setall theBlock#back = newBlock.block[0];
+      ref theBlock.classes[class] = theBlock#back;
       insert theBlock.types[class];
       ref theBlock.types[class] = theBlock#back;
       pushItem theBlock;
@@ -134,7 +135,7 @@ function	koocClassRecScan(theFile : node, theAst : node)
   }
 }
 
-function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value)
+function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value, FuncTable : reference)
 {
   if (koocDecorTool_gettype(theBlock#back.ctype) == "struct"
       || koocDecorTool_gettype(theBlock#back.ctype) == "union"
@@ -159,4 +160,28 @@ function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value)
       setall theBlock#back.list#back = newCode.block[0];
       invertArray(theBlock#back.list);
     }
+
+  if (theBlock#back.type == "__FUNCTION__")
+    pushItem FuncTable = theBlock#back.name;
+}
+
+function	koocClassCreateVtable(theClass : value, theBlock : node, FuncTable : reference)
+{
+  local		theExpression;
+  local		newCode;
+
+  cnormPatchInit(newCode);
+
+  theExpression = "struct _vtable_" + theClass + "_ vt" + theClass + " = {";
+  foreach func in FuncTable
+  {
+    theExpression = theExpression + func;
+    if (func != FuncTable#back)
+      theExpression = theExpression + ", ";
+  }
+  theExpression = theExpression + "};";
+
+  cnormPatchDeclaration(newCode, theExpression);
+  pushItem theBlock;
+  setall theBlock#back = newCode.block[0];
 }
