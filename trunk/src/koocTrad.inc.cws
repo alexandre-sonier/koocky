@@ -73,6 +73,11 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
     if (key(var) == init.module)
       setall module = var;
   }
+  foreach var in theBlock.list
+  {
+    if (var.name == init.module)
+      setall module = var;
+  }
   koocTradgetVars(theAst, module, init.value, decored_vars);
   foreach var in decored_vars
   {
@@ -101,11 +106,14 @@ function	koocTradClassCall(init : node)
   setall init.right = tmp;
   insert init.left;
   setall init.left = tmp;
-  removeVariable(init.right.__LINE__);
   init.left.value = init.module;
   init.right.value = init.value;
   removeVariable(init.value);
-  removeVariable(init.__LINE__);
+  if (existVariable(init.__LINE__))
+    {
+      removeVariable(init.right.__LINE__);
+      removeVariable(init.__LINE__);
+    }
   init.type = "deref_expression";
   init.otype = "likebinary";
   init.operator = "->";
@@ -118,7 +126,16 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
       if (existVariable(init.conflict))
 	{
 	  init.value = koocTradVar(theAst, theBlock, init, init.ctype);
-	  koocTradClassCall(init);
+	  foreach var in theBlock.variables
+	  {
+	    if (key(var) == init.module)
+	      koocTradClassCall(init);
+	  }
+	  foreach var in theBlock.list
+	  {
+	    if (var.value == init.module)
+	      koocTradClassCall(init);
+	  }
 	}
       insert theNode.ctype = init.ctype;
       ref theNode.ctype = init.ctype;
@@ -129,7 +146,16 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
       if (existVariable(init.conflict))
 	{
 	  init.value = koocTradVar(theAst, theBlock, init, theVar.ctype);
-	  koocTradClassCall(init);
+	  foreach var in theBlock.variables
+	  {
+	    if (key(var) == init.module)
+	      koocTradClassCall(init);
+	  }
+	  foreach var in theBlock.list
+	  {
+	    if (var.value == init.module)
+	      koocTradClassCall(init);
+	  }
 	}
       insert theNode.ctype = theVar.ctype;
       ref theNode.ctype = theVar.ctype;
@@ -142,7 +168,16 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	if (existVariable(init.conflict))
 	  {
 	    init.value = koocTradVar(theAst, theBlock, init, var.ctype);
-	    koocTradClassCall(init);
+	    foreach var in theBlock.variables
+	    {
+	      if (key(var) == init.module)
+		koocTradClassCall(init);
+	    }
+	    foreach var in theBlock.list
+	    {
+	      if (var.value == init.module)
+		koocTradClassCall(init);
+	    }
 	  }
 	insert theNode.ctype = var.ctype;
 	ref theNode.ctype = var.ctype;
@@ -154,7 +189,16 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
       if (existVariable(init.conflict))
 	{
 	  init.value = koocTradVar(theAst, theBlock, init, theNode.ctype);
-	  koocTradClassCall(init);
+	  foreach var in theBlock.variables
+	  {
+	    if (key(var) == init.module)
+	      koocTradClassCall(init);
+	  }
+	  foreach var in theBlock.list
+	  {
+	    if (var.value == init.module)
+	      koocTradClassCall(init);
+	  }
 	}
       return ;
     }

@@ -10,3 +10,4 @@ signed int _4bobo_function_signed_int_1a_param_signed_int (signed int b)
 	return (b + 1);
 }
 
+struct _vtable_bobo_ vtbobo  = {};
