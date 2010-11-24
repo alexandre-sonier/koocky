@@ -5,7 +5,7 @@ vartrad(theBlock : node) ::=
    => koocTradFormType(theBlock.ctype, point);
    ]?
   [
-   "[" #readIdentifier:mod "." #readIdentifier:var "]"
+   "[" [["&"]? #readIdentifier]:mod "." #readIdentifier:var "]"
    ]
   => insert theBlock.operator = "id";
 => insert theBlock.otype = "terminal";
@@ -19,34 +19,45 @@ functrad(theBlock : node) ::=
    => local paramtype;
    "@!(" #readIdentifier:type [["*"]*]:point ")"
    => pushItem paramtype = type + "_" + point;
-   "[" #readIdentifier:mod #readIdentifier:func
-   => koocTradnewFunc(theBlock, func + "();");
-   => insert theBlock.module = mod;
-   [':'
-    '(' #readIdentifier:type [["*"]*]:point ')'
-    => pushItem paramtype = type + "_" + point;
-    [
-     [
-      [
-       [#readIdentifier | #readInteger | #readCString | #readCChar]:param
-       ]
-      => koocTradAddParam(theBlock.list, type, param);
-      ]
-     |
-     [
-      '[' #readIdentifier:modu '.' #readIdentifier:param']'
-      => pushItem theBlock.list;
-      => insert theBlock.list#back.ctype.identifier = type;
-      => koocTradFormType(theBlock.list#back.ctype, point);
-      => insert theBlock.list#back.operator = "id";
-      => insert theBlock.list#back.otype = "terminal";
-      => insert theBlock.list#back.conflict = "module";
-      => insert theBlock.list#back.module = modu;
-      => insert theBlock.list#back.value = param;
-      ]
-     ]
-    ]*
-   "]"
-   => koocTradDecorFunc(theBlock, paramtype, mod, func);
+   [funcCore(theBlock, paramtype, theBlock)]
    ]
   ;
+
+funcCore(theBlock : node, paramtype : node, theAst : node) ::=
+  "[" [["&"]? #readIdentifier]:mod #readIdentifier:func
+  => koocTradnewFunc(theBlock, func + "();");
+=> insert theBlock.module = mod;
+[':'
+ '(' #readIdentifier:type [["*"]*]:point ')'
+ => pushItem paramtype = type + "_" + point;
+ [
+  [
+   [
+    [#readIdentifier | #readInteger | #readCString | #readCChar]:param
+    ]
+   => koocTradAddParam(theBlock.list, type, param);
+   ]
+  |
+  [
+   '[' #readIdentifier:modu '.' #readIdentifier:param']'
+   => pushItem theBlock.list;
+   => insert theBlock.list#back.ctype.identifier = type;
+   => koocTradFormType(theBlock.list#back.ctype, point);
+   => insert theBlock.list#back.operator = "id";
+   => insert theBlock.list#back.otype = "terminal";
+   => insert theBlock.list#back.conflict = "module";
+   => insert theBlock.list#back.module = modu;
+   => insert theBlock.list#back.value = param;
+   ]
+  |
+  [
+   => local paramtype2;
+   => pushItem paramtype2 = paramtype#back;
+   => pushItem theBlock.list;
+   funcCore(theBlock.list#back, paramtype2, theBlock)
+   ]
+  ]
+ ]*
+"]"
+=> koocTradDecorFunc(theBlock, paramtype, mod, func, theAst);
+;
