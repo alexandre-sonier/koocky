@@ -73,7 +73,7 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
     if (key(var) == init.module)
       setall module = var;
   }
-  foreach var in theBlock.list
+  foreach var in theBlock#parent.list
   {
     if (var.name == init.module)
       setall module = var;
@@ -131,9 +131,9 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (key(var) == init.module)
 	      koocTradClassCall(init);
 	  }
-	  foreach var in theBlock.list
+	  foreach var in theBlock#parent.list
 	  {
-	    if (var.value == init.module)
+	    if (var.name == init.module)
 	      koocTradClassCall(init);
 	  }
 	}
@@ -151,9 +151,9 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (key(var) == init.module)
 	      koocTradClassCall(init);
 	  }
-	  foreach var in theBlock.list
+	  foreach var in theBlock#parent.list
 	  {
-	    if (var.value == init.module)
+	    if (var.name == init.module)
 	      koocTradClassCall(init);
 	  }
 	}
@@ -173,9 +173,9 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	      if (key(var) == init.module)
 		koocTradClassCall(init);
 	    }
-	    foreach var in theBlock.list
+	    foreach var in theBlock#parent.list
 	    {
-	      if (var.value == init.module)
+	      if (var.name == init.module)
 		koocTradClassCall(init);
 	    }
 	  }
@@ -194,9 +194,9 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (key(var) == init.module)
 	      koocTradClassCall(init);
 	  }
-	  foreach var in theBlock.list
+	  foreach var in theBlock#parent.list
 	  {
-	    if (var.value == init.module)
+	    if (var.name == init.module)
 	      koocTradClassCall(init);
 	  }
 	}
