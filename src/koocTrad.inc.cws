@@ -67,7 +67,7 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
   local decored_vars;
   local theCType;
   local module = init.module;
-  
+
   foreach var in theBlock.variables
   {
     if (key(var) == init.module)
@@ -97,7 +97,7 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
   error(init.value + " of type " + theCType.identifier + " has never been declared in " + init.module);
 }
 
-function	koocTradClassCall(init : node)
+function	koocTradClassCall(init : node, refy : value)
 {
   local tmp;
 
@@ -114,13 +114,31 @@ function	koocTradClassCall(init : node)
       removeVariable(init.right.__LINE__);
       removeVariable(init.__LINE__);
     }
-  init.type = "deref_expression";
-  init.otype = "likebinary";
-  init.operator = "->";
+  if (refy == "&")
+    {
+      init.type = "field_expression";
+      init.otype = "likebinary";
+      init.operator = ".";
+    }
+  else
+    {
+      init.type = "deref_expression";
+      init.otype = "likebinary";
+      init.operator = "->";
+    }
 }
 
 function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : node, theAst : node)
 {
+  local refy = "";
+
+  if (startString(init.module, "&"))
+    {
+      init.module = rightString(init.module, sub(lengthString(init.module), 1));
+      refy = "&";
+    }
+  if (init.value == "vtable")
+    return ;
   if (existVariable(init.ctype))
     {
       if (existVariable(init.conflict))
@@ -129,12 +147,12 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	  foreach var in theBlock.variables
 	  {
 	    if (key(var) == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	  foreach var in theBlock#parent.list
 	  {
 	    if (var.name == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	}
       insert theNode.ctype = init.ctype;
@@ -149,12 +167,12 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	  foreach var in theBlock.variables
 	  {
 	    if (key(var) == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	  foreach var in theBlock#parent.list
 	  {
 	    if (var.name == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	}
       insert theNode.ctype = theVar.ctype;
@@ -171,12 +189,12 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    foreach var in theBlock.variables
 	    {
 	      if (key(var) == init.module)
-		koocTradClassCall(init);
+		koocTradClassCall(init, refy);
 	    }
 	    foreach var in theBlock#parent.list
 	    {
 	      if (var.name == init.module)
-		koocTradClassCall(init);
+		koocTradClassCall(init, refy);
 	    }
 	  }
 	insert theNode.ctype = var.ctype;
@@ -192,12 +210,12 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	  foreach var in theBlock.variables
 	  {
 	    if (key(var) == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	  foreach var in theBlock#parent.list
 	  {
 	    if (var.name == init.module)
-	      koocTradClassCall(init);
+	      koocTradClassCall(init, refy);
 	  }
 	}
       return ;
@@ -320,7 +338,7 @@ function	koocTradAddParam(theBlock : node, type : value, param : value)
   setall theBlock#back = newCode.block[0].list[0];
 }
 
-function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value , theName : value)
+function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value , theName : value, theAst : node)
 {
   local ParsedType;
   local i;
@@ -349,4 +367,138 @@ function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value ,
       theBlock.left.value = theBlock.left.value + "_" + ParsedType[i];
       i = add(i, 1);
     }
+
+  local tmp;
+  local Length = rightString(leftString(theBlock.left.value, 2), 1);
+  local str = rightString(theBlock.left.value, sub(lengthString(theBlock.left.value), add(Length, 2)));
+  local refy = "";
+  if (startString(theModule, "&"))
+    {
+      theModule = rightString(theModule, sub(lengthString(theModule), 1));
+      refy = "&";
+    }
+  foreach var in theAst#parent.variables
+  {
+    if (key(var) == theModule)
+      foreach type in theAst#parent#parent#parent.types
+      {
+	if (var.ctype.identifier == key(type))
+	  {
+	    str = "M_" + lengthString(key(type)) + key(type) + str;
+	    foreach func in type#parent.prototypes
+	    {
+	      if (key(func) == str)
+		{
+		  theBlock.left.value = str;
+		  invertArray(theBlock.list);
+		  pushItem theBlock.list;
+		  insert theBlock.list#back.type = "primary_expression";
+		  insert theBlock.list#back.value = theModule;
+		  insert theBlock.list#back.operator = "id";
+		  insert theBlock.list#back.otype = "terminal";
+		  if (refy == "&")
+		    {
+		      setall tmp = theBlock.list#back;
+		      insert theBlock.list#back.left;
+		      setall theBlock.list#back.left = tmp;
+		      theBlock.list#back.operator = "&";
+		      theBlock.list#back.type = "unary_expression";
+		      theBlock.list#back.otype = "unary";
+		    }
+		  invertArray(theBlock.list);
+		  return ;
+		}
+	    }
+	    theBlock.left.value = "V" + theBlock.left.value;
+	    invertArray(theBlock.list);
+	    pushItem theBlock.list;
+	    insert theBlock.list#back.type = "primary_expression";
+	    insert theBlock.list#back.value = theModule;
+	    insert theBlock.list#back.operator = "id";
+	    insert theBlock.list#back.otype = "terminal";
+	    invertArray(theBlock.list);
+	    setall tmp = theBlock;
+	    insert theBlock.right;
+	    setall theBlock.right = tmp;
+	    removeVariable(theBlock.list);
+	    theBlock.left.value = "vtable";
+	    theBlock.type = "deref_expression";
+	    theBlock.otype = "likebinary";
+	    theBlock.operator = "->";
+	    setall tmp = theBlock;
+	    setall theBlock.right = tmp;
+	    theBlock.left.value = theModule;
+	    if (existVariable(theBlock.left.__LINE__))
+	      {
+		removeVariable(theBlock.right.left.__LINE__);
+		removeVariable(theBlock.right.right.left.__LINE__);
+	      }
+	    return ;
+	  }
+      }
+  }
+
+  foreach var in theAst#parent#parent.list
+  {
+    if (key(var) == theModule)
+      foreach type in theAst#parent#parent#parent.types
+      {
+	if (var.ctype.identifier == key(type))
+	  {
+	    foreach func in type#parent.prototypes
+	    {
+	      str = "M_" + lengthString(key(type)) + key(type) + str;
+	      foreach func in type#parent.prototypes
+	      {
+		if (key(func) == str)
+		  {
+		    theBlock.left.value = str;
+		    invertArray(theBlock.list);
+		    pushItem theBlock.list;
+		    insert theBlock.list#back.type = "primary_expression";
+		    insert theBlock.list#back.value = theModule;
+		    insert theBlock.list#back.operator = "id";
+		    insert theBlock.list#back.otype = "terminal";
+		    if (refy == "&")
+		      {
+			setall tmp = theBlock.list#back;
+			insert theBlock.list#back.left;
+			setall theBlock.list#back.left = tmp;
+			theBlock.list#back.operator = "&";
+			theBlock.list#back.type = "unary_expression";
+			theBlock.list#back.otype = "unary";
+		      }
+		    invertArray(theBlock.list);
+		    return ;
+		  }
+	      }
+	      theBlock.left.value = "V" + theBlock.left.value;
+	      invertArray(theBlock.list);
+	      pushItem theBlock.list;
+	      insert theBlock.list#back.type = "primary_expression";
+	      insert theBlock.list#back.value = theModule;
+	      insert theBlock.list#back.operator = "id";
+	      insert theBlock.list#back.otype = "terminal";
+	      invertArray(theBlock.list);
+	      setall tmp = theBlock;
+	      insert theBlock.right;
+	      setall theBlock.right = tmp;
+	      removeVariable(theBlock.list);
+	      theBlock.left.value = "vtable";
+	      theBlock.type = "deref_expression";
+	      theBlock.otype = "likebinary";
+	      theBlock.operator = "->";
+	      setall tmp = theBlock;
+	      setall theBlock.right = tmp;
+	      theBlock.left.value = theModule;
+	      if (existVariable(theBlock.left.__LINE__))
+		{
+		  removeVariable(theBlock.right.left.__LINE__);
+		  removeVariable(theBlock.right.right.left.__LINE__);
+		}
+	      return ;
+	    }
+	  }
+      }
+  }
 }
