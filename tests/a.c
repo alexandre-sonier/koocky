@@ -1,3 +1,4 @@
+#include "Object.ko"
 #include "a.h"
 signed int _4test_variable_signed_int_1b  = 20;
 signed int M_4test_function_signed_int_1f_param_signed_int (struct _class_test_ 	* self, signed int a)
@@ -5,4 +6,4 @@ signed int M_4test_function_signed_int_1f_param_signed_int (struct _class_test_ 
 	return a;
 }
 
-struct _vtable_test_ vttest  = {M_4test_function_signed_int_1f_param_signed_int};
+struct _vtable_test_ vttest  = {};

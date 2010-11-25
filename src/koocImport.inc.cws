@@ -31,25 +31,31 @@ function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
   outfile = replaceString(".kc", ".c", outfile);
   local Currfilename = replaceString(".kc", ".c", CurrFile);
   Currfilename = theAst.relPath + replaceString(".kh", ".h", Currfilename);
-  
   if (!endString(theFile, ".h"))
     {
       if (theFile == "Object.ko")
 	{
-	  local filename = "./src/Object.ko";
-	  local outname = "./lib/Object.ko";
-	  local outfile = "Object.ko";
+	  filename = "./src/Object.ko";
+	  outname = "./lib/Object.ko";
+	  outfile = "Object.ko";
 	}
       if (!existVariable(theAst[theFile]))
 	{
 	  if (existFile(outname))
 	    deleteFile(outname);
 	  insert theAst[theFile] = theFile;
+	  if (theFile != "Object.ko")
+	    {
+	      insert theAst[theFile].import["Object.ko"] = "Object.ko";
+	      koocImportFile(theAst, "Object.ko", theFile);
+	    }
 	  parseAsBNF("kooc.cwp", theAst[theFile], filename);
 	}
       koocImportRef(CurrFile, theAst[theFile]);
     }
   else
     local outfile = theFile;
+  if (CurrFile == "Object.ko")
+    Currfilename = "./lib/Object.ko";
   appendFile(Currfilename, "#include \"" + outfile + "\"\n");
 }

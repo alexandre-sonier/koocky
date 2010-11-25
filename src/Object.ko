@@ -6,6 +6,7 @@
   Object	*new();
   @member
     {
+      const char *name_of_interface();
       void	init();
       void	delete();
     }
@@ -13,70 +14,70 @@
     {
       void	clean();
       int	isKindOf(const char*);
-      int	isKindOf(Object*);
+      int	isKindOf(struct _class_Object_*);
       int	isInstanceOf(const char *);
-      int	isInstanceOf(Object*);
+      int	isInstanceOf(struct _class_Object*);
     }
 }
 
 @implementation Object
 {
-  @member const char	*name_of_interface()
-    {
-      return ("Object");
-    }
-
   Object	*alloc()
   {
     return (malloc(sizeof(Object)));
   }
 
-  @member void	init()
-    {
-      [self.vtable] = malloc(sizeof(struct _vtable_Object_));
-    }
-
   Object	*new()
   {
-    Object	*Obj = [Object alloc];
-    [Obj init];
+    Object	*Obj = @!(Object*)[Object alloc];
+    @!(void)[Obj init];
   }
 
-  @virtual void	clean()
+  @member const char	*name_of_interface()
     {
-      free([self.vtable]);
+      return ("Object");
+    }
+
+  @member void	init()
+    {
+      [self.vtable] = (void*)&vtObject;
     }
 
   @member void	delete()
     {
-      [self clean];
+      @!(void)[self clean];
       free(self);
+    }
+
+  @virtual void	clean()
+    {
+      free(@!(void*)[self.vtable]);
     }
 
   @virtual int	isKindOf(const char* cname)
     {
-      if (!strcmp([self name_of_interface], cname))
+      if (!strcmp(@!(char*)[self name_of_interface], cname))
 	return (1);
       return (0);
     }
 
   @virtual int	isKindOf(Object* Obj)
     {
-      if (!strcmp([self name_of_interface], [Obj name_of_interface]))
+      if (!strcmp(@!(char*)[self name_of_interface], @!(char*)[Obj name_of_interface]))
 	return (1);
       return (0);
     }
 
   @virtual int	isInstanceOf(const char* cname)
     {
-      if (!strcmp([self name_of_interface], cname))
+      if (!strcmp(@!(char*)[self name_of_interface], cname))
 	return (1);
       return (0);
     }
 
   @virtual int	isInstanceOf(Object* Obj)
     {
-      if (!strcmp([self name_of_interface], [Obj name_of_interface]))
+      if (!strcmp(@!(char*)[self name_of_interface], @!(char*)[Obj name_of_interface]))
 	return (1);
       return (0);
     }
