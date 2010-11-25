@@ -1,3 +1,4 @@
+#include "Object.ko"
 #include "a.h"
 #include "b.h"
 void bla (test 	* tutu)
