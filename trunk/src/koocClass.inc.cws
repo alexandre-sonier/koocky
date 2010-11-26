@@ -82,10 +82,10 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
       local func;      
       cnormPatchInit(func);
       cnormPatchDeclaration(func, "typedef struct _class_" + theClass + "_ " + theClass + ";");
-
+      
       foreach vtable in theBlock
       {
-      	if (vtable.ctype.identifier == "_vtable_" + theClass + "_" && startString(newCode.block[0].name, "V"))
+      	if (vtable.ctype.identifier == "_vtable_" + theClass + "_") 
       	  {
 	    local type = "";
 	    theExpression = "(*" + newCode.block[0].name + ")(" + theClass + "*";
@@ -105,28 +105,6 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
       	    setall vtable.ctype.list#back = func.block[1];
       	  }
       }
-
-      if (startString(newCode.block[0].name, "M"))
-	{
-	  local type = "";
-	  theExpression = newCode.block[0].name + "(" + theClass + "*";
-
-	  foreach info in newCode.block[0].ctype.infoType
-	    type = type + key(info) + " ";
-	  type = type + newCode.block[0].ctype.identifier + " ";
-	  foreach point in newCode.block[0].ctype.pointer
-	    type = type + "*";
-
-	  if (expr[1] == "void);" || expr[1] == ");")
-	    cnormPatchDeclaration(func, type + theExpression + ");");
-	  else
-	    cnormPatchDeclaration(func, type + theExpression + ", " + expr[1]);
-	    
-	  pushItem theBlock;
-	  setall theBlock#back = func.block[1];
-	  insert theBlock.prototypes[theBlock#back.name];
-	  ref theBlock.prototypes[theBlock#back.name] = theBlock#back;
-	}
     }
 }
 
@@ -189,7 +167,7 @@ function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value, Fu
       invertArray(theBlock#back.list);
     }
 
-  if (theBlock#back.type == "__FUNCTION__" && startString(theBlock#back.name, "V"))
+  if (theBlock#back.type == "__FUNCTION__") 
     pushItem FuncTable = theBlock#back.name;
 }
 
@@ -205,6 +183,18 @@ function	koocClassCreateVtable(theClass : value, theBlock : node, FuncTable : re
 	cnormPatchInit(newCode);
 
 	theExpression = "struct _vtable_" + theClass + "_ vt" + theClass + " = {";
+
+	foreach class in theBlock.classes
+	{
+	  if (key(class) == theClass)
+	    if (existVariable(class.legacy))
+	      {
+		theExpression = theExpression + "&vt" + class.legacy;
+		if (!isEmpty(FuncTable))
+		  theExpression = theExpression + ", ";
+	      }
+	}
+
 	foreach func in FuncTable
 	{
 	  theExpression = theExpression + func;
