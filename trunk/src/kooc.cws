@@ -27,20 +27,19 @@ foreach filename in _ARGS
       if (existFile(out[filelist#back]))
 	  deleteFile(out[filelist#back]);
       insert myAst[filelist#back] = filelist#back;
-      insert myAst[filelist#back].import["Object.ko"] = "Object.ko";
+      insert myAst[filelist#back].import["Object.ko"] = filelist#back;
       koocImportFile(myAst, "Object.ko", filelist#back);
       parseAsBNF("kooc.cwp", myAst[filelist#back], filename);
     }
   foreach item in myAst[filelist#back].import
   {
-    if (item != "Object.ko")
-      //if (rightString(item, 9) == "Object.ko")
+    if (key(item) != "Object.ko")
       {
 	insert out[key(item)] = replaceString(".kh", ".h", myAst.relPath + key(item));
 	out[key(item)] = replaceString(".kh", ".h", out[key(item)]);
       }
     else
-      insert out[item] = "./lib/Object.ko";
+      insert out["Object.ko"] = "./lib/Object.ko";
   }
 }
 
@@ -49,6 +48,16 @@ foreach file in myAst
   koocImplRecScan(file, myAst);
   koocTradRecScan(file.block, file.block, file.block);
   koocClassRecScan(file, myAst);
+  foreach import in file.import
+  {
+    if (import == file)
+      {
+	appendFile(out[file], "#ifndef " + toUpperString(replaceString("/", "_", replaceString(".", "_", replaceString(".kh", ".h", replaceString(".kc", ".c", key(import)))))) + "_\n");
+	appendFile(out[file], "#define " + toUpperString(replaceString("/", "_", replaceString(".", "_", replaceString(".kh", ".h", replaceString(".kc", ".c", key(import)))))) + "_\n");
+	appendFile(out[file], "#include \"" + replaceString(".kh", ".h", replaceString(".kc", ".c", key(import))) + "\"\n");
+	appendFile(out[file], "#endif\n");
+      }
+  }
   appendFile(out[file], cnorm2c(file.block));
 }
 

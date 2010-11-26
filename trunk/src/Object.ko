@@ -17,9 +17,9 @@
     {
       void	clean();
       int	isKindOf(const char*);
-      int	isKindOf(struct _class_Object_*);
+      int	isKindOf(Object*);
       int	isInstanceOf(const char *);
-      int	isInstanceOf(struct _class_Object_*);
+      int	isInstanceOf(Object*);
     }
 }
 
