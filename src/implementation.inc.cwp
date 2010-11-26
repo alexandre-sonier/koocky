@@ -2,35 +2,35 @@ implementation(theBlock : node) ::=
   "@implementation" #readIdentifier:impl
   => local table;
   => insert theBlock.implementation[impl] = impl;
+"{"
+[
+ [
+  [declaration(theBlock)
+   => koocImplDecor(theBlock, theBlock#back, impl);
+   ]
+  ]
+ |
+ [
+  ["@member"|"@virtual"]:virt 
+  [
+   declaration(theBlock)
+   ]
+  => koocClassImpl(impl, theBlock, virt, table);
+  ]
+ |
+ [
+  ["@member"|"@virtual"]:virt 
   "{"
   [
+   [["@virtual"]:virt]? 
    [
-    [declaration(theBlock)
-     => koocImplDecor(theBlock, theBlock#back, impl);
-     ]
+    declaration(theBlock)
     ]
-   |
-   [
-    ["@member"|"@virtual"]:virt 
-    [
-     declaration(theBlock)
-     ]*
-    => koocClassImpl(impl, theBlock, virt, table);
-    ]
-   |
-   [
-    ["@member"|"@virtual"]:virt 
-    "{"
-    [
-     [["@member"|"@virtual"]?]:virt 
-     [
-      declaration(theBlock)
-      ]+
-     => koocClassImpl(impl, theBlock, virt, table);
-     ]*
-    "}"
-    ]
+   => koocClassImpl(impl, theBlock, virt, table);
    ]*
   "}"
-  => koocClassCreateVtable(impl, theBlock, table);
+  ]
+ ]*
+"}"
+=> koocClassCreateVtable(impl, theBlock, table);
   ;

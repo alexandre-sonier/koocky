@@ -338,14 +338,16 @@ function	koocTradAddParam(theBlock : node, type : value, param : value)
   setall theBlock#back = newCode.block[0].list[0];
 }
 
-function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value , theName : value, theAst : node)
+function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value , theName : value, theNode : node)
 {
   local ParsedType;
   local i;
   local tmp;
+  local theAst;
 
   theBlock.left.value = "_" + lengthString(theModule) + theModule + "_function_";
   theBlock.left.value = theBlock.left.value;
+
   foreach type in theTypes
   {
     i = 0;
@@ -360,6 +362,7 @@ function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value ,
 	i = add(i, 1);
       }
   }
+
   theBlock.left.value = theBlock.left.value + ParsedType[0] + "_" + lengthString(theName) + theName + "_param";
   i = 1;  
   while (i < getArraySize(ParsedType))
@@ -368,19 +371,26 @@ function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value ,
       i = add(i, 1);
     }
 
+  if (i == 1)
+    theBlock.left.value = theBlock.left.value + "_void";
+
   local tmp;
   local Length = rightString(leftString(theBlock.left.value, 2), 1);
   local str = rightString(theBlock.left.value, sub(lengthString(theBlock.left.value), add(Length, 2)));
   local refy = "";
+
   if (startString(theModule, "&"))
     {
       theModule = rightString(theModule, sub(lengthString(theModule), 1));
       refy = "&";
     }
-  foreach var in theAst#parent.variables
+
+  traceObject(theNode#parent#parent#parent);
+
+  foreach var in theNode.pctx.variables
   {
     if (key(var) == theModule)
-      foreach type in theAst#parent#parent#parent.types
+      foreach type in theAst#parent.types
       {
 	if (var.ctype.identifier == key(type))
 	  {
@@ -438,10 +448,10 @@ function	koocTradDecorFunc(theBlock : node, theTypes : node, theModule : value ,
       }
   }
 
-  foreach var in theAst#parent#parent.list
+  foreach var in theAst.list
   {
     if (key(var) == theModule)
-      foreach type in theAst#parent#parent#parent.types
+      foreach type in theAst#parent.types
       {
 	if (var.ctype.identifier == key(type))
 	  {
