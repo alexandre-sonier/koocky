@@ -20,6 +20,8 @@ function	koocImportRef(theFile : node, file : node)
     insert theFile.block.types[key(type)] = type;
     ref theFile.block.types[key(type)] = type;
   }
+  foreach import in file.import
+    insert theFile.import[key(import)] = import;
 }
 
 function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
@@ -29,8 +31,6 @@ function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
   outname = replaceString(".kc", ".c", outname);
   local outfile = replaceString(".kh", ".h", theFile);
   outfile = replaceString(".kc", ".c", outfile);
-  local Currfilename = replaceString(".kc", ".c", CurrFile);
-  Currfilename = theAst.relPath + replaceString(".kh", ".h", Currfilename);
   if (!endString(theFile, ".h"))
     {
       if (theFile == "Object.ko")
@@ -46,7 +46,7 @@ function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
 	  insert theAst[theFile] = theFile;
 	  if (theFile != "Object.ko")
 	    {
-	      insert theAst[theFile].import["Object.ko"] = "Object.ko";
+	      insert theAst[theFile].import["Object.ko"] = theFile;
 	      koocImportFile(theAst, "Object.ko", theFile);
 	    }
 	  parseAsBNF("kooc.cwp", theAst[theFile], filename);
@@ -55,7 +55,4 @@ function	koocImportFile(theAst : node, theFile : value, CurrFile : node)
     }
   else
     local outfile = theFile;
-  if (CurrFile == "Object.ko")
-    Currfilename = "./lib/Object.ko";
-  appendFile(Currfilename, "#include \"" + outfile + "\"\n");
 }

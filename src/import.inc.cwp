@@ -1,5 +1,11 @@
 import(st : node) ::= 
   "@import" #readCString:name
-  => insert st[name] = name;
-=> koocImportFile(this#parent, name, this);
+  [
+#check(existVariable(st[name]))
+   |
+   [
+    => insert st[name] = this;
+    => koocImportFile(this#parent, name, this);
+    ]
+   ]
 ;
