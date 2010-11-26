@@ -1,54 +1,30 @@
 @import "/usr/include/string.h"
+@import "/usr/include/stdlib.h"
 
 @class Object
 {
   Object	*alloc();
   Object	*new();
+
   @member
     {
       const char *name_of_interface();
       void	init();
       void	delete();
     }
+
   @virtual
     {
       void	clean();
       int	isKindOf(const char*);
       int	isKindOf(struct _class_Object_*);
       int	isInstanceOf(const char *);
-      int	isInstanceOf(struct _class_Object*);
+      int	isInstanceOf(struct _class_Object_*);
     }
 }
 
 @implementation Object
 {
-  Object	*alloc()
-  {
-    return (malloc(sizeof(Object)));
-  }
-
-  Object	*new()
-  {
-    Object	*Obj = @!(Object*)[Object alloc];
-    @!(void)[Obj init];
-  }
-
-  @member const char	*name_of_interface()
-    {
-      return ("Object");
-    }
-
-  @member void	init()
-    {
-      [self.vtable] = (void*)&vtObject;
-    }
-
-  @member void	delete()
-    {
-      @!(void)[self clean];
-      free(self);
-    }
-
   @virtual void	clean()
     {
       free(@!(void*)[self.vtable]);
@@ -81,4 +57,31 @@
 	return (1);
       return (0);
     }
+
+  @member const char	*name_of_interface()
+    {
+      return ("Object");
+    }
+
+  @member void	init()
+    {
+      [self.vtable] = (void*)&vtObject;
+    }
+
+  @member void	delete()
+    {
+      @!(void)[self clean];
+      free(self);
+    }
+
+  Object	*alloc()
+  {
+    return (malloc(sizeof(Object)));
+  }
+
+  Object	*new()
+  {
+    Object	*Obj = @!(Object*)[Object alloc];
+    @!(void)[Obj init];
+  }
 }
