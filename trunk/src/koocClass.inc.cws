@@ -78,15 +78,17 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
 
       local expr;
       cutString(theExpression, "(", expr);
-      
+
+      local func;      
+      cnormPatchInit(func);
+      cnormPatchDeclaration(func, "typedef struct _class_" + theClass + "_ " + theClass + ";");
+
       foreach vtable in theBlock
       {
       	if (vtable.ctype.identifier == "_vtable_" + theClass + "_" && startString(newCode.block[0].name, "V"))
       	  {
-	    local funcPointer;
 	    local type = "";
-	    cnormPatchInit(funcPointer);
-	    theExpression = "(*" + newCode.block[0].name + ")(struct _class_" + theClass + "_*";
+	    theExpression = "(*" + newCode.block[0].name + ")(" + theClass + "*";
 
 	    foreach info in newCode.block[0].ctype.infoType
 	      type = type + key(info) + " ";
@@ -95,21 +97,19 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
 	      type = type + "*";
 
 	    if (expr[1] == "void);" || expr[1] == ");")
-	      cnormPatchDeclaration(funcPointer, type + theExpression + ");");
+	      cnormPatchDeclaration(func, type + theExpression + ");");
 	    else
-	      cnormPatchDeclaration(funcPointer, type + theExpression + ", " + expr[1]);
+	      cnormPatchDeclaration(func, type + theExpression + ", " + expr[1]);
 	    
       	    pushItem vtable.ctype.list;
-      	    setall vtable.ctype.list#back = funcPointer.block[0];
+      	    setall vtable.ctype.list#back = func.block[1];
       	  }
       }
 
       if (startString(newCode.block[0].name, "M"))
 	{
-	  local func;
 	  local type = "";
-	  cnormPatchInit(func);
-	  theExpression = newCode.block[0].name + "(struct _class_" + theClass + "_*";
+	  theExpression = newCode.block[0].name + "(" + theClass + "*";
 
 	  foreach info in newCode.block[0].ctype.infoType
 	    type = type + key(info) + " ";
@@ -123,7 +123,7 @@ function	koocClassNameFunc(theClass : value, theBlock : node, theExpression : va
 	    cnormPatchDeclaration(func, type + theExpression + ", " + expr[1]);
 	    
 	  pushItem theBlock;
-	  setall theBlock#back = func.block[0];
+	  setall theBlock#back = func.block[1];
 	  insert theBlock.prototypes[theBlock#back.name];
 	  ref theBlock.prototypes[theBlock#back.name] = theBlock#back;
 	}
@@ -183,8 +183,9 @@ function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value, Fu
       pushItem theBlock#back.list;
       local newCode;
       cnormPatchInit(newCode);
-      cnormPatchDeclaration(newCode, "struct _class_" + theClass + "_* self");
-      setall theBlock#back.list#back = newCode.block[0];
+      cnormPatchDeclaration(newCode, "typedef struct _class_" + theClass + "_ " + theClass + ";");
+      cnormPatchDeclaration(newCode, theClass + "* self");
+      setall theBlock#back.list#back = newCode.block[1];
       invertArray(theBlock#back.list);
     }
 

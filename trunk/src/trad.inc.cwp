@@ -19,11 +19,11 @@ functrad(theBlock : node) ::=
    => local paramtype;
    "@!(" #readIdentifier:type [["*"]*]:point ")"
    => pushItem paramtype = type + "_" + point;
-   [funcCore(theBlock, paramtype, theBlock)]
+   [funcCore(theBlock, paramtype)]
    ]
   ;
 
-funcCore(theBlock : node, paramtype : node, theAst : node) ::=
+funcCore(theBlock : node, paramtype : node) ::=
   "[" [["&"]? #readIdentifier]:mod #readIdentifier:func
   => koocTradnewFunc(theBlock, func + "();");
 => insert theBlock.module = mod;
@@ -54,10 +54,14 @@ funcCore(theBlock : node, paramtype : node, theAst : node) ::=
    => local paramtype2;
    => pushItem paramtype2 = paramtype#back;
    => pushItem theBlock.list;
-   funcCore(theBlock.list#back, paramtype2, theBlock)
+   funcCore(theBlock.list#back, paramtype2)
    ]
   ]
  ]*
 "]"
-=> koocTradDecorFunc(theBlock, paramtype, mod, func, theAst);
+=> insert theBlock.paramtype;
+=> setall theBlock.paramtype = paramtype;
+=> insert theBlock.funclict = "module";
+=> insert theBlock.module = mod;
+=> insert theBlock.value = func;
 ;
