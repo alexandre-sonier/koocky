@@ -6,7 +6,12 @@ function	koocTradgetVars(theBlock : node, theModule : node, theVar : value, deco
   local curname;
   local moduleName;
 
-  if (existVariable(theModule.ctype.identifier))
+  if (existVariable(theBlock.types[theModule.name]))
+    {
+      moduleName = theModule.name;
+      curstart = "M";
+    }
+  else if (existVariable(theModule.ctype.identifier))
     {
       moduleName = theModule.ctype.identifier;
       curstart = "M";
@@ -78,6 +83,8 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
   {
     if (var.name == init.module)
       setall module = var;
+    else if (init.module == "super" && var.name == "self")
+      setall module = theAst.types[theAst.types[var.ctype.identifier].legacy];
   }
   koocTradgetVars(theAst, module, init.value, decored_vars);
   foreach var in decored_vars
@@ -116,11 +123,25 @@ function	koocTradClassCall(init : node, refy : value)
       removeVariable(init.right.__LINE__);
       removeVariable(init.__LINE__);
     }
+
   if (refy == "&")
     {
       init.type = "field_expression";
       init.otype = "likebinary";
       init.operator = ".";
+    }
+  else if (init.module == "super")
+    {
+      init.type = "field_expression";
+      init.otype = "likebinary";
+      init.operator = ".";
+      clearVariable(tmp);
+      setall tmp = init;
+      setall init.right = tmp;
+      init.left.value = "self";
+      init.type = "deref_expression";
+      init.otype = "likebinary";
+      init.operator = "->";      
     }
   else
     {
@@ -139,7 +160,6 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
       init.module = rightString(init.module, sub(lengthString(init.module), 1));
       refy = "&";
     }
-
   if (existVariable(init.ctype))
     {
       if (existVariable(init.conflict))
@@ -156,6 +176,8 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (var.name == init.module)
 	      koocTradClassCall(init, refy);
 	  }
+	  if ("super" == init.module)
+	    koocTradClassCall(init, refy);
 	}
       insert theNode.ctype = init.ctype;
       ref theNode.ctype = init.ctype;
@@ -177,6 +199,8 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (var.name == init.module)
 	      koocTradClassCall(init, refy);
 	  }
+	  if ("super" == init.module)
+	    koocTradClassCall(init, refy);
 	}
       insert theNode.ctype = theVar.ctype;
       ref theNode.ctype = theVar.ctype;
@@ -200,6 +224,8 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	      if (var.name == init.module)
 		koocTradClassCall(init, refy);
 	    }
+	    if ("super" == init.module)
+	      koocTradClassCall(init, refy);
 	  }
 	insert theNode.ctype = var.ctype;
 	ref theNode.ctype = var.ctype;
@@ -222,6 +248,8 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	    if (var.name == init.module)
 	      koocTradClassCall(init, refy);
 	  }
+	  if ("super" == init.module)
+	    koocTradClassCall(init, refy);
 	}
       return ;
     }
@@ -259,47 +287,140 @@ function	koocTradAddParam(theBlock : node, type : value, param : value)
   setall theBlock#back = newCode.block[0].list[0];
 }
 
+function	koocTradVirtualScan(theNode : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, theClass : value, type : node, count : value)
+{
+  local tmp;
+  local funcname;
+  local i = 0;
+
+  funcname = "_" + lengthString(type.name) + type.name + str;
+  foreach func in type.vtable.ctype.list
+  {
+    if (func.name == "V" + funcname)
+      theNode.left.value = "V" + funcname;
+    if (theNode.left.value == func.name)
+      {
+	invertArray(theNode.list);
+	pushItem theNode.list;
+	insert theNode.list#back.type = "primary_expression";
+	insert theNode.list#back.value = theModule;
+	insert theNode.list#back.operator = "id";
+	insert theNode.list#back.otype = "terminal";
+	if (refy == "&")
+	  {
+	    setall tmp = theNode.list#back;
+	    insert theNode.list#back.left;
+	    setall theNode.list#back.left = tmp;
+	    theNode.list#back.operator = "&";
+	    theNode.list#back.type = "unary_expression";
+	    theNode.list#back.otype = "unary";
+	  }
+	invertArray(theNode.list);
+	setall tmp = theNode.list#back;
+	insert theNode.list#back.right;
+	setall theNode.list#back.right = tmp;
+	insert theNode.list#back.type = "cast_expression";
+	insert theNode.list#back.left;
+	insert theNode.list#back.left.ctype;
+	insert theNode.list#back.left.ctype.pctx;
+	ref theNode.list#back.left.ctype.pctx = theBlock;
+	insert theNode.list#back.left.ctype.type = "__COMPOSED__";
+	insert theNode.list#back.left.ctype.identifier = type.name;
+	insert theNode.list#back.left.ctype.pointer;
+	pushItem theNode.list#back.left.ctype.pointer;
+	insert theNode.list#back.left.ctype.pointer[0].level = "*";
+	insert theNode.list#back.left.otype = "typecast";
+	insert theNode.list#back.left.type = "type_cast_expression";
+	insert theNode.list#back.left.operator = "()";
+	insert theNode.list#back.otype = "cast";
+	insert theNode.list#back.operator = "cast";
+	insert theNode.list#back.ctype;
+	ref theNode.list#back.ctype = theNode.list#back.left.ctype;
+	removeVariable(theNode.list#back.value);
+
+	setall tmp = theNode;
+	insert theNode.right;
+	setall theNode.right = tmp;
+	removeVariable(theNode.list);
+	theNode.type = "deref_expression";
+	theNode.otype = "likebinary";
+	theNode.operator = "->";
+	removeVariable(theNode.left);
+	insert theNode.left;
+	insert theNode.left.expr;
+	insert theNode.left.expr.type = "cast_expression";
+	insert theNode.left.expr.left;
+	insert theNode.left.expr.left.ctype;
+	insert theNode.left.expr.left.ctype.pctx;
+	ref theNode.left.expr.left.ctype.pctx = theBlock;
+	insert theNode.left.expr.left.ctype.type = "__COMPOSED__";
+	insert theNode.left.expr.left.ctype.identifier = "_vtable_" + theClass + "_";
+	insert theNode.left.expr.left.ctype.specifier = "struct";
+	insert theNode.left.expr.left.ctype.pointer;
+	pushItem theNode.left.expr.left.ctype.pointer;
+	insert theNode.left.expr.left.ctype.pointer[0].level = "*";
+	insert theNode.left.expr.left.otype = "typecast";
+	insert theNode.left.expr.left.type = "type_cast_expression";
+	insert theNode.left.expr.left.operator = "()";
+	insert theNode.left.expr.otype = "cast";
+	insert theNode.left.expr.right;
+	insert theNode.left.expr.right.left;
+	insert theNode.left.expr.right.left.type = "primary_expression";
+	insert theNode.left.expr.right.left.value = theModule;
+	insert theNode.left.expr.right.left.operator = "id";
+	insert theNode.left.expr.right.left.otype = "terminal";
+	insert theNode.left.expr.right.type = "deref_expression";
+	insert theNode.left.expr.right.otype = "likebinary";
+	insert theNode.left.expr.right.operator = "->";
+	insert theNode.left.expr.right.right;
+	insert theNode.left.expr.right.right.type = "primary_expression";
+	insert theNode.left.expr.right.right.value = "vtable";
+	insert theNode.left.expr.right.right.operator = "id";
+	insert theNode.left.expr.right.right.otype = "terminal";
+	insert theNode.left.expr.operator = "cast";
+	insert theNode.left.type = "priority_expression";
+	insert theNode.left.otype = "priority";
+	insert theNode.left.operator = "()";
+	while (i < count)
+	  {
+	    setall tmp = theNode.left;
+	    insert theNode.left.left;
+	    setall theNode.left.left = tmp;
+	    insert theNode.left.right;
+	    insert theNode.left.right.type = "primary_expression";
+	    insert theNode.left.right.value = "vtableLegacy";
+	    insert theNode.left.right.operator = "id";
+	    insert theNode.left.right.otype = "terminal";
+	    insert theNode.left.type = "deref_expression";
+	    insert theNode.left.otype = "likebinary";
+	    insert theNode.left.operator = "->";
+	    i = add(i, 1);
+	  }
+	return ;
+      }
+  }
+  if (existVariable(type.legacy) && type.name != "Object")
+    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, theClass, theAst.types[type.legacy], add(count, 1));
+}
+
 function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, var : node)
 {
   local tmp;
+  local funcname;
 
   if (var.name == theModule)
     foreach type in theAst.types
     {
-
       if (var.ctype.identifier == key(type))
 	{
-	  str = "_" + lengthString(key(type)) + key(type) + str;
+	  funcname = "_" + lengthString(key(type)) + key(type) + str;
 
-	  foreach func in type.vtable.ctype.list  // theAst.prototypes
+	  foreach func in type.vtable.ctype.list
 	  {
-	    /*   if (key(func) == "M" + str) */
-	    /* 	{ */
-	    /* 	  theNode.left.value = "M" + str; */
-	    /* 	  invertArray(theNode.list); */
-	    /* 	  pushItem theNode.list; */
-	    /* 	  insert theNode.list#back.type = "primary_expression"; */
-	    /* 	  insert theNode.list#back.value = theModule; */
-	    /* 	  insert theNode.list#back.operator = "id"; */
-	    /* 	  insert theNode.list#back.otype = "terminal"; */
-	    /* 	  if (refy == "&") */
-	    /* 	    { */
-	    /* 	      setall tmp = theNode.list#back; */
-	    /* 	      insert theNode.list#back.left; */
-	    /* 	      setall theNode.list#back.left = tmp; */
-	    /* 	      theNode.list#back.operator = "&"; */
-	    /* 	      theNode.list#back.type = "unary_expression"; */
-	    /* 	      theNode.list#back.otype = "unary"; */
-	    /* 	    } */
-	    /* 	  invertArray(theNode.list); */
-	    /* 	  return ; */
-	    /* 	} */
-	    /* } */
-
-	    if (func.name == "V" + str)
-	      theNode.left.value = "V" + str;
-	    else if (func.name == "M" + str)
-	      theNode.left.value = "M" + str;
+	    if (func.name == "V" + funcname)
+	      theNode.left.value = "V" + funcname;
+	    else if (func.name == "M" + funcname)
+	      theNode.left.value = "M" + funcname;
 
 	    if (theNode.left.value == func.name)
 	      {
@@ -309,6 +430,15 @@ function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , st
 		insert theNode.list#back.value = theModule;
 		insert theNode.list#back.operator = "id";
 		insert theNode.list#back.otype = "terminal";
+		if (refy == "&")
+		  {
+		    setall tmp = theNode.list#back;
+		    insert theNode.list#back.left;
+		    setall theNode.list#back.left = tmp;
+		    theNode.list#back.operator = "&";
+		    theNode.list#back.type = "unary_expression";
+		    theNode.list#back.otype = "unary";
+		  }
 		invertArray(theNode.list);
 		setall tmp = theNode;
 		insert theNode.right;
@@ -356,6 +486,8 @@ function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , st
 		return ;
 	      }
 	  }
+	  if (existVariable(type.legacy) && type.name != "Object")
+	    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, type.name, theAst.types[type.legacy], 1);
 	}
     }
 }
