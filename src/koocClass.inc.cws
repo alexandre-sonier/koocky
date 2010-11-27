@@ -133,7 +133,7 @@ function	setNodeLegacy(theAst : node, theLegacyName : value, theChildBlock : ref
       if (equalsIgnoreCase(declaration.ctype.identifier, theLegacyName))
 	foreach block in declaration.ctype.list
 	{
-	  if (block.name != "vtable")
+	  if (block.name != "vtable" && block.name != "vtableLegacy" && !startString(block.name, "V_"))
 	    {
 	      pushItem theChildBlock;
 	      setall theChildBlock#back = block;
@@ -156,6 +156,13 @@ function	koocClassRecScan(theFile : node, theAst : node)
 	  insert declaration.ctype.list;
 	  setNodeLegacy(theAst, "_class_" + declaration.legacy + "_", declaration.ctype.list, declaration.name);
 	}
+    
+    if (existVariable(declaration.ctype.identifier) && startString(declaration.ctype.identifier, "_vtable_"))
+      if (existVariable(declaration.legacy))
+	{
+	  insert declaration.ctype.list;
+	  setNodeLegacy(theAst, "_vtable_" + declaration.legacy + "_", declaration.ctype.list, declaration.name);
+	}
   }
 }
 
@@ -177,6 +184,8 @@ function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value, Fu
       theBlock#back.name = koocDecorPrim(theBlock#back, name);
 
       invertArray(theBlock#back.list);
+      if (endString(theBlock#back.name, "void") && existVariable(theBlock#back.list))
+	removeVariable(theBlock#back.list);
       pushItem theBlock#back.list;
       local newCode;
       cnormPatchInit(newCode);

@@ -1,0 +1,13 @@
+@import "AB.kh"
+
+@implementation	A
+{
+}
+
+@implementation B
+{
+  int func(int i)
+  {
+    return i;
+  }
+}

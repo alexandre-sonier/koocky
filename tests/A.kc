@@ -1,0 +1,13 @@
+@import "A.kh"
+
+@implementation A
+{
+  @member int f(int i)
+    {
+      return i;
+    }
+}
+
+@implementation B
+{
+}

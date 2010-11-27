@@ -1,0 +1,12 @@
+@module		A
+{
+  int		a = 42;
+  double	a = 4.2;
+  char		a = 'a';
+  int*		a = &@!(int)[A.a];
+}
+
+@module B
+{
+  int func(int);
+}

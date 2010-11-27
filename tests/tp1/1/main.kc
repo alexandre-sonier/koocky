@@ -1,0 +1,9 @@
+@import "A.kh"
+@import "/usr/include/stdio.h"
+
+int	main(void)
+{
+  printf("%d\n", @!(int)[A func :(int)42]);
+  printf("%d\n", @!(int)[A func]);
+  return (0);
+}

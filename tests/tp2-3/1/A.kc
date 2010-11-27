@@ -1,0 +1,19 @@
+@import "A.kh"
+
+@implementation A
+{
+  @member int f(void)
+    {
+      return [A.a] + 42;
+    }
+
+  @member int g(void)
+    {
+      return [A.a] / 2;
+    }
+
+  @member char h(char c)
+    {
+      return [A.a] + c;
+    }
+}
