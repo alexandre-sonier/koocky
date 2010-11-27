@@ -32,5 +32,5 @@ implementation(theBlock : node) ::=
   ]
  ]*
 "}"
-=> koocClassCreateVtable(impl, theBlock, table);
+=> setall theBlock.implementation[impl] = table;
   ;
