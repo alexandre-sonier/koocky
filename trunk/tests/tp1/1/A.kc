@@ -1,0 +1,15 @@
+@import "A.kh"
+@import "A.kh"
+
+@implementation A
+{
+  int func(int i)
+  {
+    return [A.a] + i;
+  }
+  
+  int func(void)
+  {
+    return @!(int)[A.a];
+  }
+}

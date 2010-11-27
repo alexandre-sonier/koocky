@@ -1,0 +1,6 @@
+@module A
+{
+  int a = 42;
+  int func(int);
+  int func(void);
+}

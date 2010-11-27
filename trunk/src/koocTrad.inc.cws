@@ -232,6 +232,32 @@ function	koocTradgetType(theBlock : node, init : node, theVar : node, theNode : 
 	return ;
       }
   }
+  foreach var in theBlock#parent.list
+  {
+    if (var.name == theVar.value)
+      {
+	if (existVariable(init.conflict))
+	  {
+	    if (init.value != "vtable")
+	      init.value = koocTradVar(theAst, theBlock, init, var.ctype);
+	    foreach var in theBlock.variables
+	    {
+	      if (key(var) == init.module)
+		koocTradClassCall(init, refy);
+	    }
+	    foreach var in theBlock#parent.list
+	    {
+	      if (var.name == init.module)
+		koocTradClassCall(init, refy);
+	    }
+	    if ("super" == init.module)
+	      koocTradClassCall(init, refy);
+	  }
+	insert theNode.ctype = var.ctype;
+	ref theNode.ctype = var.ctype;
+	return ;
+      }
+  }
   if (existVariable(theNode.ctype))
     {
       if (existVariable(init.conflict))
@@ -298,6 +324,8 @@ function	koocTradVirtualScan(theNode : node, theModule : value , str : value, th
   {
     if (func.name == "V" + funcname)
       theNode.left.value = "V" + funcname;
+    if (func.name == "M" + funcname)
+      theNode.left.value = "M" + funcname;
     if (theNode.left.value == func.name)
       {
 	invertArray(theNode.list);
@@ -595,7 +623,12 @@ function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
   foreach var in Curr
   {
     if (existVariable(var.block))
-      koocTradRecScan(var.block, var.block, theAst);
+      {
+	if (var.type == "return")
+	  koocTradRecScan(var.block, theBlock, theAst);
+	else
+	  koocTradRecScan(var.block, var.block, theAst);
+      }
     if (existVariable(var.list))
       koocTradRecScan(var.list, theBlock, theAst);
     if (existVariable(var.condition))

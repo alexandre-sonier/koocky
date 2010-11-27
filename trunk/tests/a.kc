@@ -1,9 +1,0 @@
-@import "a.kh"
-
-@implementation test
-{
-  @member int	f(int a)
-    {
-    return a;
-    }
-}

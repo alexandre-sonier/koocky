@@ -1,0 +1,18 @@
+@import "AB.kh"
+@import "C.kh"
+@import "/usr/include/stdio.h"
+
+int	main(void)
+{
+  printf("%d\n", [A.a] + 42);					// affiche 84
+  printf("%f\n", [A.a] + 4.2);					// affiche 8.4
+  printf("%c\n", [A.a] + '\t');					// affiche 'j'
+  printf("%f\n", @!(double)[A.a] + 2);				// affiche 6.2
+  printf("%d\n", *@!(int*)[A.a]);				// affiche 42
+ 
+  printf("%d\n", @!(int)[B func :(int)42]);			// affiche 42
+  printf("%d\n", @!(int)[B func :(int)[B func :(int)42]]);	// affiche 42
+  printf("%d\n", @!(int)[C func :(int)[A.a]]);			// affiche -42
+
+  return (0);
+}

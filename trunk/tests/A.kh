@@ -1,0 +1,8 @@
+@class A
+{
+  @member int f(int);
+}
+
+@class B : A
+{
+}

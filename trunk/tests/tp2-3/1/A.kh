@@ -1,0 +1,13 @@
+@class A
+{
+  int	a = 42;
+  char	a = 'a';
+
+  @member int f(void);
+
+  @member
+    {
+      int g(void);
+      char h(int);
+    }
+}

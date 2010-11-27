@@ -1,0 +1,9 @@
+@import "C.kh"
+
+@implementation C
+{
+  int func(int i)
+  {
+    return -i;
+  }
+}
