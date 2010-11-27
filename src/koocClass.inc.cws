@@ -23,7 +23,7 @@ function	addClass(theBlock : node, class : value, theLegacy : value)
       if (class != "Object")
 	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ { struct _vtable_" + theLegacy + "_* vtableLegacy; } vt" + class + ";");
       else
-	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {} vt" + class + ";");	
+	cnormPatchDeclaration(newBlock, "struct _vtable_" + class + "_ {} vt" + class + ";");
       insert newBlock.block[i].legacy = theLegacy;
 
       pushItem theBlock;
@@ -137,9 +137,10 @@ function	setNodeLegacy(theAst : node, theLegacyName : value, theChildBlock : ref
 	    {
 	      pushItem theChildBlock;
 	      setall theChildBlock#back = block;
-	      
 	      local length = rightString(leftString(theChildBlock#back.name, 3), 1);
+	      theChildBlock#back.pfname[0].function.name = "M_" + lengthString(myClass) + myClass + "_" + rightString(theChildBlock#back.name, sub(lengthString(theChildBlock#back.name), add(length, 4)));
 	      theChildBlock#back.name = "M_" + lengthString(myClass) + myClass + "_" + rightString(theChildBlock#back.name, sub(lengthString(theChildBlock#back.name), add(length, 4)));
+	      theChildBlock#back.list[0].ctype.identifier = myClass;
 	    }
 	}
     }
@@ -158,11 +159,15 @@ function	koocClassRecScan(theFile : node, theAst : node)
 	}
     
     if (existVariable(declaration.ctype.identifier) && startString(declaration.ctype.identifier, "_vtable_"))
-      if (existVariable(declaration.legacy))
-	{
-	  insert declaration.ctype.list;
-	  setNodeLegacy(theAst, "_vtable_" + declaration.legacy + "_", declaration.ctype.list, declaration.name);
-	}
+      {
+	local classname;
+	cutString(declaration.ctype.identifier, "_", classname);
+	if (existVariable(theFile.block.types[classname[2]].legacy) && classname[2] != "Object" && !existVariable(theFile.block.implementation[classname[2]]))
+	  {
+	    insert declaration.ctype.list;
+	    setNodeLegacy(theAst, "_vtable_" + theFile.block.types[classname[2]].legacy + "_", declaration.ctype.list, classname[2]);
+	  }
+      }
   }
 }
 
@@ -193,53 +198,69 @@ function	koocClassImpl(theClass : value, theBlock : node, theVirtual : value, Fu
       cnormPatchDeclaration(newCode, theClass + "* self");
       setall theBlock#back.list#back = newCode.block[1];
       invertArray(theBlock#back.list);
+
+      if (name == "init")
+	{
+	  local newDecl;
+	  cnormPatchInit(newDecl);
+	  cnormPatchDeclaration(newDecl, "void f(){self->vtable = (void*)&vt" + theClass + ";}");
+	  invertArray(theBlock#back.block);
+	  pushItem theBlock#back.block;
+	  setall theBlock#back.block#back = newDecl.block[0].block[0];
+	  invertArray(theBlock#back.block);
+	}
     }
 
   if (theBlock#back.type == "__FUNCTION__") 
     pushItem FuncTable = theBlock#back.name;
 }
 
-function	koocClassCreateVtable(theClass : value, theBlock : node, FuncTable : reference)
+function	koocClassCreateVtable(theBlock : node)
 {
-  local		theExpression;
-  local		newCode;
-
-  foreach class in theBlock.classes
+  foreach impl in theBlock.implementation
   {
-    if (key(class) == theClass)
-      {
-	cnormPatchInit(newCode);
-
-	theExpression = "struct _vtable_" + theClass + "_ vt" + theClass + " = {";
-
-	foreach class in theBlock.classes
+    local		theExpression;
+    local		newCode;
+    foreach class in theBlock.classes
+    {
+      if (key(class) == key(impl))
 	{
-	  if (key(class) == theClass)
-	    if (existVariable(class.legacy))
-	      {
-		theExpression = theExpression + "&vt" + class.legacy;
-		if (!isEmpty(FuncTable))
-		  theExpression = theExpression + ", ";
-	      }
-	}
+	  cnormPatchInit(newCode);
 
-	foreach pointer in class.vtable.ctype.list
-	{
-	  foreach func in FuncTable
+	  theExpression = "struct _vtable_" + key(impl) + "_ vt" + key(impl) + " = {";
+
+	  if (existVariable(class.legacy))
+	    {
+	      theExpression = theExpression + "&vt" + class.legacy;
+	      theExpression = theExpression + ", ";
+	    }
+
+	  local check;
+	  foreach pointer in class.vtable.ctype.list
 	  {
-	    if (func == pointer.name)
+	    if (pointer.name != "vtableLegacy")
 	      {
-		theExpression = theExpression + func;
+		check = 0;
+		foreach func in impl
+		{
+		  if (func == pointer.name)
+		    {
+		      check = 1;
+		      theExpression = theExpression + func;
+		    }
+		}
+		if (check == 0)
+		  theExpression = theExpression + "0";
 		if (pointer.name != class.vtable.ctype.list#back.name)
 		  theExpression = theExpression + ", ";
 	      }
 	  }
+	  theExpression = theExpression + "};";
+	    
+	  cnormPatchDeclaration(newCode, theExpression);
+	  pushItem theBlock;
+	  setall theBlock#back = newCode.block[0];
 	}
-	theExpression = theExpression + "};";
-
-	cnormPatchDeclaration(newCode, theExpression);
-	pushItem theBlock;
-	setall theBlock#back = newCode.block[0];
-      }
+    }
   }
 }

@@ -48,6 +48,11 @@ foreach file in myAst
   koocImplRecScan(file, myAst);
   koocTradRecScan(file.block, file.block, file.block);
   koocClassRecScan(file, myAst);
+}
+
+foreach file in myAst
+{
+  koocClassCreateVtable(file.block);  
   foreach import in file.import
   {
     if (import == file)
