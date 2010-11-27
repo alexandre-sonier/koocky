@@ -27,19 +27,19 @@ foreach filename in _ARGS
       if (existFile(out[filelist#back]))
 	  deleteFile(out[filelist#back]);
       insert myAst[filelist#back] = filelist#back;
-      insert myAst[filelist#back].import["Object.ko"] = filelist#back;
-      koocImportFile(myAst, "Object.ko", filelist#back);
+      insert myAst[filelist#back].import["Object.ko.kh"] = filelist#back;
+      koocImportFile(myAst, "Object.ko.kh", filelist#back);
       parseAsBNF("kooc.cwp", myAst[filelist#back], filename);
     }
   foreach item in myAst[filelist#back].import
   {
-    if (key(item) != "Object.ko")
+    if (key(item) != "Object.ko.kh")
       {
 	insert out[key(item)] = replaceString(".kh", ".h", myAst.relPath + key(item));
 	out[key(item)] = replaceString(".kh", ".h", out[key(item)]);
       }
     else
-      insert out["Object.ko"] = "./lib/Object.ko";
+      insert out["Object.ko.kh"] = "./lib/Object.ko.h";
   }
 }
 

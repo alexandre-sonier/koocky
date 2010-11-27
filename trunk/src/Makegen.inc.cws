@@ -20,7 +20,7 @@ function		MakeGen(out : node)
     appendFile(outs, "NAME\t=" + key(item) + "\n");
   }
 
-  appendFile(outs, "SRC\t=");
+  appendFile(outs, "SRC\t=lib/Object.ko.c ");
 
   foreach item in out
   {

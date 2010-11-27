@@ -1,0 +1,21 @@
+@class Object
+{
+  Object	*alloc();
+  Object	*new();
+
+  @member
+    {
+      const char *name_of_interface();
+      void	init();
+      void	delete();
+    }
+
+  @virtual
+    {
+      void	clean();
+      int	isKindOf(const char*);
+      int	isKindOf(Object*);
+      int	isInstanceOf(const char *);
+      int	isInstanceOf(Object*);
+    }
+}
