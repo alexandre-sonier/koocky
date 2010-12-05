@@ -1,8 +1,7 @@
+@import "/usr/include/stdlib.h"
+
 @class Object
 {
-  Object	*alloc();
-  Object	*new();
-
   @member
     {
       const char *name_of_interface();

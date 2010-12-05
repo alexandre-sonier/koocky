@@ -46,12 +46,12 @@ foreach filename in _ARGS
 foreach file in myAst
 {
   koocImplRecScan(file, myAst);
-  koocTradRecScan(file.block, file.block, file.block);
   koocClassRecScan(file, myAst);
 }
 
 foreach file in myAst
 {
+  koocTradRecScan(file.block, file.block, file.block);
   koocClassCreateVtable(file.block);  
   foreach import in file.import
   {

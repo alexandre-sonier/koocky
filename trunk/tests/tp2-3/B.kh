@@ -1,0 +1,9 @@
+@import "A.kh"
+
+@class B : A
+{
+  @member void init();
+  @member int c;
+  @member int z();
+  @virtual int g();
+}

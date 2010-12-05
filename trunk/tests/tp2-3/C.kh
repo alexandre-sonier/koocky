@@ -1,0 +1,7 @@
+@import "B.kh"
+
+@class C : B
+{
+  @member void init();
+  @member int toto();
+}

@@ -1,0 +1,29 @@
+@import "A.kh"
+@import "B.kh"
+@import "C.kh"
+@import "/usr/include/stdio.h"
+@import "/usr/include/stdlib.h"
+
+int	main(void)
+{
+  printf("%d\n", @!(int)[A.a]);				// affiche 42
+  printf("%c\n", @!(char)[A.a]);			// affiche 'a'
+
+  A*	myClass = @!(A*)[A new];
+
+  printf("%d\n", @!(int)[myClass f]);			// affiche 84
+  printf("%d\n", @!(int)[myClass g]);			// affiche 21
+  printf("%c\n", @!(char)[myClass h :(char)'\0']);	// affiche 'a'
+
+  B*	OtherClass = @!(B*)[B new];
+
+  printf("%d\n", @!(int)[OtherClass z]);		// affiche 2
+  printf("%d\n", @!(int)[OtherClass f]);		// affiche 84
+  printf("%d\n", @!(int)[OtherClass g]);		// affiche 1
+
+  C*	LastClass = @!(C*)[C new];
+
+  printf("%d\n", @!(int)[LastClass toto]);		// affiche 42
+
+  return (0);
+}

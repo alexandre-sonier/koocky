@@ -6,16 +6,12 @@
 #define _USR_INCLUDE_STRING_H_
 #include "/usr/include/string.h"
 #endif
-#ifndef _USR_INCLUDE_STDLIB_H_
-#define _USR_INCLUDE_STDLIB_H_
-#include "/usr/include/stdlib.h"
-#endif
 void V_6Object_function_void_5clean_param_void (Object 	* self)
 {
 	free(self->vtable);
 }
 
-signed int V_6Object_function_signed_int_8isKindOf_param_signed_char_point (Object 	* self, const signed char 	* cname)
+signed int V_6Object_function_signed_int_8isKindOf_param_signed_char_point (Object 	* self, const char 	* cname)
 {
 	if (!strcmp(((struct  _vtable_Object_	*)self->vtable)->M_6Object_function_signed_char_point_17name_of_interface_param_void(self), cname))
 		return (1);
@@ -29,7 +25,7 @@ signed int V_6Object_function_signed_int_8isKindOf_param_Object_point (Object 	*
 	return (0);
 }
 
-signed int V_6Object_function_signed_int_12isInstanceOf_param_signed_char_point (Object 	* self, const signed char 	* cname)
+signed int V_6Object_function_signed_int_12isInstanceOf_param_signed_char_point (Object 	* self, const char 	* cname)
 {
 	if (!strcmp(((struct  _vtable_Object_	*)self->vtable)->M_6Object_function_signed_char_point_17name_of_interface_param_void(self), cname))
 		return (1);
@@ -43,7 +39,7 @@ signed int V_6Object_function_signed_int_12isInstanceOf_param_Object_point (Obje
 	return (0);
 }
 
-const signed char 	* M_6Object_function_signed_char_point_17name_of_interface_param_void (Object 	* self)
+const char 	* M_6Object_function_signed_char_point_17name_of_interface_param_void (Object 	* self)
 {
 	return ("Object");
 }
@@ -67,6 +63,7 @@ Object 	* _6Object_function_Object_point_5alloc_param_void ()
 Object 	* _6Object_function_Object_point_3new_param_void ()
 {
 	Object 	* Obj  = _6Object_function_Object_point_5alloc_param_void();
+	Obj->vtable = (  void	*)&vtObject;
 	((struct  _vtable_Object_	*)Obj->vtable)->M_6Object_function_void_4init_param_void(Obj);
 }
 

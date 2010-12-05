@@ -33,4 +33,5 @@ implementation(theBlock : node) ::=
  ]*
 "}"
 => setall theBlock.implementation[impl] = table;
-  ;
+=> koocClassImplAddFuncs(theBlock, impl);
+;

@@ -1,5 +1,4 @@
 @import "/usr/include/string.h"
-@import "/usr/include/stdlib.h"
 
 @implementation Object
 {
@@ -51,15 +50,4 @@
       @!(void)[self clean];
       free(self);
     }
-
-  Object	*alloc()
-  {
-    return (malloc(sizeof(Object)));
-  }
-
-  Object	*new()
-  {
-    Object	*Obj = @!(Object*)[Object alloc];
-    @!(void)[Obj init];
-  }
 }

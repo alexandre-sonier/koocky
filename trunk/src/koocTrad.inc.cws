@@ -25,10 +25,12 @@ function	koocTradgetVars(theBlock : node, theModule : node, theVar : value, deco
       foreach type in theBlock.types
       {
 	if (moduleName == key(type))
-	  foreach var in type.ctype.list
 	  {
-	    if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
-	      insert decored_vars[var.name] = var.name;
+	    foreach var in type.ctype.list
+	    {
+	      if ((leftString(var.name, lengthString(curstart)) == curstart) && (rightString(var.name, lengthString(curname)) == curname))
+		insert decored_vars[var.name] = var.name;
+	    }
 	  }
       }
     }
@@ -102,7 +104,7 @@ function	koocTradVar(theAst : node, theBlock : node, init : node, theType : node
 	  return var;
       }
   }
-  error(init.value + " of type " + theCType.identifier + " has never been declared in " + init.module);
+  error("The variable '" + init.value + "' has never been declared in '" + init.module + "'");
 }
 
 function	koocTradClassCall(init : node, refy : value)
@@ -313,7 +315,7 @@ function	koocTradAddParam(theBlock : node, type : value, param : value)
   setall theBlock#back = newCode.block[0].list[0];
 }
 
-function	koocTradVirtualScan(theNode : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, theClass : value, type : node, count : value)
+function	koocTradVirtualScan(theNode : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, theClass : value, type : node, count : value, check : node)
 {
   local tmp;
   local funcname;
@@ -424,14 +426,15 @@ function	koocTradVirtualScan(theNode : node, theModule : value , str : value, th
 	    insert theNode.left.operator = "->";
 	    i = add(i, 1);
 	  }
+	check = 1;
 	return ;
       }
   }
   if (existVariable(type.legacy) && type.name != "Object")
-    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, theClass, theAst.types[type.legacy], add(count, 1));
+    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, theClass, theAst.types[type.legacy], add(count, 1), check);
 }
 
-function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, var : node)
+function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , str : value, theBlock : node, theAst : node, refy : value, var : node, check : node)
 {
   local tmp;
   local funcname;
@@ -511,11 +514,12 @@ function	koocTradFuncAdd(theNode : node, theTypes : node, theModule : value , st
 		insert theNode.left.type = "priority_expression";
 		insert theNode.left.otype = "priority";
 		insert theNode.left.operator = "()";
+		check = 1;
 		return ;
 	      }
 	  }
 	  if (existVariable(type.legacy) && type.name != "Object")
-	    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, type.name, theAst.types[type.legacy], 1);
+	    koocTradVirtualScan(theNode, theModule, str, theBlock, theAst, refy, type.name, theAst.types[type.legacy], 1, check);
 	}
     }
 }
@@ -556,8 +560,8 @@ function	koocTradDecorFunc(theNode : node, theTypes : node, theModule : value , 
     theNode.left.value = theNode.left.value + "_void";
 
   local tmp;
-  local Length = rightString(leftString(theNode.left.value, 2), 1);
-  local str = rightString(theNode.left.value, sub(lengthString(theNode.left.value), add(Length, 2)));
+  local Length = lengthString("_" + lengthString(theModule) + theModule);
+  local str = rightString(theNode.left.value, sub(lengthString(theNode.left.value), Length));
   local refy = "";
 
   if (startString(theModule, "&"))
@@ -566,11 +570,18 @@ function	koocTradDecorFunc(theNode : node, theTypes : node, theModule : value , 
       refy = "&";
     }
 
+  local check = 0;
   foreach var in theBlock.variables
-    koocTradFuncAdd(theNode, theTypes, theModule, str, theBlock, theAst, refy, var);
-
+    koocTradFuncAdd(theNode, theTypes, theModule, str, theBlock, theAst, refy, var, check);
   foreach var in theBlock#parent.list
-    koocTradFuncAdd(theNode, theTypes, theModule, str, theBlock, theAst, refy, var);
+    koocTradFuncAdd(theNode, theTypes, theModule, str, theBlock, theAst, refy, var, check);
+
+  foreach func in theAst.prototypes
+  {
+    if (check == 1 || key(func) == theNode.left.value)
+      return;
+  }
+  error("The function '" + theName + "' has never been declared in '" + theModule + "'");  
 }
 
 function	koocTradRecScan(Curr : node, theBlock : node, theAst : node)
