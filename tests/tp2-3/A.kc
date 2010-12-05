@@ -7,13 +7,20 @@
       return [A.a] + 42;
     }
 
-  @member int g(void)
+  @virtual int g(void)
     {
       return [A.a] / 2;
     }
 
-  @member char h(char c)
+  @member 
     {
-      return [A.a] + c;
+      char h(char c)
+      {
+	return [A.a] + c;
+      }
+
+      void init()
+      {
+      }
     }
 }

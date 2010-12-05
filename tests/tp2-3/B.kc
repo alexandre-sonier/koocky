@@ -1,0 +1,17 @@
+@import "B.kh"
+
+@implementation B
+{
+  @member int z()
+    {
+      return @!(int)[self.c];
+    }
+  @member void init()
+    {
+      [self.c] = 2;
+    }
+  @virtual int g()
+    {
+      return [self.c] / 2;
+    }
+}

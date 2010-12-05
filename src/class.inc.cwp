@@ -26,8 +26,18 @@ class(theBlock : node) ::=
      "{"
      [
       [
-       [["@virtual"]:virt]? [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[");"]]:expr
-       => koocClassNameFunc(class, theBlock, expr, virt);
+       [["@virtual"]:virt2]? [['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']+['(']['a'..'z'|'A'..'Z'|'0'..'9'|','|'_'|'*'|'['|']'|'&']*[");"]]:expr
+       [
+#check(existVariable(virt2) && virt2 != "")
+	[
+	 => koocClassNameFunc(class, theBlock, expr, virt2);
+	 => virt2 = "";
+	 ]
+	|
+	[
+	 => koocClassNameFunc(class, theBlock, expr, virt);	 
+	 ]
+	]
        ]
       |
       [
@@ -39,5 +49,7 @@ class(theBlock : node) ::=
      ]
     ]*
    "}"
+   => koocClassAddFunc(class, theBlock, "alloc");
+   => koocClassAddFunc(class, theBlock, "new");
    ]
   ;

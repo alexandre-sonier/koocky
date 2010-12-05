@@ -4,10 +4,11 @@
   char	a = 'a';
 
   @member int f(void);
+  @member void init();
 
   @member
     {
-      int g(void);
-      char h(int);
+      @virtual int g(void);
+      char h(char);
     }
 }

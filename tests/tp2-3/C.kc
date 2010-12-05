@@ -1,0 +1,15 @@
+@import "C.kh"
+
+@implementation C
+{
+  @member void init()
+    {
+      [super.c] = 2;
+      [self.c] = 40;
+    }
+
+  @member int toto()
+    {
+      return @!(int)[super.c] + @!(int)[self.c];
+    }
+}
