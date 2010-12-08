@@ -1,0 +1,42 @@
+#!/bin/sh
+
+echo "";
+echo -e "\033[31mTest TP1 no1:\033[0m";
+echo "@module";
+echo "@implementation";
+echo "Appels simples";
+$KOOC_PATH/kooc $KOOC_PATH/tests/tp1/1/*.k*;
+echo "";
+echo -e "\033[34mMake:\033[0m";
+make;
+echo "";
+echo -e "\033[36mExecution:\033[0m";
+./exec;
+echo "";
+echo -e "\033[31mTest TP1 no2:\033[0m"
+echo "@module";
+echo "@implementation";
+echo "Appels complexes, types implicites";
+$KOOC_PATH/kooc $KOOC_PATH/tests/tp1/2/*.k*;
+echo "";
+echo -e "\033[34mMake:\033[0m";
+make;
+echo "";
+echo -e "\033[36mExecution:\033[0m";
+./exec;
+echo "";
+echo -e "\033[31mTest TP2-3:\033[0m";
+echo "@class";
+echo "@member / @virtual";
+echo "@implementation";
+echo "self / super";
+echo "heritage";
+echo "Instanciations et appels des fonctions et variables avec types implicites";
+$KOOC_PATH/kooc $KOOC_PATH/tests/tp2-3/*.k*;
+echo "";
+echo -e "\033[34mMake:\033[0m";
+make;
+echo "";
+echo -e "\033[36mExecution:\033[0m";
+./exec;
+echo "";
